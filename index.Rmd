@@ -1,0 +1,993 @@
+---
+  title: "RNAseqChef manual"
+  author: Kan Etoh
+  date: '`r format(Sys.time(), "%y/%m/%d %H:%M")`'
+---
+```{r setup, include=FALSE}
+source("global.R")
+input <- c()
+input$Species <- "Mus musculus" 
+input$Species2 <- "Mus musculus" 
+input$Species3 <- "Mus musculus" 
+input$Species4 <- "Mus musculus" 
+input$Species5 <- "Mus musculus" 
+input$Species6 <- "Mus musculus" 
+input$Species7 <- "Mus musculus" 
+input$fc <- 1.5 
+input$fc2 <-1.5
+input$fc4 <- 5
+input$fc6 <- 1.5
+input$fdr <- 0.05
+input$fdr2 <-0.05
+input$fdr4 <- 0.05
+input$fdr6 <- 0.05
+input$basemean <- 0
+input$basemean2 <- 1
+input$basemean6 <- 0
+input$basemean3 <- 0
+input$Gene_set <- "MSigDB Hallmark"
+input$Gene_set2 <- "MSigDB Hallmark"
+input$Gene_set3 <- "MSigDB Hallmark"
+input$Gene_set4 <- "MSigDB Hallmark"
+input$Gene_set5 <- "MSigDB Hallmark"
+input$Gene_set6 <- "MSigDB Hallmark"
+input$Gene_set7 <- "MSigDB Hallmark"
+input$Gene_set8 <- "MSigDB Hallmark"
+input$Gene_set9 <- "MSigDB Hallmark"
+knitr::opts_chunk$set(echo = TRUE)
+``` 
+
+---
+
+# 概要
+
+![](manual_figure/graphical abstract.png){#id .class width=70%} <br><br>
+
+RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
+単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
+また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br><br>
+RNAseqChefは、以下の方法で使用可能です。<br>
+1. ウェブページへアクセス <br>
+2. ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
+ウェブページ: https://kan-e.shinyapps.io/RNAseqChef/ <br>
+ソースコード: https://github.com/Kan-E/RNAseqChef <br>
+問い合わせ先: Kan Etoh, kaneto@kumamoto-u.ac.jp <br><br><br>
+
+
+本アプリは以下のセクションにより構成されます。<br>
+
+- **Pair-wise DEG** (２群間比較の遺伝子発現変動解析)
+
+- **3 conditions DEG** (３群間多重比較の遺伝子発現変動解析)
+
+- **Multi DEG** (尤度比検定による遺伝子発現変動解析)
+
+- **Venn diagram** (複数の遺伝子セットから共通遺伝子の抽出・複数のカウントデータを統合したヒートマップの作成)
+
+- **Normalized count analysis** (normalized countデータを用いたクラスタリング解析、遺伝子セットの抽出)
+
+- **Enrichment viewer** (遺伝子セットの機能解析)
+
+- **More**（その他の便利機能やReferenceなど）
+
+アプリはメニュー、セッティングパネル、アウトプットパネルの3種類のパネルで構成されています。<br>
+各セクションはアプリ上部のメニューボタンをクリックすることで移動できます。<br>
+解析を実行するファイルは、セッティングパネルからアップロードすることができます。<br>
+解析は、アウトプットパネルのタブパネルをクリックすることで実行されます。<br><br>
+![panel](manual_figure/panel.png){#id .class width=70%} <br>
+
+
+---
+
+# Pair-wise DEG
+
+２群間の比較解析を実行します。DEG（発現変動遺伝子）の同定・可視化・機能解析結果を出力します。
+
+## Setting
+
+![pair-wise set](manual_figure/pair-wise set.png){#id .class width=50%}<br>
+
+---
+
+### Input format
+
+inputとなるraw countデータの形式は3種類あります。<br>
+下図のようにボタンを押すことで、アップロードの様式が切り替わります。
+![input switch](manual_figure/input switch.png){#id .class width=100%}<br>
+   
+#### 1. **raw count データのみ** <br>
+以下の条件を満たす場合、raw countデータのみで解析を実行できます。
+   
+    - 解析対象となる２群のデータのみで構成されるファイル
+    - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
+    - アンダーバー「 _ 」は、n数の表記以外では使用しない
+![unchanged image](www/input_format1.png){#id .class width=50%}
+<br>　
+
+---
+   
+#### 2. **raw count データ + メタデータ** <br>
+サンプル名がaccession numberである場合や余分な情報が含まれるraw countデータである場合に使用します。<br>
+メタデータは以下の情報を含む必要があります。
+   
+    - １列目は、raw countデータで使用されているサンプル名（例: accession number）
+    - ２列目は、対応するサンプル名 (例: Control_1)
+    - ３列目以降は、解析に影響しません 
+![unchanged image](www/input_format2.png){#id .class width=50%}
+<br><br>
+   
+   #### 3. **raw count データのみ (バッチモード)** <br>
+以下の条件を満たす場合、複数のraw countデータを一括処理できます。
+   
+    - 解析対象となる２群のデータのみで構成されるファイル
+    - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
+    - アンダーバー「 _ 」は、n数の表記以外では使用しない
+
+バッチモードでは、Output panelに結果が表示されません。    
+Downloadボタンをクリックすることで、Clustering, MA_plot, DEG_result, 発現量が増加した遺伝子のカウントデータ、発現量が減少した遺伝子のカウントデータ、normalizedカウントデータ、がzip形式で出力されます。
+![unchanged image](www/input_format1.png){#id .class width=50%}
+<br>　
+
+---
+   
+#### DEG analysis method
+本アプリでは、3種類のDEG解析を実行できます。
+
+- [DESeq2](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8)
+- [edgeR](https://academic.oup.com/bioinformatics/article/26/1/139/182458)
+- [EBSeq](https://academic.oup.com/bioinformatics/article/29/8/1035/228913)
+<br>
+
+#### FDR method
+DEG analysis methodがDESeq2またはedgeRの場合、3種類のFDR methodが選べます。
+
+- BH, Benjamini-Hochberg法 (default)
+- Qvalue, Storey法
+- [IHW, Independent Hypothesis Weighting](https://www.nature.com/articles/nmeth.3885)
+<br> 
+
+#### Species
+データセットの種を選択することで以下の解析が実行されます。
+
+    - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換
+    - エンリッチメント解析の実行
+<br>  
+    
+#### Cut-off conditions
+Fold change, FDR, basemeanの閾値が設定できます。
+<br>  <br> 
+    
+#### Option: normalized count input
+TPMカウントなどのnormalized countデータを用いてbasemean cut-offやボックスプロットを表示することができます。<br>
+注: raw countデータが不要になるわけではありません。
+<br>  <br> 
+
+---
+
+## Output
+
+### Input Data
+
+アップロードしたraw countデータを表示します。
+メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw countデータも表示します。
+<br><br>
+![pair-wise input](manual_figure/pair-wise input.png){#id .class width=70%}<br><br>
+
+---
+
+### Result overview
+
+Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリングの3種類のクラスタリング解析を実行します。<br>
+DEG解析の結果をMA-plotとheatmapで表示します。<br>
+表データとして、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
+ count <- read.table("data/example1.txt",header = T,row.names = 1)
+ collist <- gsub("\\_.+$", "", colnames(count))
+ group <- data.frame(con = factor(collist))
+ dds<- DESeqDataSetFromMatrix(countData = round(count),colData = group, design = ~ con)
+ dds$con <- factor(dds$con, levels = unique(collist))
+ dds <- DESeq(dds)
+ contrast <- c("con", unique(collist))
+ res <- results(dds,  contrast = contrast)
+ data <- as.data.frame(res)
+ count <- counts(dds, normalized=TRUE)
+ collist <- factor(gsub("\\_.+$", "", colnames(count)))
+    vec <- c()
+    for (i in 1:length(unique(collist))) {
+      num <- length(collist[collist == unique(collist)[i]])
+      vec <- c(vec, num)
+    }
+    Cond_1 <- vec[1]
+    Cond_2 <- vec[2]
+    Row.names <- NULL
+    log2FoldChange <- NULL
+    value <- NULL
+    data <- merge(data,count, by=0)
+    data$log2FoldChange <- -1 * data$log2FoldChange
+    data2 <- dplyr::filter(data, abs(data$log2FoldChange) > log(2, 2))
+    data2$group <- "Up"
+    data2$group[data2$log2FoldChange < 0] <- "Down"
+    data3 <- dplyr::filter(data2, abs(data2$padj) < 0.05)
+    genenames <- as.vector(data$Row.names)
+    xlab <- "Log2 mean expression"
+    m1 <- as.grob(ggmaplot(data, fdr = 0.05, fc = 2, size = 0.1,
+                           palette = c("#B31B21", "#1465AC", "darkgray"),
+                           genenames = genenames,
+                           legend = "top", top = 20,
+                           font.label = c("bold", 6),font.legend = "bold",
+                           font.main = "bold",xlab = xlab,
+                           ggtheme = ggplot2::theme_minimal(),
+                           select.top.method = "fc"))
+   data.z <- genescale(data3[,8:(7 + Cond_1 + Cond_2)], axis=1, method="Z")
+      ht <- as.grob(Heatmap(data.z, name = "z-score",column_order = colnames(data.z),
+                            clustering_method_columns = 'ward.D2',
+                            show_row_names = F, show_row_dend = F))
+    p <- plot_grid(m1, ht, rel_widths = c(2, 1))
+    print(PCAplot(data = count))
+    print(p)
+```
+
+<br><br>
+
+---
+
+### GOI (Genes of interest) profiling
+
+Volcano plotを表示します。<br>
+GOI listから遺伝子を選択することで、volcano plotで表示される点のうち、目的の遺伝子だけをラベルすることができます。<br>
+x軸、y軸のレンジはスライドバーを操作することで自由に変更できます。<br>
+また、GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
+![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling.png){#id .class width=70%}
+<br><br>
+
+---
+
+### Enrichment analysis
+
+エンリッチメント解析によりDEGの機能を同定します。<br>
+解析に使用できる遺伝子セットは、以下の通りです。<br>
+[MSigDB hallmark gene](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=H) <br>
+[KEGG](https://www.kegg.jp) <br>
+[Reactome](https://reactome.org) <br>
+[PID (Pathway Interaction Database)](https://maayanlab.cloud/Harmonizome/resource/Pathway+Interaction+Database) <br>
+[BioCarta](https://maayanlab.cloud/Harmonizome/dataset/Biocarta+Pathways) <br>
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) <br>
+[GO (biological process, cellular component, and molecular function)](http://geneontology.org)  <br>
+[Human phenotype ontology](https://hpo.jax.org/app/)  <br>
+[DoRothEA regulon (activator)](https://saezlab.github.io/dorothea/) <br>
+[DoRothEA regulon (repressor)](https://saezlab.github.io/dorothea/) <br>
+[Transcription factor targets](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=TFT) <br>
+[miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
+注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
+
+解析結果として、over-representative analysis, GSEA (gene set enrichment analysis), gene-concept network (cnet) plotが出力されます。 <br>
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
+![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=70%}<br><br><br>
+
+---
+
+# 3 conditions DEG
+
+EBSeqによる多重比較解析を実行することで、３群間のDEGを同時に検出・可視化・機能解析結果を出力します。<br>
+注： 多重比較解析は時間がかかります（５〜１０分）。
+
+## Setting
+
+
+![cond 3 set](manual_figure/cond 3 set.png){#id .class width=50%}<br>
+
+---
+
+### Input format
+
+3conditions DEGのinput formatや設定は、pair-wise DEGと全く同様です。<br>
+pair-wise DEGの説明を読んだ方は、読む必要はありません。<br>
+
+inputとなるraw countデータの形式は2種類あります。<br>
+
+#### 1. **raw count データのみ** <br>
+以下の条件を満たす場合、raw countデータのみで解析を実行できます。
+   
+    - 解析対象となる３群のデータのみで構成されるファイル
+    - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
+    - アンダーバー「 _ 」は、n数の表記以外では使用しない
+![unchanged image](www/input_format1.png){#id .class width=50%}
+<br>　
+
+---
+   
+#### 2. **raw count データ + メタデータ** <br>
+サンプル名がaccession numberある場合や余分な情報が含まれるraw countデータである場合に使用します。<br>
+メタデータは以下の情報を含む必要があります。
+   
+    - １列目は、raw countデータで使用されているサンプル名（例: accession number）
+    - ２列目は、対応するサンプル名 (例: Control_1)
+    - ３列目以降は、解析に影響しません 
+![unchanged image](www/input_format2.png){#id .class width=50%}
+<br><br>
+   
+---
+   
+#### Species
+データセットの種を選択することで以下の解析が実行されます。
+
+    - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換
+    - Enrichment analysisの実行
+<br>  
+    
+#### Cut-off conditions
+Fold change, FDR, basemeanの閾値が設定できます。
+<br>  <br> 
+    
+#### Option: normalized count input
+TPMカウントなどのnormalized countデータを用いてbasemean cut-offやボックスプロットを表示することができます。<br>
+注: raw countデータが不要になるわけではありません。
+<br>  <br> 
+
+---
+
+## Output
+
+### Input Data
+
+アップロードしたraw countデータを表示します。
+メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw countデータも表示します。
+<br><br>
+![cond 3 input](manual_figure/cond 3 input.png){#id .class width=60%}
+
+---
+
+### Result overview
+
+Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリングの3種類のクラスタリング解析を実行します。<br>
+DEG解析の結果をscatter plotとheatmapで表示します。<br>
+3条件総当たりで遺伝子発現変動を可視化することで、各条件の遺伝子発現の特徴を抽出できます。<br>
+また、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
+![cond 3 overview](manual_figure/cond 3 overview.png){#id .class width=70%}
+<br><br>
+
+---
+
+### GOI (Genes of interest) profiling
+
+GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
+![cond 3 goi](manual_figure/cond 3 goi.png){#id .class width=50%}
+
+---
+
+### Enrichment analysis
+
+Enrichment analysisによりDEGの機能を同定します。<br>
+解析に使用できる遺伝子セットは、以下の通りです。<br>
+[MSigDB hallmark gene](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=H) <br>
+[KEGG](https://www.kegg.jp) <br>
+[Reactome](https://reactome.org) <br>
+[PID (Pathway Interaction Database)](https://maayanlab.cloud/Harmonizome/resource/Pathway+Interaction+Database) <br>
+[BioCarta](https://maayanlab.cloud/Harmonizome/dataset/Biocarta+Pathways) <br>
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) <br>
+[GO (biological process, cellular component, and molecular function)](http://geneontology.org)  <br>
+[Human phenotype ontology](https://hpo.jax.org/app/)  <br>
+[DoRothEA regulon (activator)](https://saezlab.github.io/dorothea/) <br>
+[DoRothEA regulon (repressor)](https://saezlab.github.io/dorothea/) <br>
+[Transcription factor targets](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=TFT) <br>
+[miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
+注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
+
+解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。 <br>
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br><br>
+
+![cond 3 enrichment](manual_figure/cond 3 enrichment.png){#id .class width=70%} <br>
+
+---
+
+# Multi DEG
+
+LRT(Likelihood Ratio Test: 尤度比検定)を実行することで、発現変動遺伝子を検出・可視化・機能解析結果を出力します。<br>
+注： 個々の群間の検定は行いません。
+
+## Setting
+
+
+![multi set](manual_figure/multi set.png){#id .class width=50%}<br>
+
+---
+
+### Input format
+
+inputとなるraw countデータの形式は2種類あります。<br>
+
+#### 1. **raw count データのみ** <br>
+以下の条件を満たす場合、raw countデータのみで解析を実行できます。
+   
+    - 解析対象のデータのみで構成されるファイル
+    - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
+    - アンダーバー「 _ 」は、n数の表記以外では使用しない
+![unchanged image](www/input_format1.png){#id .class width=50%}
+<br>　
+
+---
+   
+#### 2. **raw count データ + メタデータ** <br>
+2-factorの比較・可視化をしたい場合に使用します。<br>
+メタデータは以下の情報を含む必要があります。
+   
+    - １列目は、raw countデータで使用されているサンプル名
+    - １列目のサンプル名は、n数の情報を含む（アンダーバー「 _ 」を用いて表記する）
+    - ２列目は、対応するサンプルの条件1 (例: time)
+    - ３列目は、対応するサンプルの条件2 (例: genotype)
+![unchanged image](www/input_format_multi.png){#id .class width=50%}
+<br><br>
+   
+---
+
+#### FDR method
+3種類のFDR methodが選べます。
+
+- BH, Benjamini-Hochberg法 (default)
+- Qvalue, Storey法
+- [IHW, Independent Hypothesis Weighting](https://www.nature.com/articles/nmeth.3885)
+<br> 
+   
+#### Species
+データセットの種を選択することで以下の解析が実行されます。
+
+    - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換
+    - Enrichment analysisの実行
+<br>  
+    
+#### Cut-off conditions
+Fold change, FDR, basemeanの閾値が設定できます。
+<br>  <br> 
+    
+#### Option: normalized count input
+TPMカウントなどのnormalized countデータを用いてbasemean cut-offやボックスプロットを表示することができます。<br>
+注: raw countデータが不要になるわけではありません。
+<br>  <br> 
+
+---
+
+## Output
+
+### Input Data
+
+アップロードしたraw countデータを表示します。
+メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw countデータも表示します。
+<br><br>
+![multi input](manual_figure/multi input.png){#id .class width=60%}
+
+---
+
+### Result overview
+
+Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリング、UMAP(Uniform Manifold Approximation and Projection)の４種類のクラスタリング解析を実行します。<br>
+DEG解析の結果をheatmapで表示します。<br>
+また、DEG解析の結果やDEGのカウントデータが出力されます。<br>
+
+UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
+小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
+サンプル数が少ない場合は、n_neiborsを小さくする必要があります。<br><br>
+![multi overview](manual_figure/multi overview.png){#id .class width=70%}
+<br><br>
+
+---
+
+### Divisive clustering
+
+分割型(top-down)アプローチによる階層的クラスタリングを実行します。<br>
+クラスターの数は自動的に決定されます。<br>
+それぞれのクラスターの発現パターンをボックスプロットで表示します。<br>
+遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
+また、Enrichment analysisにより各クラスターの遺伝子の機能を同定します。<br>
+解析に使用できる遺伝子セットは、以下の通りです。<br>
+[MSigDB hallmark gene](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=H) <br>
+[KEGG](https://www.kegg.jp) <br>
+[Reactome](https://reactome.org) <br>
+[PID (Pathway Interaction Database)](https://maayanlab.cloud/Harmonizome/resource/Pathway+Interaction+Database) <br>
+[BioCarta](https://maayanlab.cloud/Harmonizome/dataset/Biocarta+Pathways) <br>
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) <br>
+[GO (biological process, cellular component, and molecular function)](http://geneontology.org)  <br>
+[Human phenotype ontology](https://hpo.jax.org/app/)  <br>
+[DoRothEA regulon (activator)](https://saezlab.github.io/dorothea/) <br>
+[DoRothEA regulon (repressor)](https://saezlab.github.io/dorothea/) <br>
+[Transcription factor targets](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=TFT) <br>
+[miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
+注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
+
+解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。 <br>
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br><br>
+
+
+**Select a pair for fold change cut-off**について<br>
+選択された2群間のFold ChangeがCut-off condition(Setting panel)の対象となります。<br>
+特定の群間でのみ大きく変化する遺伝子を抽出したい場合に有効な機能となります。<br>
+
+**The DEG number after the filteration**について<br>
+Cut-off後のDEGの数が表示されます。<br>
+
+**Most significant genes**について<br>
+Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
+Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br>
+
+
+![multi deg](manual_figure/multi divisive1.png){#id .class width=50%}<br>
+
+---
+
+### k-means clustering
+k-means clusteringを実行します。<br>
+クラスターの数は、スライドバーを操作することで変更できます。<br>
+それぞれのクラスターの発現パターンをボックスプロットで表示します。<br>
+遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
+また、Enrichment analysisにより各クラスターの遺伝子の機能を同定します。<br>
+
+**Select a pair for fold change cut-off**について<br>
+選択された2群間のFold ChangeがCut-off condition(Setting panel)の対象となります。<br>
+特定の群間でのみ大きく変化する遺伝子を抽出したい場合に有効な機能となります。<br>
+
+**The DEG number after the filteration**について<br>
+Cut-off後のDEGの数が表示されます。<br>
+
+**Most significant genes**について<br>
+Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
+Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br>
+
+![multi kmeans](manual_figure/multi kmeans.png){#id .class width=60%}<br>
+
+---
+
+### GSEA 
+
+GSEA (gene set enrichment analysis)によりDEGの機能を同定します。<br>
+解析に使用できる遺伝子セットは、以下の通りです。<br>
+[MSigDB hallmark gene](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=H) <br>
+[KEGG](https://www.kegg.jp) <br>
+[Reactome](https://reactome.org) <br>
+[PID (Pathway Interaction Database)](https://maayanlab.cloud/Harmonizome/resource/Pathway+Interaction+Database) <br>
+[BioCarta](https://maayanlab.cloud/Harmonizome/dataset/Biocarta+Pathways) <br>
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) <br>
+[GO (biological process, cellular component, and molecular function)](http://geneontology.org)  <br>
+[Human phenotype ontology](https://hpo.jax.org/app/)  <br>
+[DoRothEA regulon (activator)](https://saezlab.github.io/dorothea/) <br>
+[DoRothEA regulon (repressor)](https://saezlab.github.io/dorothea/) <br>
+[Transcription factor targets](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=TFT) <br>
+[miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
+注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
+
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br><br>
+
+![multi GSEA](manual_figure/multi GSEA.png){#id .class width=70%} <br>
+
+---
+
+# Venn diagram
+
+複数の遺伝子リストの共通部分を抽出します。<br>
+カウントデータと組み合わせることで、共通部分のカウントデータの抽出・ヒートマップの作成ができます。<br><br>
+
+## Setting
+![venn setting](manual_figure/venn setting.png){#id .class width=50%}
+
+---
+
+### Input format
+
+#### 1. 遺伝子リスト
+inputとなる遺伝子リストのフォーマットは以下の通りです。
+
+    - １列目は、遺伝子名
+    - ２列目以降は、解析に影響しません
+    - 最大アップロード数は７です。
+    - ファイル名は、拡張子以外でピリオド「 . 」を使用しない
+
+２列目以降は解析に影響しないため、カウントデータが含まれていても問題ありません。<br>
+**最大７種類**の遺伝子リストの共通部分、非共通部分を可視化、リストとして出力できます。<br><br>
+   
+#### 2. Option: カウントデータ
+カウントデータから共通部分の遺伝子のみを抽出します。<br>
+inputとなるカウントデータのフォーマットは以下の通りです。
+
+    - Raw countデータではなく、normalized countデータを使用
+    - ファイル名は、拡張子以外でピリオド「 . 」を使用しない
+<br>
+
+#### 3. 複数のカウントデータ（統合ヒートマップの作成）
+複数のカウントデータを統合して、ベン図により同定した遺伝子セットの発現を可視化します。<br>
+inputとなるカウントデータのフォーマットは以下の通りです。
+
+    - Raw countデータではなく、normalized countデータを使用
+    - ファイル名は、拡張子以外でピリオド「 . 」を使用しない
+<br>
+
+---
+   
+#### Option: pre-zscoring
+pre-zscoringは、複数のカウントデータを統合する前に、zscore化します<br>
+   
+---
+
+## Output
+
+### Input gene list
+
+アップロードした遺伝子リストから作成したベン図を表示します。<br>
+アップロードしたリストに含まれる全遺伝子に関して、ベン図のどのグループに所属するかをリストとして表示します。<br>
+カウントデータをアップロードした場合、「intersection tableのgene list」からグループを選択することで、選択したグループの遺伝子をカウントデータから抽出することができます。<br><br>
+**データの見方について**<br>
+ベン図で表示されるグループは、アップロードした遺伝子リストのファイル名を元に作成されます（具体例の場合、example1.txtとexample2.txtをアップロードしています）。<br>
+共通部分はコロン「 : 」により表記されます（具体例の場合、**day0:day1:day5** = 「day0,day1,day5の共通部分」、**day0:day1** = 「day0とday1のみの共通部分」、**day0** = 「共通部分を除いたday0の遺伝子」となります）。
+<br><br>
+![venn venn diagram](manual_figure/venn venn diagram.png){#id .class width=60%}
+
+---
+
+### Integrated heatmap
+
+複数のカウントデータの統合及びベン図グループの遺伝子抽出を行い、ヒートマップとして結果を出力します。<br>
+可視化するグループは「gene list」から選択することで切り替えることができます。<br>
+統合したカウントテーブルは2種類出力されます。<br>
+integrated normalized countはzscore化をせずに複数のカウントデータを結合した結果です。<br>
+integrated zscored normalized countはzscore化したカウントデータです。pre-zscoringがTRUEの場合、複数のデータを結合する前にzscore化、pre-zscoringがFalseの場合、データを結合した後にzscore化されます。<br>
+「gene list」からnot selectedを選択することで、全遺伝子を結合したカウントデータを取得することも可能です。
+<br><br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap.png){#id .class width=60%}
+<br><br>
+
+---
+
+### Enrichment analysis
+
+エンリッチメント解析により各遺伝子グループの機能を同定します。<br>
+解析に使用できる遺伝子セットは、以下の通りです。<br>
+[MSigDB hallmark gene](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=H) <br>
+[KEGG](https://www.kegg.jp) <br>
+[Reactome](https://reactome.org) <br>
+[PID (Pathway Interaction Database)](https://maayanlab.cloud/Harmonizome/resource/Pathway+Interaction+Database) <br>
+[BioCarta](https://maayanlab.cloud/Harmonizome/dataset/Biocarta+Pathways) <br>
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) <br>
+[GO (biological process, cellular component, and molecular function)](http://geneontology.org)  <br>
+[Human phenotype ontology](https://hpo.jax.org/app/)  <br>
+[DoRothEA regulon (activator)](https://saezlab.github.io/dorothea/) <br>
+[DoRothEA regulon (repressor)](https://saezlab.github.io/dorothea/) <br>
+[Transcription factor targets](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=TFT) <br>
+[miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
+注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
+
+解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。<br>
+cnet plotで表示するグループは、「Group」から選択することで切り替えることができます。
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
+<br><br>
+![venn enrichment](manual_figure/venn enrichment.png){#id .class width=70%} <br>
+
+---
+
+# Normalized count analysis
+
+Normalized countデータのクラスタリング解析を実行します。<br>
+オプションとして遺伝子リストをアップロードすることで、目的の遺伝子のカウントデータのみを抽出し、クラスタリング解析を実行することもできます。<br>
+また、boxplotやヒートマップにより遺伝子発現の可視化もできます。<br>
+さらに、k-means clusteringにより類似の発現パターンを示す遺伝子グループを同定します。
+<br><br>
+
+## Setting
+
+![norm set](manual_figure/norm set.png){#id .class width=50%}<br>
+
+---
+
+### Input format
+   
+   pair-wise DEGや3 conditions DEGのフォーマットと同様です。
+   
+#### 1. **normalized count データのみ** <br>
+以下の条件を満たす場合、raw countデータのみで解析を実行できます。
+   
+    - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
+    - アンダーバー「 _ 」は、n数の表記以外では使用しない
+![unchanged image](www/input_format1.png){#id .class width=0%}
+<br>　
+
+---
+   
+#### 2. **normalized count データ + メタデータ** <br>
+サンプル名がaccession numberである場合や余分な情報が含まれるraw countデータである場合に使用します。<br>
+メタデータは以下の情報を含む必要があります。
+   
+    - １列目は、normalized countデータで使用されているサンプル名（例: accession number）
+    - ２列目は、対応するサンプル名 (例: Control_1)
+    - ３列目以降は、解析に影響しません 
+![unchanged image](www/input_format2.png){#id .class width=50%}
+<br><br>
+   
+---
+
+#### Species
+データセットの種を選択することで以下の解析が実行されます。
+
+    - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換
+<br>  <br> 
+
+#### Filter option 1
+gene listをアップロードすることで、目的の遺伝子グループのみを抽出後、クラスタリング解析を実行します。
+<br>  <br> 
+    
+#### Filter option 2
+basemeanの閾値が設定できます。
+<br>  <br> 
+
+   
+---
+
+## Output
+
+### Input Normalized Count Data
+
+アップロードしたNormalized countデータ、メタデータ、遺伝子リストを表示します。<br>
+メタデータや遺伝子リストをアップロードした場合、抽出結果のNormalized countデータも表示します。
+<br><br>
+![norm input](manual_figure/norm input.png){#id .class width=60%}
+<br><br>
+
+---
+
+### Clustering
+Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリング、UMAP(Uniform Manifold Approximation and Projection)の４種類のクラスタリング解析を実行します。<br>
+UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
+小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
+サンプル数が少ない場合は、n_neiborsを小さくする必要があります。<br>
+
+<br><br>
+![norm overview](manual_figure/norm overview.png){#id .class width=60%}
+<br><br>
+
+---
+
+### GOI (Genes of interest) profiling
+
+GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。
+
+<br><br>
+![norm goi](manual_figure/norm goi.png){#id .class width=50%}
+<br><br>
+
+---
+
+### k-means clustering
+k-means clusteringを実行します。<br>
+クラスターの数は、スライドバーを操作することで変更できます。<br>
+また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。
+
+<br><br>
+![norm kmeans](manual_figure/norm kmeans.png){#id .class width=60%}
+<br><br>
+
+---
+
+# Enrichment viewer
+
+遺伝子リストのエンリッチメント解析を実行します。<br>
+Venn diagramやk-means clusteringの結果を用いることで、同定した遺伝子グループの機能を比較・可視化します。
+<br><br>
+
+## Setting
+
+![enrich set](manual_figure/enrich set.png){#id .class width=50%}<br><br>
+
+---
+
+### Input format
+   
+inputとなる遺伝子リストのフォーマットは以下の通りです。<br>
+
+    - １列目は、遺伝子名
+    - ２列目は、遺伝子に対応するグループ名 
+    - ３列目以降は解析に影響しません
+    - ファイル名は、拡張子以外でピリオド「 . 」を使用しない
+３列目以降は解析に影響しないため、カウントデータが含まれていても問題ありません。<br>
+Venn diagramやk-means clusteringで得たテーブルデータを形式を変更せずに使用することができます。<br><br>
+   
+---
+
+#### Species
+データセットの種を選択することで以下の解析が実行されます。
+
+    - エンリッチメント解析の実行
+    - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換
+<br>  
+
+   
+---
+
+## Output
+
+### Input gene list for enrichment analysis
+
+アップロードした遺伝子リストを表示します。
+<br><br>
+![enrich input](manual_figure/enrich input.png){#id .class width=60%}
+<br><br>
+
+---
+
+### Enrichment analysis
+
+エンリッチメント解析により各遺伝子グループの機能を同定します。<br>
+解析に使用できる遺伝子セットは、以下の通りです。<br>
+[MSigDB hallmark gene](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=H) <br>
+[KEGG](https://www.kegg.jp) <br>
+[Reactome](https://reactome.org) <br>
+[PID (Pathway Interaction Database)](https://maayanlab.cloud/Harmonizome/resource/Pathway+Interaction+Database) <br>
+[BioCarta](https://maayanlab.cloud/Harmonizome/dataset/Biocarta+Pathways) <br>
+[WikiPathways](https://www.wikipathways.org/index.php/WikiPathways) <br>
+[GO (biological process, cellular component, and molecular function)](http://geneontology.org)  <br>
+[Human phenotype ontology](https://hpo.jax.org/app/)  <br>
+[DoRothEA regulon (activator)](https://saezlab.github.io/dorothea/) <br>
+[DoRothEA regulon (repressor)](https://saezlab.github.io/dorothea/) <br>
+[Transcription factor targets](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=TFT) <br>
+[miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
+注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
+
+解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。<br>
+cnet plotで表示するグループは、「Group」から選択することで切り替えることができます。
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
+<br><br>
+![enrich enrichment](manual_figure/enrich enrichment.png){#id .class width=70%}
+<br><br>
+---
+
+# More
+
+## Volcano navi
+
+Volcano plotを描写します。<br>
+Input formatは、以下の通りです。
+
+    - １行目は、遺伝子名 
+    - 「log2FoldChange」と「padj」という名前の行を含む
+    - その他の列は、解析に影響しません
+
+log2FoldChangeとpadjさえあれば、volcano plotを描写することができるので、RNA-seq以外のデータも利用できます。<br>
+GOI listから遺伝子を選択することで、volcano plotで表示される点のうち、目的の遺伝子だけをラベルすることができます。<br>
+x軸、y軸のレンジはスライドバーを操作することで自由に変更できます。<br>
+また、normalized countデータをアップロードする場合は、GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
+
+![volcano navi](manual_figure/volcano navi.png){#id .class width=100%}<br><br>
+
+---
+
+## MSigDB gene set
+
+[MSigDB (Molecular Signatures Data Base)](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)に登録されている遺伝子セットをダウンロードできます。<br>
+
+![MSigDB](manual_figure/MSigDB.png){#id .class width=100%}<br><br>
+
+---
+
+## Reference
+
+Shiny framework
+
+- Winston Chang, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui
+  Xie, Jeff Allen, Jonathan McPherson, Alan Dipert and Barbara Borges (2021).
+  shiny: Web Application Framework for R. R package version 1.7.1.
+  https://CRAN.R-project.org/package=shiny
+- Eric Bailey (2022). shinyBS: Twitter Bootstrap Components for Shiny. R package
+  version 0.61.1. https://CRAN.R-project.org/package=shinyBS
+- Yihui Xie, Joe Cheng and Xianying Tan (2022). DT: A Wrapper of the JavaScript
+  Library 'DataTables'. R package version 0.23.
+  https://CRAN.R-project.org/package=DT
+
+EBSeq (for ebseq)
+
+- Ning Leng and Christina Kendziorski (2020). EBSeq: An R package for gene and isoform
+  differential expression analysis of RNA-seq data. R package version 1.30.0.
+  
+DESeq2 (for deseq2)
+
+- Love, M.I., Huber, W., Anders, S. Moderated estimation of fold change and dispersion for
+  RNA-seq data with DESeq2 Genome Biology 15(12):550 (2014)
+
+edgeR (for edger)
+
+- Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a Bioconductor package for differential
+  expression analysis of digital gene expression data. Bioinformatics 26, 139-140
+
+IHW, Independent hypothesis weighting, and qvalue (for fdr control method of deseq2 and edger)
+
+- Nikolaos Ignatiadis, Bernd Klaus, Judith Zaugg and Wolfgang Huber (2016): Data-driven hypothesis
+  weighting increases detection power in genome-scale multiple testing. Nature Methods 13:577,
+  doi: 10.1038/nmeth.3885
+- John D. Storey, Andrew J. Bass, Alan Dabney and David Robinson (2021). qvalue: Q-value
+  estimation for false discovery rate control. R package version 2.26.0.
+  http://github.com/jdstorey/qvalue
+
+ggdendro (for dendrograms)
+
+- Andrie de Vries and Brian D. Ripley (2020). ggdendro: Create Dendrograms and Tree Diagrams Using 'ggplot2'. R package version 0.1.22. https://CRAN.R-project.org/package=ggdendro
+
+umap (for UMAP)
+
+- Konopka T (2022). _umap: Uniform Manifold Approximation and Projection_. R package
+  version 0.2.8.0, <https://CRAN.R-project.org/package=umap>.
+
+clusterProfiler, DOSE, msigdbr, dorothea (for enrichment analysis)
+
+- T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
+- Guangchuang Yu, Li-Gen Wang, Guang-Rong Yan, Qing-Yu He. DOSE: an R/Bioconductor package for Disease Ontology Semantic and Enrichment analysis. Bioinformatics 2015 31(4):608-609
+- Dolgalev I (2022). _msigdbr: MSigDB Gene Sets for Multiple Organisms in a Tidy Data Format_. R
+  package version 7.5.1, <https://CRAN.R-project.org/package=msigdbr>.
+- Garcia-Alonso L, Holland CH, Ibrahim MM, Turei D, Saez-Rodriguez J. 'Benchmark and integration of resources for the estimation of human transcription factor activities.' Genome Research. 2019. DOI: 10.1101/gr.240663.118.
+
+AnnotationDbi, org.Hs.eg.db, org.Mm.eg.db, org.Rn.eg.db, org.Xl.eg.db, org.Dm.eg.db, and org.Ce.eg.db (for genome wide annotation)
+
+- Hervé Pagès, Marc Carlson, Seth Falcon and Nianhua Li (2020). AnnotationDbi: Manipulation of SQLite-based annotations in Bioconductor. R package version 1.52.0. https://bioconductor.org/packages/AnnotationDbi
+- Marc Carlson (2020). org.Hs.eg.db: Genome wide annotation for Human. R package version 3.12.0.
+- Marc Carlson (2020). org.Mm.eg.db: Genome wide annotation for Mouse. R package version 3.12.0.
+- Marc Carlson (2022). org.Rn.eg.db: Genome wide annotation for Rat. R package version 3.15.0.
+- Marc Carlson (2022). org.Xl.eg.db: Genome wide annotation for Worm. R package version 3.15.0.
+- Marc Carlson (2022). org.Dm.eg.db: Genome wide annotation for Rat. R package version 3.15.0.
+- Marc Carlson (2022). org.Ce.eg.db: Genome wide annotation for Worm. R package version 3.15.0.
+
+genefilter (for z-score normalization)
+
+- R. Gentleman, V. Carey, W. Huber and F. Hahne (2021). genefilter: methods for filtering genes from high-throughput experiments. R package version 1.72.1.
+
+ComplexHeatmap (for heatmap and k-means clustering)
+
+- Gu, Z. (2016) Complex heatmaps reveal patterns and correlations in multidimensional genomic data. Bioinformatics.
+
+ggplot2 and ggpubr (for boxplot and scater plot)
+
+- H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
+- Alboukadel Kassambara (2020). ggpubr: 'ggplot2' Based Publication Ready Plots. R package version 0.4.0. https://CRAN.R-project.org/package=ggpubr
+
+DEGreport (for divisive clustering analysis)
+
+- Pantano L (2022). DEGreport: Report of DEG analysis. R package version 1.32.0, http://lpantano.github.io/DEGreport
+
+venn (for venn diagram analysis)
+
+- Adrian Dusa (2021). venn: Draw Venn Diagrams. R package version 1.10. https://CRAN.R-project.org/package=venn
+
+dplyr and tidyr (for data manipulation)
+
+- Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.7. https://CRAN.R-project.org/package=dplyr
+- Hadley Wickham (2021). tidyr: Tidy Messy Data. R package version 1.1.3. https://CRAN.R-project.org/package=tidyr
+
+
+sample data
+
+- R. Takase, S. Hino, K. Nagaoka, K. Anan, K. Kohrogi, H. Araki, Y. Hino, A. Sakamoto, T. B. Nicholson, T. Chen, M. Nakao, Lysine-specific demethylase-2 is distinctively involved in brown and beige adipogenic differentiation. FASEB J. 33, 5300–5311 (2019).
+- Saunderson EA, Stepper P, Gomm JJ, Hoa L et al. Hit-and-run epigenetic editing prevents senescence entry in primary breast cells from healthy donors. Nat Commun 2017 Nov 13;8(1):1450. PMID: 29133799
+
+---
+
+# License
+This shiny code is licensed under the GPLv3. Please see the file LICENSE.md for information.
+```
+RNAseqChef, an RNA-seq data controller highlighting gene expression features
+Shiny App for automated, systematic, and integrated RNA-seq differential expression analysis
+Copyright (C) 2022  Kan Etoh
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+You may contact the author of this code, Kan Etoh, at <kaneto@kumamoto-u.ac.jp>
+```
+
+---
+
+# Session info
+
+```{r, echo = TRUE}
+ sessionInfo()
+```

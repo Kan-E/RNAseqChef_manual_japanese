@@ -1,0 +1,72 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+www/Venn.png
+www/Pair-wise_DEG.png
+www/Normalized.png
+www/Multi DEG.png
+www/input_format_volcano.png
+www/input_format_multi.png
+www/input_format_enrich.png
+www/input_format3.png
+www/input_format2.png
+www/input_format1.png
+www/enrichment_viewer.png
+www/3cond_DEG.png
+www/.DS_Store
+RNAseqChef_manual_japanese.Rproj
+manual_figure/volcano navi.png
+manual_figure/venn venn diagram.png
+manual_figure/venn setting.png
+manual_figure/venn integrated heatmap.png
+manual_figure/venn enrichment.png
+manual_figure/panel.png
+manual_figure/pair-wise set.png
+manual_figure/pair-wise input.png
+manual_figure/pair-wise GOI profiling.png
+manual_figure/pair-wise enrichment analysis.png
+manual_figure/norm set.png
+manual_figure/norm overview.png
+manual_figure/norm kmeans.png
+manual_figure/norm input.png
+manual_figure/norm goi.png
+manual_figure/multi set.png
+manual_figure/multi overview.png
+manual_figure/multi kmeans.png
+manual_figure/multi input.png
+manual_figure/multi GSEA.png
+manual_figure/multi divisive1.png
+manual_figure/MSigDB.png
+manual_figure/input switch.png
+manual_figure/graphical abstract.png
+manual_figure/enrich set.png
+manual_figure/enrich input.png
+manual_figure/enrich enrichment.png
+manual_figure/cond 3 set.png
+manual_figure/cond 3 overview.png
+manual_figure/cond 3 input.png
+manual_figure/cond 3 goi.png
+manual_figure/cond 3 enrichment.png
+manual_figure/.DS_Store
+global.R
+data/example9.csv
+data/example8.txt
+data/example7.txt
+data/example6.csv
+data/example5.csv
+data/example4.txt
+data/example3.csv
+data/example2.csv
+data/example13.txt
+data/example12.txt
+data/example11.txt
+data/example10.txt
+data/example1.txt
+data/enrich_example.txt
+data/DEGexample.txt
+data/day5.txt
+data/day1.txt
+data/day0.txt
+data/.DS_Store
+.DS_Store
