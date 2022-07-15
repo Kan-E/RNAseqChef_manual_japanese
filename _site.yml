@@ -3,6 +3,7 @@ author: Kan Etoh
 output:
   html_document:
     theme: cosmo
+    google_analytics: G-054JEEKXC9
     highlight: textmate
     toc: true
     toc_float:
