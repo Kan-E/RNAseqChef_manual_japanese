@@ -262,7 +262,7 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 
 解析結果として、over-representative analysis, GSEA (gene set enrichment analysis), gene-concept network (cnet) plotが出力されます。 <br>
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
-![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=70%}<br><br><br>
+![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=70%}<br><br>
 
 ---
 
@@ -382,7 +382,7 @@ Enrichment analysisによりDEGの機能を同定します。<br>
 
 # Multi DEG
 
-LRT(Likelihood Ratio Test: 尤度比検定)を実行することで、発現変動遺伝子を検出・可視化・機能解析結果を出力します。<br>
+DESeq2 LRT(Likelihood Ratio Test: 尤度比検定)を実行することで、発現変動遺伝子を検出・可視化・機能解析結果を出力します。<br>
 注： 個々の群間の検定は行いません。
 
 ## Setting
@@ -465,7 +465,7 @@ DEG解析の結果をheatmapで表示します。<br>
 
 UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
-サンプル数が少ない場合は、n_neiborsを小さくする必要があります。<br><br>
+サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br><br>
 ![multi overview](manual_figure/multi overview.png){#id .class width=70%}
 <br><br>
 
@@ -501,7 +501,7 @@ UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍�
 選択された2群間のFold ChangeがCut-off condition(Setting panel)の対象となります。<br>
 特定の群間でのみ大きく変化する遺伝子を抽出したい場合に有効な機能となります。<br>
 
-**The DEG number after the filteration**について<br>
+**The DEG number after the filtration**について<br>
 Cut-off後のDEGの数が表示されます。<br>
 
 **Most significant genes**について<br>
@@ -524,7 +524,7 @@ k-means clusteringを実行します。<br>
 選択された2群間のFold ChangeがCut-off condition(Setting panel)の対象となります。<br>
 特定の群間でのみ大きく変化する遺伝子を抽出したい場合に有効な機能となります。<br>
 
-**The DEG number after the filteration**について<br>
+**The DEG number after the filtration**について<br>
 Cut-off後のDEGの数が表示されます。<br>
 
 **Most significant genes**について<br>
@@ -565,7 +565,7 @@ GSEA (gene set enrichment analysis)によりDEGの機能を同定します。<br
 カウントデータと組み合わせることで、共通部分のカウントデータの抽出・ヒートマップの作成ができます。<br><br>
 
 ## Setting
-![venn setting](manual_figure/venn setting.png){#id .class width=50%}
+![venn setting](manual_figure/venn setting.png){#id .class width=50%}<br>
 
 ---
 
@@ -733,7 +733,7 @@ basemeanの閾値が設定できます。
 Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリング、UMAP(Uniform Manifold Approximation and Projection)の４種類のクラスタリング解析を実行します。<br>
 UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
-サンプル数が少ない場合は、n_neiborsを小さくする必要があります。<br>
+サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br>
 
 <br><br>
 ![norm overview](manual_figure/norm overview.png){#id .class width=60%}

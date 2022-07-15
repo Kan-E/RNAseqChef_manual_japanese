@@ -246,7 +246,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
 <h4 class="author">Kan Etoh</h4>
-<h4 class="date">22/07/15 09:48</h4>
+<h4 class="date">22/07/15 11:43</h4>
 
 </div>
 
@@ -446,7 +446,7 @@ enrichment analysis), gene-concept network (cnet) plotが出力されます。
 href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。
 <img src="manual_figure/pair-wise%20enrichment%20analysis.png" id="id"
 class="class" style="width:70.0%"
-alt="pair-wise enrichment analysis" /><br><br><br></p>
+alt="pair-wise enrichment analysis" /><br><br></p>
 <hr />
 </div>
 </div>
@@ -573,7 +573,7 @@ class="class" style="width:70.0%" alt="cond 3 enrichment" /> <br></p>
 </div>
 <div id="multi-deg" class="section level1">
 <h1>Multi DEG</h1>
-<p>LRT(Likelihood Ratio Test:
+<p>DESeq2 LRT(Likelihood Ratio Test:
 尤度比検定)を実行することで、発現変動遺伝子を検出・可視化・機能解析結果を出力します。<br>
 注： 個々の群間の検定は行いません。</p>
 <div id="setting-2" class="section level2">
@@ -656,7 +656,7 @@ DEG解析の結果をheatmapで表示します。<br>
 また、DEG解析の結果やDEGのカウントデータが出力されます。<br></p>
 <p>UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
-サンプル数が少ない場合は、n_neiborsを小さくする必要があります。<br><br>
+サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br><br>
 <img src="manual_figure/multi%20overview.png" id="id" class="class"
 style="width:70.0%" alt="multi overview" /> <br><br></p>
 <hr />
@@ -697,7 +697,7 @@ href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">Cl
 選択された2群間のFold ChangeがCut-off condition(Setting
 panel)の対象となります。<br>
 特定の群間でのみ大きく変化する遺伝子を抽出したい場合に有効な機能となります。<br></p>
-<p><strong>The DEG number after the filteration</strong>について<br>
+<p><strong>The DEG number after the filtration</strong>について<br>
 Cut-off後のDEGの数が表示されます。<br></p>
 <p><strong>Most significant genes</strong>について<br>
 Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
@@ -718,7 +718,7 @@ analysisにより各クラスターの遺伝子の機能を同定します。<br
 選択された2群間のFold ChangeがCut-off condition(Setting
 panel)の対象となります。<br>
 特定の群間でのみ大きく変化する遺伝子を抽出したい場合に有効な機能となります。<br></p>
-<p><strong>The DEG number after the filteration</strong>について<br>
+<p><strong>The DEG number after the filtration</strong>について<br>
 Cut-off後のDEGの数が表示されます。<br></p>
 <p><strong>Most significant genes</strong>について<br>
 Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
@@ -765,11 +765,8 @@ style="width:70.0%" alt="multi GSEA" /> <br></p>
 カウントデータと組み合わせることで、共通部分のカウントデータの抽出・ヒートマップの作成ができます。<br><br></p>
 <div id="setting-3" class="section level2">
 <h2>Setting</h2>
-<div class="figure">
-<img src="manual_figure/venn%20setting.png" id="id" class="class"
-style="width:50.0%" alt="" />
-<p class="caption">venn setting</p>
-</div>
+<p><img src="manual_figure/venn%20setting.png" id="id" class="class"
+style="width:50.0%" alt="venn setting" /><br></p>
 <hr />
 <div id="input-format-3" class="section level3">
 <h3>Input format</h3>
@@ -953,7 +950,7 @@ ward.D2による階層的クラスタリング、UMAP(Uniform Manifold Approxima
 and Projection)の４種類のクラスタリング解析を実行します。<br>
 UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
-サンプル数が少ない場合は、n_neiborsを小さくする必要があります。<br></p>
+サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br></p>
 <p><br><br> <img src="manual_figure/norm%20overview.png" id="id"
 class="class" style="width:60.0%" alt="norm overview" /> <br><br></p>
 <hr />
