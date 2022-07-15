@@ -41,7 +41,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 概要
 
-![](manual_figure/graphical abstract.png){#id .class width=70%} <br><br>
+![](manual_figure/graphical abstract_ver2.png){#id .class width=70%} <br><br>
 
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
 単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
