@@ -246,7 +246,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
 <h4 class="author">Kan Etoh</h4>
-<h4 class="date">22/07/19 15:07</h4>
+<h4 class="date">22/07/20 13:33</h4>
 
 </div>
 
@@ -265,8 +265,10 @@ installation」に記載されているコードをRで実行 <br><br> ウェブ
 href="https://kan-e.shinyapps.io/RNAseqChef/"
 class="uri">https://kan-e.shinyapps.io/RNAseqChef/</a> <br>
 ソースコード: <a href="https://github.com/Kan-E/RNAseqChef"
-class="uri">https://github.com/Kan-E/RNAseqChef</a> <br> 問い合わせ先:
-Kan Etoh, <a href="mailto:kaneto@kumamoto-u.ac.jp"
+class="uri">https://github.com/Kan-E/RNAseqChef</a> <br> Manual
+(English): <a href="https://kan-e.github.io/RNAseqChef_manual"
+class="uri">https://kan-e.github.io/RNAseqChef_manual</a> <br>
+問い合わせ先: Kan Etoh, <a href="mailto:kaneto@kumamoto-u.ac.jp"
 class="email">kaneto@kumamoto-u.ac.jp</a> <br><br><br></p>
 <p>本アプリは以下のセクションにより構成されます。<br></p>
 <ul>
@@ -291,6 +293,24 @@ countデータを用いたクラスタリング解析、遺伝子セットの抽
 <img src="manual_figure/panel.png" id="id" class="class"
 style="width:70.0%" alt="panel" /> <br></p>
 <hr />
+</div>
+<div id="input-fileの共通ルール注意点" class="section level1">
+<h1>Input fileの共通ルール・注意点</h1>
+<div id="拡張子" class="section level4">
+<h4>拡張子</h4>
+<p>タブ区切りtxt file (.txt)、カンマ区切りcsv file
+(.csv)、エクセルファイル (.xlsx)に対応します。<br><br></p>
+</div>
+<div id="遺伝子名の重複" class="section level4">
+<h4>遺伝子名の重複</h4>
+<p>エクセルの自動書式機能が遺伝子名の誤変換を引き起こすケースがあります。<br>
+エクセルのバージョンによっては、<strong>ただファイルを開くだけで遺伝子名の変換・重複が起こります</strong>（March1
+→ 1-Mar, Marc1 → 1-Marなど）。<br>
+RNAseqChefでは、遺伝子名の重複を含むファイルは解析できません（Enrichment
+viewerを除く）。<br>
+エクセルでファイルを編集する場合は、遺伝子の誤変換が起きていないことを確認してください。<br><br></p>
+<hr />
+</div>
 </div>
 <div id="pair-wise-deg" class="section level1">
 <h1>Pair-wise DEG</h1>
@@ -326,8 +346,10 @@ countデータである場合に使用します。<br>
 - ３列目以降は、解析に影響しません </code></pre>
 <p><img src="www/input_format2.png" id="id" class="class"
 style="width:50.0%" alt="unchanged image" /> <br><br></p>
-<p>#### 3. <strong>raw count データのみ (バッチモード)</strong> <br>
-以下の条件を満たす場合、複数のraw countデータを一括処理できます。</p>
+</div>
+<div id="raw-count-データのみ-バッチモード" class="section level4">
+<h4>3. <strong>raw count データのみ (バッチモード)</strong> <br></h4>
+<p>以下の条件を満たす場合、複数のraw countデータを一括処理できます。</p>
 <pre><code>- 解析対象となる２群のデータのみで構成されるファイル
 - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
 - アンダーバー「 _ 」は、n数の表記以外では使用しない</code></pre>

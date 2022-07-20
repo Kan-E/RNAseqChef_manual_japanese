@@ -51,6 +51,7 @@ RNAseqChefは、以下の方法で使用可能です。<br>
 2. ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
 ウェブページ: https://kan-e.shinyapps.io/RNAseqChef/ <br>
 ソースコード: https://github.com/Kan-E/RNAseqChef <br>
+Manual (English): https://kan-e.github.io/RNAseqChef_manual <br>
 問い合わせ先: Kan Etoh, kaneto@kumamoto-u.ac.jp <br><br><br>
 
 
@@ -76,6 +77,20 @@ RNAseqChefは、以下の方法で使用可能です。<br>
 解析は、アウトプットパネルのタブパネルをクリックすることで実行されます。<br><br>
 ![panel](manual_figure/panel.png){#id .class width=70%} <br>
 
+---
+
+# Input fileの共通ルール・注意点
+
+#### 拡張子
+
+タブ区切りtxt file (.txt)、カンマ区切りcsv file (.csv)、エクセルファイル (.xlsx)に対応します。<br><br>
+
+#### 遺伝子名の重複
+
+エクセルの自動書式機能が遺伝子名の誤変換を引き起こすケースがあります。<br>
+エクセルのバージョンによっては、**ただファイルを開くだけで遺伝子名の変換・重複が起こります**（March1 → 1-Mar, Marc1 → 1-Marなど）。<br>
+RNAseqChefでは、遺伝子名の重複を含むファイルは解析できません（Enrichment viewerを除く）。<br>
+エクセルでファイルを編集する場合は、遺伝子の誤変換が起きていないことを確認してください。<br><br>
 
 ---
 
@@ -116,7 +131,7 @@ inputとなるraw countデータの形式は3種類あります。<br>
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
-   #### 3. **raw count データのみ (バッチモード)** <br>
+#### 3. **raw count データのみ (バッチモード)** <br>
 以下の条件を満たす場合、複数のraw countデータを一括処理できます。
    
     - 解析対象となる２群のデータのみで構成されるファイル
