@@ -246,7 +246,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
 <h4 class="author">Kan Etoh</h4>
-<h4 class="date">22/07/20 13:33</h4>
+<h4 class="date">22/07/25 16:31</h4>
 
 </div>
 
@@ -258,7 +258,8 @@ div.tocify {
 class="class" style="width:70.0%" /> <br><br></p>
 <p>RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
 単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
-また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br><br>
+また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br>
+Publication-readyな高解像度Figure（イラストレーターで編集可能なPDFファイル）をダウンロードすることができます。<br><br>
 RNAseqChefは、以下の方法で使用可能です。<br> 1. ウェブページへアクセス
 <br> 2. ソースコードページの「Local
 installation」に記載されているコードをRで実行 <br><br> ウェブページ: <a
@@ -309,6 +310,26 @@ style="width:70.0%" alt="panel" /> <br></p>
 RNAseqChefでは、遺伝子名の重複を含むファイルは解析できません（Enrichment
 viewerを除く）。<br>
 エクセルでファイルを編集する場合は、遺伝子の誤変換が起きていないことを確認してください。<br><br></p>
+<hr />
+</div>
+</div>
+<div id="output-fileの共通ルール注意点" class="section level1">
+<h1>Output fileの共通ルール・注意点</h1>
+<div id="データの保存" class="section level4">
+<h4>データの保存</h4>
+<p>ダウンロードボタンを押すことで、テーブルデータやグラフが保存されます。
+表データはタブ区切りtxt
+file(.txt)、グラフはイラストレーターで編集可能なPDFファイルで保存されます。<br>
+pair-wise DEGのbatch
+modeのみ、zip形式で複数のファイルが保存されます。<br><br></p>
+</div>
+<div id="保存されるグラフのサイズ調整" class="section level4">
+<h4>保存されるグラフのサイズ調整</h4>
+<p>Setting panelの「Output plot size setting for
+pdf」を調整することで保存される図のサイズを変更できます。<br>
+グラフ内で隣り合う文字が重なってしまう場合やグラフの余白が大きすぎる場合にパラメーターを調整して下さい。<br>
+パラメーターの値が0の場合、デフォルトサイズで保存されます。<br>
+デフォルトサイズは、図の種類によって異なります。詳細は、アプリ内のポップアップからご覧ください。<br><br></p>
 <hr />
 </div>
 </div>
@@ -1024,6 +1045,11 @@ clusteringで得たテーブルデータを形式を変更せずに使用する�
 <pre><code>- エンリッチメント解析の実行
 - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換</code></pre>
 <p><br></p>
+<hr />
+</div>
+<div id="most-significant-pathways" class="section level4">
+<h4>Most significant pathways</h4>
+<p>Dotplotやcnet plotで表示されるpathwayの数を変更できます。 <br></p>
 <hr />
 </div>
 </div>

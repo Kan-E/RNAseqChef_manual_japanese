@@ -45,7 +45,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
 単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
-また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br><br>
+また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br>
+Publication-readyな高解像度Figure（イラストレーターで編集可能なPDFファイル）をダウンロードすることができます。<br><br>
 RNAseqChefは、以下の方法で使用可能です。<br>
 1. ウェブページへアクセス <br>
 2. ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
@@ -91,6 +92,23 @@ Manual (English): https://kan-e.github.io/RNAseqChef_manual <br>
 エクセルのバージョンによっては、**ただファイルを開くだけで遺伝子名の変換・重複が起こります**（March1 → 1-Mar, Marc1 → 1-Marなど）。<br>
 RNAseqChefでは、遺伝子名の重複を含むファイルは解析できません（Enrichment viewerを除く）。<br>
 エクセルでファイルを編集する場合は、遺伝子の誤変換が起きていないことを確認してください。<br><br>
+
+---
+
+# Output fileの共通ルール・注意点
+
+#### データの保存
+
+ダウンロードボタンを押すことで、テーブルデータやグラフが保存されます。
+表データはタブ区切りtxt file(.txt)、グラフはイラストレーターで編集可能なPDFファイルで保存されます。<br>
+pair-wise DEGのbatch modeのみ、zip形式で複数のファイルが保存されます。<br><br>
+
+#### 保存されるグラフのサイズ調整
+
+Setting panelの「Output plot size setting for pdf」を調整することで保存される図のサイズを変更できます。<br>
+グラフ内で隣り合う文字が重なってしまう場合やグラフの余白が大きすぎる場合にパラメーターを調整して下さい。<br>
+パラメーターの値が0の場合、デフォルトサイズで保存されます。<br>
+デフォルトサイズは、図の種類によって異なります。詳細は、アプリ内のポップアップからご覧ください。<br><br>
 
 ---
 
@@ -809,6 +827,11 @@ Venn diagramやk-means clusteringで得たテーブルデータを形式を変�
     - 遺伝子名がENSEMBL IDの場合、gene symbolへの変換
 <br>  
 
+---
+
+#### Most significant pathways
+Dotplotやcnet plotで表示されるpathwayの数を変更できます。
+<br>  
    
 ---
 
