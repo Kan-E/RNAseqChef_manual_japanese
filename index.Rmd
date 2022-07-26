@@ -48,8 +48,12 @@ RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析
 また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br>
 Publication-readyな高解像度Figure（イラストレーターで編集可能なPDFファイル）をダウンロードすることができます。<br><br>
 RNAseqChefは、以下の方法で使用可能です。<br>
-1. ウェブページへアクセス <br>
-2. ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
+方法1. 下記ウェブページへアクセス <br>
+方法2. 下記ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
+注）現時点では、サーバーの都合上、ウェブページは複数人同時使用できません。<br>
+ウェブページが正常に動作しない場合は、時間をおいてから再度アクセスして下さい。<br>
+方法２の場合は、使用人数の制限はありません。
+
 ウェブページ: https://kan-e.shinyapps.io/RNAseqChef/ <br>
 ソースコード: https://github.com/Kan-E/RNAseqChef <br>
 Manual (English): https://kan-e.github.io/RNAseqChef_manual <br>
