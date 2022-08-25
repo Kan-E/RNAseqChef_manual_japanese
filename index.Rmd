@@ -388,7 +388,7 @@ DEG解析の結果をscatter plotとheatmapで表示します。<br>
 ### GOI (Genes of interest) profiling
 
 GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-![cond 3 goi](manual_figure/cond 3 goi.png){#id .class width=50%}
+![cond 3 goi](manual_figure/cond 3 goi.png){#id .class width=70%}
 
 ---
 
