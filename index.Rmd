@@ -54,7 +54,7 @@ RNAseqChefは、以下の方法で使用可能です。<br>
 ウェブページが正常に動作しない場合は、時間をおいてから再度アクセスして下さい。<br>
 方法２の場合は、使用人数の制限はありません。
 
-ウェブページ: https://kan-e.shinyapps.io/RNAseqChef/ <br>
+ウェブページ: https://imeg-ku.shinyapps.io/RNAseqChef/ <br>
 ソースコード: https://github.com/Kan-E/RNAseqChef <br>
 Manual (English): https://kan-e.github.io/RNAseqChef_manual <br>
 問い合わせ先: Kan Etoh, kaneto@kumamoto-u.ac.jp <br><br><br>
