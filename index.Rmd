@@ -5,39 +5,23 @@
 ---
 ```{r setup, include=FALSE}
 source("global.R")
-input <- c()
-input$Species <- "Mus musculus" 
-input$Species2 <- "Mus musculus" 
-input$Species3 <- "Mus musculus" 
-input$Species4 <- "Mus musculus" 
-input$Species5 <- "Mus musculus" 
-input$Species6 <- "Mus musculus" 
-input$Species7 <- "Mus musculus" 
-input$fc <- 1.5 
-input$fc2 <-1.5
-input$fc4 <- 5
-input$fc6 <- 1.5
-input$fdr <- 0.05
-input$fdr2 <-0.05
-input$fdr4 <- 0.05
-input$fdr6 <- 0.05
-input$basemean <- 0
-input$basemean2 <- 1
-input$basemean6 <- 0
-input$basemean3 <- 0
-input$Gene_set <- "MSigDB Hallmark"
-input$Gene_set2 <- "MSigDB Hallmark"
-input$Gene_set3 <- "MSigDB Hallmark"
-input$Gene_set4 <- "MSigDB Hallmark"
-input$Gene_set5 <- "MSigDB Hallmark"
-input$Gene_set6 <- "MSigDB Hallmark"
-input$Gene_set7 <- "MSigDB Hallmark"
-input$Gene_set8 <- "MSigDB Hallmark"
-input$Gene_set9 <- "MSigDB Hallmark"
+library(biomaRt)
+library(monaLisa)
+library(GenomicRanges)
+library(BiocParallel)
+library(SummarizedExperiment)
+library(JASPAR2020)
+library(TFBSTools)
+library(BSgenome.Mmusculus.UCSC.mm10)
+library(BSgenome.Hsapiens.UCSC.hg19)
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 knitr::opts_chunk$set(echo = TRUE)
 ``` 
 
 ---
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7095218.svg)](https://doi.org/10.5281/zenodo.7095218)<br>
 
 # 概要
 
@@ -50,9 +34,6 @@ Publication-readyな高解像度Figure（イラストレーターで編集可能
 RNAseqChefは、以下の方法で使用可能です。<br>
 方法1. 下記ウェブページへアクセス <br>
 方法2. 下記ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
-注）現時点では、サーバーの都合上、ウェブページは複数人同時使用できません。<br>
-ウェブページが正常に動作しない場合は、時間をおいてから再度アクセスして下さい。<br>
-方法２の場合は、使用人数の制限はありません。
 
 ウェブページ: https://imeg-ku.shinyapps.io/RNAseqChef/ <br>
 ソースコード: https://github.com/Kan-E/RNAseqChef <br>
@@ -150,6 +131,8 @@ inputとなるraw countデータの形式は3種類あります。<br>
     - １列目は、raw countデータで使用されているサンプル名（例: accession number）
     - ２列目は、対応するサンプル名 (例: Control_1)
     - ３列目以降は、解析に影響しません 
+メタデータ２列目のサンプル名は、n数表記（例："_1"）は必須ではありません。
+n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
@@ -217,53 +200,7 @@ TPMカウントなどのnormalized countデータを用いてbasemean cut-offや
 Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリングの3種類のクラスタリング解析を実行します。<br>
 DEG解析の結果をMA-plotとheatmapで表示します。<br>
 表データとして、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
-```{r, echo = FALSE, warning=FALSE, message=FALSE}
- count <- read.table("data/example1.txt",header = T,row.names = 1)
- collist <- gsub("\\_.+$", "", colnames(count))
- group <- data.frame(con = factor(collist))
- dds<- DESeqDataSetFromMatrix(countData = round(count),colData = group, design = ~ con)
- dds$con <- factor(dds$con, levels = unique(collist))
- dds <- DESeq(dds)
- contrast <- c("con", unique(collist))
- res <- results(dds,  contrast = contrast)
- data <- as.data.frame(res)
- count <- counts(dds, normalized=TRUE)
- collist <- factor(gsub("\\_.+$", "", colnames(count)))
-    vec <- c()
-    for (i in 1:length(unique(collist))) {
-      num <- length(collist[collist == unique(collist)[i]])
-      vec <- c(vec, num)
-    }
-    Cond_1 <- vec[1]
-    Cond_2 <- vec[2]
-    Row.names <- NULL
-    log2FoldChange <- NULL
-    value <- NULL
-    data <- merge(data,count, by=0)
-    data$log2FoldChange <- -1 * data$log2FoldChange
-    data2 <- dplyr::filter(data, abs(data$log2FoldChange) > log(2, 2))
-    data2$group <- "Up"
-    data2$group[data2$log2FoldChange < 0] <- "Down"
-    data3 <- dplyr::filter(data2, abs(data2$padj) < 0.05)
-    genenames <- as.vector(data$Row.names)
-    xlab <- "Log2 mean expression"
-    m1 <- as.grob(ggmaplot(data, fdr = 0.05, fc = 2, size = 0.1,
-                           palette = c("#B31B21", "#1465AC", "darkgray"),
-                           genenames = genenames,
-                           legend = "top", top = 20,
-                           font.label = c("bold", 6),font.legend = "bold",
-                           font.main = "bold",xlab = xlab,
-                           ggtheme = ggplot2::theme_minimal(),
-                           select.top.method = "fc"))
-   data.z <- genescale(data3[,8:(7 + Cond_1 + Cond_2)], axis=1, method="Z")
-      ht <- as.grob(Heatmap(data.z, name = "z-score",column_order = colnames(data.z),
-                            clustering_method_columns = 'ward.D2',
-                            show_row_names = F, show_row_dend = F))
-    p <- plot_grid(m1, ht, rel_widths = c(2, 1))
-    print(PCAplot(data = count))
-    print(p)
-```
-
+![pair-wise result_overview](manual_figure/pair_result_overview.png){#id .class width=70%}
 <br><br>
 
 ---
@@ -274,8 +211,9 @@ Volcano plotを表示します。<br>
 GOI listから遺伝子を選択することで、volcano plotで表示される点のうち、目的の遺伝子だけをラベルすることができます。<br>
 x軸、y軸のレンジはスライドバーを操作することで自由に変更できます。<br>
 また、GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling.png){#id .class width=70%}
-<br><br>
+![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling1.png){#id .class width=70%}<br>
+![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling2.png){#id .class width=70%}
+<br>
 
 ---
 
@@ -299,7 +237,7 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 
 解析結果として、over-representative analysis, GSEA (gene set enrichment analysis), gene-concept network (cnet) plotが出力されます。 <br>
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
-![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=70%}<br><br>
+![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=70%}<br>
 
 ---
 
@@ -340,6 +278,8 @@ inputとなるraw countデータの形式は2種類あります。<br>
     - １列目は、raw countデータで使用されているサンプル名（例: accession number）
     - ２列目は、対応するサンプル名 (例: Control_1)
     - ３列目以降は、解析に影響しません 
+メタデータ２列目のサンプル名は、n数表記（例："_1"）は必須ではありません。
+n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
@@ -380,15 +320,18 @@ Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2に
 DEG解析の結果をscatter plotとheatmapで表示します。<br>
 3条件総当たりで遺伝子発現変動を可視化することで、各条件の遺伝子発現の特徴を抽出できます。<br>
 また、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
-![cond 3 overview](manual_figure/cond 3 overview.png){#id .class width=70%}
-<br><br>
+![cond 3 overview](manual_figure/cond 3 overview1.png){#id .class width=70%}<br>
+![cond 3 overview](manual_figure/cond 3 overview2.png){#id .class width=70%}<br>
+![cond 3 overview](manual_figure/cond 3 overview3.png){#id .class width=70%}
+<br>
 
 ---
 
 ### GOI (Genes of interest) profiling
 
 GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-![cond 3 goi](manual_figure/cond 3 goi.png){#id .class width=70%}
+![cond 3 goi](manual_figure/cond 3 goi1.png){#id .class width=70%}<br>
+![cond 3 goi](manual_figure/cond 3 goi2.png){#id .class width=70%}<br>
 
 ---
 
@@ -413,7 +356,8 @@ Enrichment analysisによりDEGの機能を同定します。<br>
 解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。 <br>
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br><br>
 
-![cond 3 enrichment](manual_figure/cond 3 enrichment.png){#id .class width=70%} <br>
+![cond 3 enrichment](manual_figure/cond 3 enrichment1.png){#id .class width=70%} <br>
+![cond 3 enrichment](manual_figure/cond 3 enrichment2.png){#id .class width=70%} <br>
 
 ---
 
@@ -489,8 +433,9 @@ TPMカウントなどのnormalized countデータを用いてbasemean cut-offや
 
 アップロードしたraw countデータを表示します。
 メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw countデータも表示します。
-<br><br>
-![multi input](manual_figure/multi input.png){#id .class width=60%}
+<br>
+![multi input](manual_figure/multi input1.png){#id .class width=60%}
+![multi input](manual_figure/multi input2.png){#id .class width=60%}<br>
 
 ---
 
@@ -503,8 +448,9 @@ DEG解析の結果をheatmapで表示します。<br>
 UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
 サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br><br>
-![multi overview](manual_figure/multi overview.png){#id .class width=70%}
-<br><br>
+![multi overview](manual_figure/multi overview1.png){#id .class width=70%}<br>
+![multi overview](manual_figure/multi overview2.png){#id .class width=70%}<br>
+
 
 ---
 
@@ -546,7 +492,12 @@ Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析�
 Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br>
 
 
+![multi deg](manual_figure/multi divisive.png){#id .class width=50%}<br>
 ![multi deg](manual_figure/multi divisive1.png){#id .class width=50%}<br>
+![multi deg](manual_figure/multi divisive2.png){#id .class width=50%}<br>
+![multi deg](manual_figure/multi divisive3.png){#id .class width=50%}<br>
+![multi deg](manual_figure/multi divisive4.png){#id .class width=50%}<br>
+![multi deg](manual_figure/multi divisive5.png){#id .class width=50%}<br>
 
 ---
 
@@ -568,7 +519,12 @@ Cut-off後のDEGの数が表示されます。<br>
 Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
 Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br>
 
-![multi kmeans](manual_figure/multi kmeans.png){#id .class width=60%}<br>
+![multi kmeans](manual_figure/multi kmeans1.png){#id .class width=60%}<br>
+![multi kmeans](manual_figure/multi kmeans2.png){#id .class width=60%}<br>
+![multi kmeans](manual_figure/multi kmeans3.png){#id .class width=60%}<br>
+![multi kmeans](manual_figure/multi kmeans4.png){#id .class width=60%}<br>
+![multi kmeans](manual_figure/multi kmeans5.png){#id .class width=60%}<br>
+![multi kmeans](manual_figure/multi kmeans6.png){#id .class width=60%}<br>
 
 ---
 
@@ -590,7 +546,7 @@ GSEA (gene set enrichment analysis)によりDEGの機能を同定します。<br
 [miRNA target](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR) <br>
 注) 転写因子の予測解析は**DoRothEA regulon**の使用を推奨します。
 
-解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br><br>
+解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br>
 
 ![multi GSEA](manual_figure/multi GSEA.png){#id .class width=70%} <br>
 
@@ -646,7 +602,8 @@ pre-zscoringは、複数のカウントデータを統合する前に、zscore�
 ベン図で表示されるグループは、アップロードした遺伝子リストのファイル名を元に作成されます（具体例の場合、example1.txtとexample2.txtをアップロードしています）。<br>
 共通部分はコロン「 : 」により表記されます（具体例の場合、**day0:day1:day5** = 「day0,day1,day5の共通部分」、**day0:day1** = 「day0とday1のみの共通部分」、**day0** = 「共通部分を除いたday0の遺伝子」となります）。
 <br><br>
-![venn venn diagram](manual_figure/venn venn diagram.png){#id .class width=60%}
+![venn venn diagram](manual_figure/venn venn diagram1.png){#id .class width=60%}<br>
+![venn venn diagram](manual_figure/venn venn diagram2.png){#id .class width=60%}<br>
 
 ---
 
@@ -659,8 +616,9 @@ integrated normalized countはzscore化をせずに複数のカウントデー�
 integrated zscored normalized countはzscore化したカウントデータです。pre-zscoringがTRUEの場合、複数のデータを結合する前にzscore化、pre-zscoringがFalseの場合、データを結合した後にzscore化されます。<br>
 「gene list」からnot selectedを選択することで、全遺伝子を結合したカウントデータを取得することも可能です。
 <br><br>
-![venn integrated heatmap](manual_figure/venn integrated heatmap.png){#id .class width=60%}
-<br><br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap.png){#id .class width=60%}<br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap1.png){#id .class width=60%}<br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap2.png){#id .class width=60%}<br>
 
 ---
 
@@ -686,6 +644,7 @@ integrated zscored normalized countはzscore化したカウントデータです
 cnet plotで表示するグループは、「Group」から選択することで切り替えることができます。
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
 <br><br>
+![venn enrichment](manual_figure/venn enrichment1.png){#id .class width=70%} <br>
 ![venn enrichment](manual_figure/venn enrichment.png){#id .class width=70%} <br>
 
 ---
@@ -725,6 +684,8 @@ Normalized countデータのクラスタリング解析を実行します。<br>
     - １列目は、normalized countデータで使用されているサンプル名（例: accession number）
     - ２列目は、対応するサンプル名 (例: Control_1)
     - ３列目以降は、解析に影響しません 
+メタデータ２列目のサンプル名は、n数表記（例："_1"）は必須ではありません。
+n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
@@ -765,30 +726,30 @@ UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍�
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
 サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br>
 
-<br><br>
-![norm overview](manual_figure/norm overview.png){#id .class width=60%}
-<br><br>
+![norm overview](manual_figure/norm overview1.png){#id .class width=60%}<br>
+![norm overview](manual_figure/norm overview2.png){#id .class width=60%}<br>
+<br>
 
 ---
 
 ### GOI (Genes of interest) profiling
 
 GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。
+<br>
 
-<br><br>
-![norm goi](manual_figure/norm goi.png){#id .class width=50%}
-<br><br>
+![norm goi](manual_figure/norm goi1.png){#id .class width=50%}<br>
+![norm goi](manual_figure/norm goi2.png){#id .class width=50%}<br>
 
 ---
 
 ### k-means clustering
 k-means clusteringを実行します。<br>
 クラスターの数は、スライドバーを操作することで変更できます。<br>
-また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。
+また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
 
-<br><br>
-![norm kmeans](manual_figure/norm kmeans.png){#id .class width=60%}
-<br><br>
+![norm kmeans](manual_figure/norm kmeans1.png){#id .class width=60%}<br>
+![norm kmeans](manual_figure/norm kmeans2.png){#id .class width=60%}<br>
+![norm kmeans](manual_figure/norm kmeans3.png){#id .class width=60%}<br>
 
 ---
 
@@ -838,8 +799,8 @@ Dotplotやcnet plotで表示されるpathwayの数を変更できます。
 
 アップロードした遺伝子リストを表示します。
 <br><br>
-![enrich input](manual_figure/enrich input.png){#id .class width=60%}
-<br><br>
+![enrich input](manual_figure/enrich input1.png){#id .class width=60%}
+<br>
 
 ---
 
@@ -865,8 +826,26 @@ Dotplotやcnet plotで表示されるpathwayの数を変更できます。
 cnet plotで表示するグループは、「Group」から選択することで切り替えることができます。
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
 <br><br>
-![enrich enrichment](manual_figure/enrich enrichment.png){#id .class width=70%}
-<br><br>
+![enrich enrichment](manual_figure/enrich enrichment1.png){#id .class width=70%}<br>
+![enrich enrichment](manual_figure/enrich enrichment2.png){#id .class width=70%}<br>
+
+---
+
+### Promoter motif analysis
+
+各遺伝子グループのプロモーター領域にエンリッチするDNA結合モチーフを同定します。<br>
+解析可能な動物種: ヒト(hg19)とマウス(mm10)<br>
+Upstream: TSS上流の解析範囲<br>
+Downstream: TSS下流の解析範囲<br>
+padj: Dotplotに表示するmotifの閾値<br>
+Startボタンを押すと解析が始まります。<br><br>
+
+"Motif table"から興味あるモチーフを選択することで、"Motif region"にMotifの存在領域（エンリッチした遺伝子グループの指定したTSS領域限定）を表示することができます。<br>
+
+![enrich promoter](manual_figure/enrich promoter1.png){#id .class width=70%}<br>
+![enrich promoter](manual_figure/enrich promoter2.png){#id .class width=70%}<br>
+![enrich promoter](manual_figure/enrich promoter3.png){#id .class width=70%}<br>
+
 ---
 
 # More
@@ -893,7 +872,18 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 
 [MSigDB (Molecular Signatures Data Base)](http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)に登録されている遺伝子セットをダウンロードできます。<br>
 
-![MSigDB](manual_figure/MSigDB.png){#id .class width=100%}<br><br>
+![MSigDB](manual_figure/MSigDB.png){#id .class width=100%}<br>
+
+---
+
+## DoRothEA regulon
+
+[DoRothEA (Discriminant Regulon Expression Analysis)](https://saezlab.github.io/dorothea/)のデータを参照できます。<br>
+"Target name for TF search"または"TF name for target search"に遺伝子名を入力することで、「転写因子 ⇄ ターゲット遺伝子」の双方向検索ができます。<br>
+Confidence: 公式ページでは信頼度の高いA–Cのデータを用いた解析が推奨されています。RNAseqChefを用いたエンリッチメント解析は、転写因子の予測精度を上げるために"Confidence"がA–Cのデータを使用しています。
+
+![DoRothEA](manual_figure/DoRothEA1.png){#id .class width=100%}<br>
+![DoRothEA](manual_figure/DoRothEA2.png){#id .class width=100%}<br>
 
 ---
 
@@ -982,6 +972,29 @@ DEGreport (for divisive clustering analysis)
 venn (for venn diagram analysis)
 
 - Adrian Dusa (2021). venn: Draw Venn Diagrams. R package version 1.10. https://CRAN.R-project.org/package=venn
+
+GenomicRanges, TxDb.Mmusculus.UCSC.mm10.knownGene, TxDb.Hsapiens.UCSC.hg19.knownGene, BSgenome.Mmusculus.UCSC.mm10, and BSgenome.Hsapiens.UCSC.hg19 (for promoter sequence)
+
+- Lawrence M, Huber W, Pag\`es H, Aboyoun P, Carlson M, et al. (2013) Software for Computing and Annotating Genomic Ranges. PLoS Comput Biol 9(8): e1003118. doi:10.1371/journal.pcbi.1003118"
+
+- Team BC, Maintainer BP (2019). _TxDb.Mmusculus.UCSC.mm10.knownGene: Annotation package for TxDb object(s)_. R package version 3.10.0.
+
+- Team TBD (2021). _BSgenome.Mmusculus.UCSC.mm10: Full genome sequences for Mus musculus (UCSC version mm10, based on GRCm38.p6)_. R package version 1.4.3.
+
+- Carlson M, Maintainer BP (2015). _TxDb.Hsapiens.UCSC.hg19.knownGene: Annotation package for TxDb object(s)_. R package version 3.2.2.
+
+- Team TBD (2020). _BSgenome.Hsapiens.UCSC.hg19: Full genome sequences for Homo sapiens (UCSC version hg19, based on GRCh37.p13)_. R package version 1.4.3.
+
+monaLisa, TFBSTools, BiocParallel, SummarizedExperiment, and JASPAR2020 (for promoter motif analysis)
+- Machlab D, Burger L, Soneson C, Rijli FM, Schübeler D, Stadler MB. monaLisa: an R/Bioconductor package for identifying regulatory motifs. Bioinformatics (2022).
+
+- Tan, G., and Lenhard, B. (2016). TFBSTools: an R/bioconductor package for transcription factor binding site analysis. Bioinformatics 32, 1555-1556.
+
+- Morgan M, Wang J, Obenchain V, Lang M, Thompson R, Turaga N (2022). _BiocParallel:Bioconductor facilities for parallel evaluation_. R package version 1.30.3, <https://github.com/Bioconductor/BiocParallel>.
+
+- Morgan M, Obenchain V, Hester J, Pagès H (2022). _SummarizedExperiment:SummarizedExperiment container_. R package version 1.26.1, <https://bioconductor.org/packages/SummarizedExperiment>.
+
+- Baranasic D (2020). _JASPAR2020: Data package for JASPAR database (version 2020)_. R package version 0.99.10, <http://jaspar.genereg.net/>.
 
 dplyr and tidyr (for data manipulation)
 

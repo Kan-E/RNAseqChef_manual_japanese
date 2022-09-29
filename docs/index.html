@@ -246,12 +246,15 @@ div.tocify {
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
 <h4 class="author">Kan Etoh</h4>
-<h4 class="date">22/09/17 00:30</h4>
+<h4 class="date">22/09/29 15:52</h4>
 
 </div>
 
 
 <hr />
+<p><a href="https://doi.org/10.5281/zenodo.7095218"><img
+src="https://zenodo.org/badge/DOI/10.5281/zenodo.7095218.svg"
+alt="DOI" /></a><br></p>
 <div id="概要" class="section level1">
 <h1>概要</h1>
 <p><img src="manual_figure/graphical%20abstract_ver2.png" id="id"
@@ -262,10 +265,7 @@ class="class" style="width:70.0%" /> <br><br></p>
 Publication-readyな高解像度Figure（イラストレーターで編集可能なPDFファイル）をダウンロードすることができます。<br><br>
 RNAseqChefは、以下の方法で使用可能です。<br> 方法1.
 下記ウェブページへアクセス <br> 方法2. 下記ソースコードページの「Local
-installation」に記載されているコードをRで実行 <br><br>
-注）現時点では、サーバーの都合上、ウェブページは複数人同時使用できません。<br>
-ウェブページが正常に動作しない場合は、時間をおいてから再度アクセスして下さい。<br>
-方法２の場合は、使用人数の制限はありません。</p>
+installation」に記載されているコードをRで実行 <br><br></p>
 <p>ウェブページ: <a href="https://imeg-ku.shinyapps.io/RNAseqChef/"
 class="uri">https://imeg-ku.shinyapps.io/RNAseqChef/</a> <br>
 ソースコード: <a href="https://github.com/Kan-E/RNAseqChef"
@@ -368,7 +368,9 @@ countデータである場合に使用します。<br>
 <pre><code>- １列目は、raw countデータで使用されているサンプル名（例: accession number）
 - ２列目は、対応するサンプル名 (例: Control_1)
 - ３列目以降は、解析に影響しません </code></pre>
-<p><img src="www/input_format2.png" id="id" class="class"
+<p>メタデータ２列目のサンプル名は、n数表記（例：“_1”）は必須ではありません。
+n数表記がない場合には、自動的にナンバリングされます（上から順に”_1”,“_2”…と割り振られます）。
+<img src="www/input_format2.png" id="id" class="class"
 style="width:50.0%" alt="unchanged image" /> <br><br></p>
 </div>
 <div id="raw-count-データのみ-バッチモード" class="section level4">
@@ -445,8 +447,8 @@ style="width:70.0%" alt="pair-wise input" /><br><br></p>
 ward.D2による階層的クラスタリングの3種類のクラスタリング解析を実行します。<br>
 DEG解析の結果をMA-plotとheatmapで表示します。<br>
 表データとして、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
-<img src="index_files/figure-html/unnamed-chunk-1-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
-<p><br><br></p>
+<img src="manual_figure/pair_result_overview.png" id="id" class="class"
+style="width:70.0%" alt="pair-wise result_overview" /> <br><br></p>
 <hr />
 </div>
 <div id="goi-genes-of-interest-profiling" class="section level3">
@@ -457,9 +459,11 @@ plotで表示される点のうち、目的の遺伝子だけをラベルする�
 x軸、y軸のレンジはスライドバーを操作することで自由に変更できます。<br>
 また、GOI
 listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-<img src="manual_figure/pair-wise%20GOI%20profiling.png" id="id"
+<img src="manual_figure/pair-wise%20GOI%20profiling1.png" id="id"
+class="class" style="width:70.0%" alt="pair-wise GOI profiling" /><br>
+<img src="manual_figure/pair-wise%20GOI%20profiling2.png" id="id"
 class="class" style="width:70.0%" alt="pair-wise GOI profiling" />
-<br><br></p>
+<br></p>
 <hr />
 </div>
 <div id="enrichment-analysis" class="section level3">
@@ -492,7 +496,7 @@ enrichment analysis), gene-concept network (cnet) plotが出力されます。
 href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。
 <img src="manual_figure/pair-wise%20enrichment%20analysis.png" id="id"
 class="class" style="width:70.0%"
-alt="pair-wise enrichment analysis" /><br><br></p>
+alt="pair-wise enrichment analysis" /><br></p>
 <hr />
 </div>
 </div>
@@ -530,7 +534,9 @@ countデータである場合に使用します。<br>
 <pre><code>- １列目は、raw countデータで使用されているサンプル名（例: accession number）
 - ２列目は、対応するサンプル名 (例: Control_1)
 - ３列目以降は、解析に影響しません </code></pre>
-<p><img src="www/input_format2.png" id="id" class="class"
+<p>メタデータ２列目のサンプル名は、n数表記（例：“_1”）は必須ではありません。
+n数表記がない場合には、自動的にナンバリングされます（上から順に”_1”,“_2”…と割り振られます）。
+<img src="www/input_format2.png" id="id" class="class"
 style="width:50.0%" alt="unchanged image" /> <br><br></p>
 <hr />
 </div>
@@ -572,16 +578,22 @@ ward.D2による階層的クラスタリングの3種類のクラスタリング
 DEG解析の結果をscatter plotとheatmapで表示します。<br>
 3条件総当たりで遺伝子発現変動を可視化することで、各条件の遺伝子発現の特徴を抽出できます。<br>
 また、DEG解析の結果やDEGのカウントデータが出力されます。<br><br> <img
-src="manual_figure/cond%203%20overview.png" id="id" class="class"
-style="width:70.0%" alt="cond 3 overview" /> <br><br></p>
+src="manual_figure/cond%203%20overview1.png" id="id" class="class"
+style="width:70.0%" alt="cond 3 overview" /><br> <img
+src="manual_figure/cond%203%20overview2.png" id="id" class="class"
+style="width:70.0%" alt="cond 3 overview" /><br> <img
+src="manual_figure/cond%203%20overview3.png" id="id" class="class"
+style="width:70.0%" alt="cond 3 overview" /> <br></p>
 <hr />
 </div>
 <div id="goi-genes-of-interest-profiling-1" class="section level3">
 <h3>GOI (Genes of interest) profiling</h3>
 <p>GOI
 listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-<img src="manual_figure/cond%203%20goi.png" id="id" class="class"
-style="width:70.0%" alt="cond 3 goi" /></p>
+<img src="manual_figure/cond%203%20goi1.png" id="id" class="class"
+style="width:70.0%" alt="cond 3 goi" /><br> <img
+src="manual_figure/cond%203%20goi2.png" id="id" class="class"
+style="width:70.0%" alt="cond 3 goi" /><br></p>
 <hr />
 </div>
 <div id="enrichment-analysis-1" class="section level3">
@@ -611,8 +623,10 @@ regulon</strong>の使用を推奨します。</p>
 <p>解析は、over-representative analysis, gene-concept network (cnet)
 plotが実行されます。 <br> 解析は、<a
 href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。<br><br></p>
-<p><img src="manual_figure/cond%203%20enrichment.png" id="id"
-class="class" style="width:70.0%" alt="cond 3 enrichment" /> <br></p>
+<p><img src="manual_figure/cond%203%20enrichment1.png" id="id"
+class="class" style="width:70.0%" alt="cond 3 enrichment" /> <br> <img
+src="manual_figure/cond%203%20enrichment2.png" id="id" class="class"
+style="width:70.0%" alt="cond 3 enrichment" /> <br></p>
 <hr />
 </div>
 </div>
@@ -688,9 +702,11 @@ countデータが不要になるわけではありません。 <br> <br></p>
 <h3>Input Data</h3>
 <p>アップロードしたraw countデータを表示します。
 メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw
-countデータも表示します。 <br><br> <img
-src="manual_figure/multi%20input.png" id="id" class="class"
-style="width:60.0%" alt="multi input" /></p>
+countデータも表示します。 <br> <img
+src="manual_figure/multi%20input1.png" id="id" class="class"
+style="width:60.0%" alt="multi input" /> <img
+src="manual_figure/multi%20input2.png" id="id" class="class"
+style="width:60.0%" alt="multi input" /><br></p>
 <hr />
 </div>
 <div id="result-overview-2" class="section level3">
@@ -703,8 +719,10 @@ DEG解析の結果をheatmapで表示します。<br>
 <p>UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
 サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br><br>
-<img src="manual_figure/multi%20overview.png" id="id" class="class"
-style="width:70.0%" alt="multi overview" /> <br><br></p>
+<img src="manual_figure/multi%20overview1.png" id="id" class="class"
+style="width:70.0%" alt="multi overview" /><br> <img
+src="manual_figure/multi%20overview2.png" id="id" class="class"
+style="width:70.0%" alt="multi overview" /><br></p>
 <hr />
 </div>
 <div id="divisive-clustering" class="section level3">
@@ -748,7 +766,17 @@ Cut-off後のDEGの数が表示されます。<br></p>
 <p><strong>Most significant genes</strong>について<br>
 Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
 Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br></p>
-<p><img src="manual_figure/multi%20divisive1.png" id="id" class="class"
+<p><img src="manual_figure/multi%20divisive.png" id="id" class="class"
+style="width:50.0%" alt="multi deg" /><br> <img
+src="manual_figure/multi%20divisive1.png" id="id" class="class"
+style="width:50.0%" alt="multi deg" /><br> <img
+src="manual_figure/multi%20divisive2.png" id="id" class="class"
+style="width:50.0%" alt="multi deg" /><br> <img
+src="manual_figure/multi%20divisive3.png" id="id" class="class"
+style="width:50.0%" alt="multi deg" /><br> <img
+src="manual_figure/multi%20divisive4.png" id="id" class="class"
+style="width:50.0%" alt="multi deg" /><br> <img
+src="manual_figure/multi%20divisive5.png" id="id" class="class"
 style="width:50.0%" alt="multi deg" /><br></p>
 <hr />
 </div>
@@ -769,7 +797,17 @@ Cut-off後のDEGの数が表示されます。<br></p>
 <p><strong>Most significant genes</strong>について<br>
 Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
 Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br></p>
-<p><img src="manual_figure/multi%20kmeans.png" id="id" class="class"
+<p><img src="manual_figure/multi%20kmeans1.png" id="id" class="class"
+style="width:60.0%" alt="multi kmeans" /><br> <img
+src="manual_figure/multi%20kmeans2.png" id="id" class="class"
+style="width:60.0%" alt="multi kmeans" /><br> <img
+src="manual_figure/multi%20kmeans3.png" id="id" class="class"
+style="width:60.0%" alt="multi kmeans" /><br> <img
+src="manual_figure/multi%20kmeans4.png" id="id" class="class"
+style="width:60.0%" alt="multi kmeans" /><br> <img
+src="manual_figure/multi%20kmeans5.png" id="id" class="class"
+style="width:60.0%" alt="multi kmeans" /><br> <img
+src="manual_figure/multi%20kmeans6.png" id="id" class="class"
 style="width:60.0%" alt="multi kmeans" /><br></p>
 <hr />
 </div>
@@ -798,7 +836,7 @@ href="http://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp?collection=MIR">miRNA
 target</a> <br> 注) 転写因子の予測解析は<strong>DoRothEA
 regulon</strong>の使用を推奨します。</p>
 <p>解析は、<a
-href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。<br><br></p>
+href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。<br></p>
 <p><img src="manual_figure/multi%20GSEA.png" id="id" class="class"
 style="width:70.0%" alt="multi GSEA" /> <br></p>
 <hr />
@@ -860,8 +898,10 @@ style="width:50.0%" alt="venn input" /><br><br></p>
 「day0,day1,day5の共通部分」、<strong>day0:day1</strong> =
 「day0とday1のみの共通部分」、<strong>day0</strong> =
 「共通部分を除いたday0の遺伝子」となります）。 <br><br> <img
-src="manual_figure/venn%20venn%20diagram.png" id="id" class="class"
-style="width:60.0%" alt="venn venn diagram" /></p>
+src="manual_figure/venn%20venn%20diagram1.png" id="id" class="class"
+style="width:60.0%" alt="venn venn diagram" /><br> <img
+src="manual_figure/venn%20venn%20diagram2.png" id="id" class="class"
+style="width:60.0%" alt="venn venn diagram" /><br></p>
 <hr />
 </div>
 <div id="integrated-heatmap" class="section level3">
@@ -877,7 +917,12 @@ countはzscore化したカウントデータです。pre-zscoringがTRUEの場�
 selectedを選択することで、全遺伝子を結合したカウントデータを取得することも可能です。
 <br><br> <img src="manual_figure/venn%20integrated%20heatmap.png"
 id="id" class="class" style="width:60.0%"
-alt="venn integrated heatmap" /> <br><br></p>
+alt="venn integrated heatmap" /><br> <img
+src="manual_figure/venn%20integrated%20heatmap1.png" id="id"
+class="class" style="width:60.0%" alt="venn integrated heatmap" /><br>
+<img src="manual_figure/venn%20integrated%20heatmap2.png" id="id"
+class="class" style="width:60.0%"
+alt="venn integrated heatmap" /><br></p>
 <hr />
 </div>
 <div id="enrichment-analysis-2" class="section level3">
@@ -909,8 +954,10 @@ plotが実行されます。<br> cnet
 plotで表示するグループは、「Group」から選択することで切り替えることができます。
 解析は、<a
 href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。
-<br><br> <img src="manual_figure/venn%20enrichment.png" id="id"
-class="class" style="width:70.0%" alt="venn enrichment" /> <br></p>
+<br><br> <img src="manual_figure/venn%20enrichment1.png" id="id"
+class="class" style="width:70.0%" alt="venn enrichment" /> <br> <img
+src="manual_figure/venn%20enrichment.png" id="id" class="class"
+style="width:70.0%" alt="venn enrichment" /> <br></p>
 <hr />
 </div>
 </div>
@@ -948,7 +995,9 @@ countデータである場合に使用します。<br>
 <pre><code>- １列目は、normalized countデータで使用されているサンプル名（例: accession number）
 - ２列目は、対応するサンプル名 (例: Control_1)
 - ３列目以降は、解析に影響しません </code></pre>
-<p><img src="www/input_format2.png" id="id" class="class"
+<p>メタデータ２列目のサンプル名は、n数表記（例：“_1”）は必須ではありません。
+n数表記がない場合には、自動的にナンバリングされます（上から順に”_1”,“_2”…と割り振られます）。
+<img src="www/input_format2.png" id="id" class="class"
 style="width:50.0%" alt="unchanged image" /> <br><br></p>
 <hr />
 </div>
@@ -991,25 +1040,33 @@ and Projection)の４種類のクラスタリング解析を実行します。<b
 UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
 サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br></p>
-<p><br><br> <img src="manual_figure/norm%20overview.png" id="id"
-class="class" style="width:60.0%" alt="norm overview" /> <br><br></p>
+<p><img src="manual_figure/norm%20overview1.png" id="id" class="class"
+style="width:60.0%" alt="norm overview" /><br> <img
+src="manual_figure/norm%20overview2.png" id="id" class="class"
+style="width:60.0%" alt="norm overview" /><br> <br></p>
 <hr />
 </div>
 <div id="goi-genes-of-interest-profiling-2" class="section level3">
 <h3>GOI (Genes of interest) profiling</h3>
-<p>GOI
-listから選択された遺伝子のheatmapおよびboxplotが表示されます。</p>
-<p><br><br> <img src="manual_figure/norm%20goi.png" id="id"
-class="class" style="width:50.0%" alt="norm goi" /> <br><br></p>
+<p>GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。
+<br></p>
+<p><img src="manual_figure/norm%20goi1.png" id="id" class="class"
+style="width:50.0%" alt="norm goi" /><br> <img
+src="manual_figure/norm%20goi2.png" id="id" class="class"
+style="width:50.0%" alt="norm goi" /><br></p>
 <hr />
 </div>
 <div id="k-means-clustering-1" class="section level3">
 <h3>k-means clustering</h3>
 <p>k-means clusteringを実行します。<br>
 クラスターの数は、スライドバーを操作することで変更できます。<br>
-また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。</p>
-<p><br><br> <img src="manual_figure/norm%20kmeans.png" id="id"
-class="class" style="width:60.0%" alt="norm kmeans" /> <br><br></p>
+また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br></p>
+<p><img src="manual_figure/norm%20kmeans1.png" id="id" class="class"
+style="width:60.0%" alt="norm kmeans" /><br> <img
+src="manual_figure/norm%20kmeans2.png" id="id" class="class"
+style="width:60.0%" alt="norm kmeans" /><br> <img
+src="manual_figure/norm%20kmeans3.png" id="id" class="class"
+style="width:60.0%" alt="norm kmeans" /><br></p>
 <hr />
 </div>
 </div>
@@ -1057,8 +1114,8 @@ clusteringで得たテーブルデータを形式を変更せずに使用する�
 class="section level3">
 <h3>Input gene list for enrichment analysis</h3>
 <p>アップロードした遺伝子リストを表示します。 <br><br> <img
-src="manual_figure/enrich%20input.png" id="id" class="class"
-style="width:60.0%" alt="enrich input" /> <br><br></p>
+src="manual_figure/enrich%20input1.png" id="id" class="class"
+style="width:60.0%" alt="enrich input" /> <br></p>
 <hr />
 </div>
 <div id="enrichment-analysis-3" class="section level3">
@@ -1090,9 +1147,28 @@ plotが実行されます。<br> cnet
 plotで表示するグループは、「Group」から選択することで切り替えることができます。
 解析は、<a
 href="https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html">ClusterProfiler</a>に依存します。
-<br><br> <img src="manual_figure/enrich%20enrichment.png" id="id"
-class="class" style="width:70.0%" alt="enrich enrichment" /> <br><br>
-—</p>
+<br><br> <img src="manual_figure/enrich%20enrichment1.png" id="id"
+class="class" style="width:70.0%" alt="enrich enrichment" /><br> <img
+src="manual_figure/enrich%20enrichment2.png" id="id" class="class"
+style="width:70.0%" alt="enrich enrichment" /><br></p>
+<hr />
+</div>
+<div id="promoter-motif-analysis" class="section level3">
+<h3>Promoter motif analysis</h3>
+<p>各遺伝子グループのプロモーター領域にエンリッチするDNA結合モチーフを同定します。<br>
+解析可能な動物種: ヒト(hg19)とマウス(mm10)<br> Upstream:
+TSS上流の解析範囲<br> Downstream: TSS下流の解析範囲<br> padj:
+Dotplotに表示するmotifの閾値<br>
+Startボタンを押すと解析が始まります。<br><br></p>
+<p>“Motif table”から興味あるモチーフを選択することで、“Motif
+region”にMotifの存在領域（エンリッチした遺伝子グループの指定したTSS領域限定）を表示することができます。<br></p>
+<p><img src="manual_figure/enrich%20promoter1.png" id="id" class="class"
+style="width:70.0%" alt="enrich promoter" /><br> <img
+src="manual_figure/enrich%20promoter2.png" id="id" class="class"
+style="width:70.0%" alt="enrich promoter" /><br> <img
+src="manual_figure/enrich%20promoter3.png" id="id" class="class"
+style="width:70.0%" alt="enrich promoter" /><br></p>
+<hr />
 </div>
 </div>
 </div>
@@ -1121,7 +1197,21 @@ style="width:100.0%" alt="volcano navi" /><br><br></p>
 (Molecular Signatures Data
 Base)</a>に登録されている遺伝子セットをダウンロードできます。<br></p>
 <p><img src="manual_figure/MSigDB.png" id="id" class="class"
-style="width:100.0%" alt="MSigDB" /><br><br></p>
+style="width:100.0%" alt="MSigDB" /><br></p>
+<hr />
+</div>
+<div id="dorothea-regulon" class="section level2">
+<h2>DoRothEA regulon</h2>
+<p><a href="https://saezlab.github.io/dorothea/">DoRothEA (Discriminant
+Regulon Expression Analysis)</a>のデータを参照できます。<br> “Target
+name for TF search”または”TF name for target
+search”に遺伝子名を入力することで、「転写因子 ⇄
+ターゲット遺伝子」の双方向検索ができます。<br> Confidence:
+公式ページでは信頼度の高いA–Cのデータを用いた解析が推奨されています。RNAseqChefを用いたエンリッチメント解析は、転写因子の予測精度を上げるために”Confidence”がA–Cのデータを使用しています。</p>
+<p><img src="manual_figure/DoRothEA1.png" id="id" class="class"
+style="width:100.0%" alt="DoRothEA" /><br> <img
+src="manual_figure/DoRothEA2.png" id="id" class="class"
+style="width:100.0%" alt="DoRothEA" /><br></p>
 <hr />
 </div>
 <div id="reference" class="section level2">
@@ -1259,6 +1349,50 @@ class="uri">http://lpantano.github.io/DEGreport</a></li>
 1.10. <a href="https://CRAN.R-project.org/package=venn"
 class="uri">https://CRAN.R-project.org/package=venn</a></li>
 </ul>
+<p>GenomicRanges, TxDb.Mmusculus.UCSC.mm10.knownGene,
+TxDb.Hsapiens.UCSC.hg19.knownGene, BSgenome.Mmusculus.UCSC.mm10, and
+BSgenome.Hsapiens.UCSC.hg19 (for promoter sequence)</p>
+<ul>
+<li><p>Lawrence M, Huber W, Pag`es H, Aboyoun P, Carlson M, et
+al. (2013) Software for Computing and Annotating Genomic Ranges. PLoS
+Comput Biol 9(8): e1003118. <a href="doi:10.1371/journal.pcbi.1003118"
+class="uri">doi:10.1371/journal.pcbi.1003118</a>”</p></li>
+<li><p>Team BC, Maintainer BP (2019).
+<em>TxDb.Mmusculus.UCSC.mm10.knownGene: Annotation package for TxDb
+object(s)</em>. R package version 3.10.0.</p></li>
+<li><p>Team TBD (2021). <em>BSgenome.Mmusculus.UCSC.mm10: Full genome
+sequences for Mus musculus (UCSC version mm10, based on GRCm38.p6)</em>.
+R package version 1.4.3.</p></li>
+<li><p>Carlson M, Maintainer BP (2015).
+<em>TxDb.Hsapiens.UCSC.hg19.knownGene: Annotation package for TxDb
+object(s)</em>. R package version 3.2.2.</p></li>
+<li><p>Team TBD (2020). <em>BSgenome.Hsapiens.UCSC.hg19: Full genome
+sequences for Homo sapiens (UCSC version hg19, based on
+GRCh37.p13)</em>. R package version 1.4.3.</p></li>
+</ul>
+<p>monaLisa, TFBSTools, BiocParallel, SummarizedExperiment, and
+JASPAR2020 (for promoter motif analysis) - Machlab D, Burger L, Soneson
+C, Rijli FM, Schübeler D, Stadler MB. monaLisa: an R/Bioconductor
+package for identifying regulatory motifs. Bioinformatics (2022).</p>
+<ul>
+<li><p>Tan, G., and Lenhard, B. (2016). TFBSTools: an R/bioconductor
+package for transcription factor binding site analysis. Bioinformatics
+32, 1555-1556.</p></li>
+<li><p>Morgan M, Wang J, Obenchain V, Lang M, Thompson R, Turaga N
+(2022). <em>BiocParallel:Bioconductor facilities for parallel
+evaluation</em>. R package version 1.30.3, <a
+href="https://github.com/Bioconductor/BiocParallel"
+class="uri">https://github.com/Bioconductor/BiocParallel</a>.</p></li>
+<li><p>Morgan M, Obenchain V, Hester J, Pagès H (2022).
+<em>SummarizedExperiment:SummarizedExperiment container</em>. R package
+version 1.26.1, <a
+href="https://bioconductor.org/packages/SummarizedExperiment"
+class="uri">https://bioconductor.org/packages/SummarizedExperiment</a>.</p></li>
+<li><p>Baranasic D (2020). <em>JASPAR2020: Data package for JASPAR
+database (version 2020)</em>. R package version 0.99.10, <a
+href="http://jaspar.genereg.net/"
+class="uri">http://jaspar.genereg.net/</a>.</p></li>
+</ul>
 <p>dplyr and tidyr (for data manipulation)</p>
 <ul>
 <li>Hadley Wickham, Romain François, Lionel Henry and Kirill Müller
@@ -1326,121 +1460,176 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [8] datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] umap_0.2.8.0                dorothea_1.8.0             
-##  [3] clusterProfiler.dplyr_0.0.2 BiocManager_1.30.18        
-##  [5] shinyjs_2.1.0               plotly_4.10.0              
-##  [7] shinyBS_0.61.1              ComplexHeatmap_2.12.1      
-##  [9] genefilter_1.78.0           msigdbr_7.5.1              
-## [11] DOSE_3.22.0                 enrichplot_1.16.1          
-## [13] clusterProfiler_4.4.4       org.Xl.eg.db_3.15.0        
-## [15] org.Ce.eg.db_3.15.0         org.Dm.eg.db_3.15.0        
-## [17] org.Rn.eg.db_3.15.0         org.Mm.eg.db_3.15.0        
-## [19] org.Hs.eg.db_3.15.0         AnnotationDbi_1.58.0       
-## [21] DEGreport_1.32.0            qvalue_2.28.0              
-## [23] IHW_1.24.0                  edgeR_3.38.4               
-## [25] limma_3.52.3                ggnewscale_0.4.7           
-## [27] EBSeq_1.36.0                testthat_3.1.4             
-## [29] gplots_3.1.3                blockmodeling_1.0.5        
-## [31] DESeq2_1.36.0               SummarizedExperiment_1.26.1
-## [33] Biobase_2.56.0              MatrixGenerics_1.8.1       
-## [35] matrixStats_0.62.0          GenomicRanges_1.48.0       
-## [37] GenomeInfoDb_1.32.4         IRanges_2.30.1             
-## [39] S4Vectors_0.34.0            BiocGenerics_0.42.0        
-## [41] cowplot_1.1.1               gridExtra_2.3              
-## [43] ggplotify_0.1.0             ggdendro_0.1.23            
-## [45] ggrepel_0.9.1               venn_1.11                  
-## [47] ggpubr_0.4.0                forcats_0.5.2              
-## [49] stringr_1.4.1               dplyr_1.0.10               
-## [51] purrr_0.3.4                 readr_2.1.2                
-## [53] tidyr_1.2.1                 tibble_3.1.8               
-## [55] ggplot2_3.3.6               tidyverse_1.3.2            
-## [57] multcomp_1.4-20             TH.data_1.1-1              
-## [59] MASS_7.3-57                 survival_3.3-1             
-## [61] mvtnorm_1.1-3               rstatix_0.7.0              
-## [63] gdata_2.18.0.1              DT_0.25                    
-## [65] shiny_1.7.2                
+##  [1] TxDb.Hsapiens.UCSC.hg19.knownGene_3.2.2  
+##  [2] TxDb.Mmusculus.UCSC.mm10.knownGene_3.10.0
+##  [3] GenomicFeatures_1.48.4                   
+##  [4] BSgenome.Hsapiens.UCSC.hg19_1.4.3        
+##  [5] BSgenome.Mmusculus.UCSC.mm10_1.4.3       
+##  [6] BSgenome_1.64.0                          
+##  [7] rtracklayer_1.56.1                       
+##  [8] Biostrings_2.64.1                        
+##  [9] XVector_0.36.0                           
+## [10] TFBSTools_1.34.0                         
+## [11] JASPAR2020_0.99.10                       
+## [12] BiocParallel_1.30.3                      
+## [13] monaLisa_1.2.0                           
+## [14] biomaRt_2.52.0                           
+## [15] umap_0.2.9.0                             
+## [16] dorothea_1.8.0                           
+## [17] clusterProfiler.dplyr_0.0.2              
+## [18] BiocManager_1.30.18                      
+## [19] shinyjs_2.1.0                            
+## [20] plotly_4.10.0                            
+## [21] shinyBS_0.61.1                           
+## [22] ComplexHeatmap_2.12.1                    
+## [23] genefilter_1.78.0                        
+## [24] msigdbr_7.5.1                            
+## [25] DOSE_3.22.1                              
+## [26] enrichplot_1.16.2                        
+## [27] clusterProfiler_4.4.4                    
+## [28] org.Xl.eg.db_3.15.0                      
+## [29] org.Ce.eg.db_3.15.0                      
+## [30] org.Dm.eg.db_3.15.0                      
+## [31] org.Rn.eg.db_3.15.0                      
+## [32] org.Mm.eg.db_3.15.0                      
+## [33] org.Hs.eg.db_3.15.0                      
+## [34] AnnotationDbi_1.58.0                     
+## [35] DEGreport_1.32.0                         
+## [36] qvalue_2.28.0                            
+## [37] IHW_1.24.0                               
+## [38] edgeR_3.38.4                             
+## [39] limma_3.52.3                             
+## [40] ggnewscale_0.4.7                         
+## [41] EBSeq_1.36.0                             
+## [42] testthat_3.1.4                           
+## [43] gplots_3.1.3                             
+## [44] blockmodeling_1.1.3                      
+## [45] DESeq2_1.36.0                            
+## [46] SummarizedExperiment_1.26.1              
+## [47] Biobase_2.56.0                           
+## [48] MatrixGenerics_1.8.1                     
+## [49] matrixStats_0.62.0                       
+## [50] GenomicRanges_1.48.0                     
+## [51] GenomeInfoDb_1.32.4                      
+## [52] IRanges_2.30.1                           
+## [53] S4Vectors_0.34.0                         
+## [54] BiocGenerics_0.42.0                      
+## [55] cowplot_1.1.1                            
+## [56] gridExtra_2.3                            
+## [57] ggplotify_0.1.0                          
+## [58] ggdendro_0.1.23                          
+## [59] ggrepel_0.9.1                            
+## [60] venn_1.11                                
+## [61] ggpubr_0.4.0                             
+## [62] forcats_0.5.2                            
+## [63] stringr_1.4.1                            
+## [64] dplyr_1.0.10                             
+## [65] purrr_0.3.4                              
+## [66] readr_2.1.2                              
+## [67] tidyr_1.2.1                              
+## [68] tibble_3.1.8                             
+## [69] ggplot2_3.3.6                            
+## [70] tidyverse_1.3.2                          
+## [71] multcomp_1.4-20                          
+## [72] TH.data_1.1-1                            
+## [73] MASS_7.3-58.1                            
+## [74] survival_3.4-0                           
+## [75] mvtnorm_1.1-3                            
+## [76] rstatix_0.7.0                            
+## [77] gdata_2.18.0.1                           
+## [78] DT_0.25                                  
+## [79] shiny_1.7.2                              
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] bit64_4.0.5                 knitr_1.40                 
-##   [3] DelayedArray_0.22.0         data.table_1.14.2          
-##   [5] KEGGREST_1.36.3             RCurl_1.98-1.8             
-##   [7] doParallel_1.0.17           generics_0.1.3             
-##   [9] RSQLite_2.2.17              shadowtext_0.1.2           
-##  [11] bit_4.0.4                   tzdb_0.3.0                 
-##  [13] xml2_1.3.3                  lubridate_1.8.0            
-##  [15] httpuv_1.6.6                assertthat_0.2.1           
-##  [17] viridis_0.6.2               gargle_1.2.0               
-##  [19] xfun_0.33                   hms_1.1.2                  
-##  [21] jquerylib_0.1.4             babelgene_22.3             
-##  [23] evaluate_0.16               promises_1.2.0.1           
-##  [25] fansi_1.0.3                 caTools_1.18.2             
-##  [27] dbplyr_2.2.1                readxl_1.4.1               
-##  [29] igraph_1.3.4                DBI_1.1.3                  
-##  [31] geneplotter_1.74.0          htmlwidgets_1.5.4          
-##  [33] reshape_0.8.9               googledrive_2.0.0          
-##  [35] ellipsis_0.3.2              RSpectra_0.16-1            
-##  [37] backports_1.4.1             annotate_1.74.0            
-##  [39] vctrs_0.4.1                 abind_1.4-5                
-##  [41] cachem_1.0.6                withr_2.5.0                
-##  [43] ggforce_0.3.4               lasso2_1.2-22              
-##  [45] treeio_1.20.2               fdrtool_1.2.17             
-##  [47] mnormt_2.1.0                cluster_2.1.3              
-##  [49] lazyeval_0.2.2              ape_5.6-2                  
-##  [51] crayon_1.5.1                labeling_0.4.2             
-##  [53] pkgconfig_2.0.3             slam_0.1-50                
-##  [55] tweenr_2.0.1                nlme_3.1-157               
-##  [57] rlang_1.0.5                 lifecycle_1.0.2            
-##  [59] sandwich_3.0-2              downloader_0.4             
-##  [61] modelr_0.1.9                cellranger_1.1.0           
-##  [63] polyclip_1.10-0             Matrix_1.4-1               
-##  [65] aplot_0.1.6                 carData_3.0-5              
-##  [67] lpsymphony_1.24.0           zoo_1.8-10                 
-##  [69] reprex_2.0.2                GlobalOptions_0.1.2        
-##  [71] googlesheets4_1.0.1         png_0.1-7                  
-##  [73] viridisLite_0.4.1           rjson_0.2.21               
-##  [75] bitops_1.0-7                ConsensusClusterPlus_1.60.0
-##  [77] KernSmooth_2.23-20          Biostrings_2.64.1          
-##  [79] blob_1.2.3                  shape_1.4.6                
-##  [81] gridGraphics_0.5-1          ggsignif_0.6.3             
-##  [83] scales_1.2.1                memoise_2.0.1              
-##  [85] magrittr_2.0.3              plyr_1.8.7                 
-##  [87] zlibbioc_1.42.0             scatterpie_0.1.7           
-##  [89] compiler_4.2.1              RColorBrewer_1.1-3         
-##  [91] clue_0.3-61                 cli_3.4.0                  
-##  [93] XVector_0.36.0              patchwork_1.1.2            
-##  [95] tidyselect_1.1.2            stringi_1.7.8              
-##  [97] highr_0.9                   yaml_2.3.5                 
-##  [99] GOSemSim_2.22.0             askpass_1.1                
-## [101] locfit_1.5-9.6              bcellViper_1.32.0          
-## [103] sass_0.4.2                  fastmatch_1.1-3            
-## [105] parallel_4.2.1              circlize_0.4.15            
-## [107] rstudioapi_0.14             foreach_1.5.2              
-## [109] logging_0.10-108            farver_2.1.1               
-## [111] ggraph_2.0.6                digest_0.6.29              
-## [113] Rcpp_1.0.9                  car_3.1-0                  
-## [115] broom_1.0.0                 later_1.3.0                
-## [117] httr_1.4.4                  Nozzle.R1_1.1-1.1          
-## [119] psych_2.2.5                 colorspace_2.0-3           
-## [121] reticulate_1.25             rvest_1.0.3                
-## [123] brio_1.1.3                  XML_3.99-0.10              
-## [125] fs_1.5.2                    splines_4.2.1              
-## [127] yulab.utils_0.0.5           tidytree_0.4.0             
-## [129] graphlayouts_0.8.1          xtable_1.8-4               
-## [131] ggtree_3.4.2                jsonlite_1.8.0             
-## [133] tidygraph_1.2.2             ggfun_0.0.6                
-## [135] R6_2.5.1                    pillar_1.8.1               
-## [137] htmltools_0.5.3             mime_0.12                  
-## [139] glue_1.6.2                  fastmap_1.1.0              
-## [141] BiocParallel_1.30.3         codetools_0.2-18           
-## [143] fgsea_1.22.0                utf8_1.2.2                 
-## [145] lattice_0.20-45             bslib_0.4.0                
-## [147] gtools_3.9.3                openssl_2.0.2              
-## [149] GO.db_3.15.0                admisc_0.29                
-## [151] rmarkdown_2.16              munsell_0.5.0              
-## [153] DO.db_2.9                   GetoptLong_1.0.5           
-## [155] GenomeInfoDbData_1.2.8      iterators_1.0.14           
-## [157] haven_2.5.1                 reshape2_1.4.4             
-## [159] gtable_0.3.1</code></pre>
+##   [1] Rsamtools_2.12.0            foreach_1.5.2              
+##   [3] glmnet_4.1-4                crayon_1.5.1               
+##   [5] nlme_3.1-159                backports_1.4.1            
+##   [7] reprex_2.0.2                GOSemSim_2.22.0            
+##   [9] rlang_1.0.6                 readxl_1.4.1               
+##  [11] filelock_1.0.2              rjson_0.2.21               
+##  [13] bcellViper_1.32.0           CNEr_1.32.0                
+##  [15] bit64_4.0.5                 glue_1.6.2                 
+##  [17] poweRlaw_0.70.6             parallel_4.2.1             
+##  [19] haven_2.5.1                 tidyselect_1.1.2           
+##  [21] XML_3.99-0.10               zoo_1.8-11                 
+##  [23] GenomicAlignments_1.32.1    xtable_1.8-4               
+##  [25] magrittr_2.0.3              evaluate_0.16              
+##  [27] sm_2.2-5.7.1                cli_3.4.1                  
+##  [29] zlibbioc_1.42.0             rstudioapi_0.14            
+##  [31] bslib_0.4.0                 fastmatch_1.1-3            
+##  [33] treeio_1.20.2               xfun_0.33                  
+##  [35] askpass_1.1                 clue_0.3-61                
+##  [37] cluster_2.1.4               caTools_1.18.2             
+##  [39] tidygraph_1.2.2             KEGGREST_1.36.3            
+##  [41] logging_0.10-108            ape_5.6-2                  
+##  [43] TFMPvalue_0.0.8             png_0.1-7                  
+##  [45] reshape_0.8.9               withr_2.5.0                
+##  [47] bitops_1.0-7                slam_0.1-50                
+##  [49] ggforce_0.3.4               plyr_1.8.7                 
+##  [51] cellranger_1.1.0            pracma_2.4.2               
+##  [53] pillar_1.8.1                GlobalOptions_0.1.2        
+##  [55] stabs_0.6-4                 cachem_1.0.6               
+##  [57] fs_1.5.2                    GetoptLong_1.0.5           
+##  [59] vctrs_0.4.1                 ellipsis_0.3.2             
+##  [61] generics_0.1.3              munsell_0.5.0              
+##  [63] tweenr_2.0.2                fgsea_1.22.0               
+##  [65] DelayedArray_0.22.0         fastmap_1.1.0              
+##  [67] compiler_4.2.1              abind_1.4-5                
+##  [69] httpuv_1.6.6                GenomeInfoDbData_1.2.8     
+##  [71] lattice_0.20-45             utf8_1.2.2                 
+##  [73] later_1.3.0                 BiocFileCache_2.4.0        
+##  [75] jsonlite_1.8.0              scales_1.2.1               
+##  [77] tidytree_0.4.1              carData_3.0-5              
+##  [79] lazyeval_0.2.2              promises_1.2.0.1           
+##  [81] car_3.1-0                   doParallel_1.0.17          
+##  [83] R.utils_2.12.0              reticulate_1.26            
+##  [85] rmarkdown_2.16              sandwich_3.0-2             
+##  [87] vioplot_0.3.7               downloader_0.4             
+##  [89] igraph_1.3.5                yaml_2.3.5                 
+##  [91] htmltools_0.5.3             memoise_2.0.1              
+##  [93] BiocIO_1.6.0                locfit_1.5-9.6             
+##  [95] graphlayouts_0.8.1          viridisLite_0.4.1          
+##  [97] digest_0.6.29               assertthat_0.2.1           
+##  [99] mime_0.12                   rappdirs_0.3.3             
+## [101] RSQLite_2.2.17              yulab.utils_0.0.5          
+## [103] data.table_1.14.2           blob_1.2.3                 
+## [105] R.oo_1.25.0                 lpsymphony_1.24.0          
+## [107] splines_4.2.1               googledrive_2.0.0          
+## [109] RCurl_1.98-1.8              broom_1.0.1                
+## [111] hms_1.1.2                   modelr_0.1.9               
+## [113] colorspace_2.0-3            ConsensusClusterPlus_1.60.0
+## [115] mnormt_2.1.0                shape_1.4.6                
+## [117] aplot_0.1.7                 sass_0.4.2                 
+## [119] Rcpp_1.0.9                  circlize_0.4.15            
+## [121] fansi_1.0.3                 tzdb_0.3.0                 
+## [123] brio_1.1.3                  Nozzle.R1_1.1-1.1          
+## [125] R6_2.5.1                    lifecycle_1.0.2            
+## [127] curl_4.3.2                  ggsignif_0.6.3             
+## [129] googlesheets4_1.0.1         jquerylib_0.1.4            
+## [131] DO.db_2.9                   Matrix_1.5-1               
+## [133] RColorBrewer_1.1-3          iterators_1.0.14           
+## [135] htmlwidgets_1.5.4           polyclip_1.10-0            
+## [137] shadowtext_0.1.2            gridGraphics_0.5-1         
+## [139] seqLogo_1.62.0              rvest_1.0.3                
+## [141] openssl_2.0.3               patchwork_1.1.2            
+## [143] codetools_0.2-18            lubridate_1.8.0            
+## [145] GO.db_3.15.0                gtools_3.9.3               
+## [147] prettyunits_1.1.1           psych_2.2.5                
+## [149] dbplyr_2.2.1                RSpectra_0.16-1            
+## [151] R.methodsS3_1.8.2           gtable_0.3.1               
+## [153] DBI_1.1.3                   ggfun_0.0.7                
+## [155] httr_1.4.4                  KernSmooth_2.23-20         
+## [157] stringi_1.7.8               progress_1.2.2             
+## [159] reshape2_1.4.4              farver_2.1.1               
+## [161] annotate_1.74.0             viridis_0.6.2              
+## [163] fdrtool_1.2.17              ggtree_3.4.2               
+## [165] xml2_1.3.3                  admisc_0.30                
+## [167] restfulr_0.0.15             geneplotter_1.74.0         
+## [169] bit_4.0.4                   scatterpie_0.1.8           
+## [171] ggraph_2.0.6                pkgconfig_2.0.3            
+## [173] babelgene_22.3              gargle_1.2.1               
+## [175] DirichletMultinomial_1.38.0 lasso2_1.2-22              
+## [177] knitr_1.40</code></pre>
 </div>
 
 
