@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # 概要
 
-![](manual_figure/graphical abstract_ver2.png){#id .class width=70%} <br><br>
+![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
 単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
@@ -200,7 +200,7 @@ TPMカウントなどのnormalized countデータを用いてbasemean cut-offや
 Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2による階層的クラスタリングの3種類のクラスタリング解析を実行します。<br>
 DEG解析の結果をMA-plotとheatmapで表示します。<br>
 表データとして、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
-![pair-wise result_overview](manual_figure/pair_result_overview.png){#id .class width=70%}
+![pair-wise result_overview](manual_figure/pair_result_overview.png){#id .class width=80%}
 <br><br>
 
 ---
@@ -211,8 +211,8 @@ Volcano plotを表示します。<br>
 GOI listから遺伝子を選択することで、volcano plotで表示される点のうち、目的の遺伝子だけをラベルすることができます。<br>
 x軸、y軸のレンジはスライドバーを操作することで自由に変更できます。<br>
 また、GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling1.png){#id .class width=70%}<br>
-![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling2.png){#id .class width=70%}
+![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling1.png){#id .class width=80%}<br>
+![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling2.png){#id .class width=80%}
 <br>
 
 ---
@@ -237,7 +237,7 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 
 解析結果として、over-representative analysis, GSEA (gene set enrichment analysis), gene-concept network (cnet) plotが出力されます。 <br>
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
-![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=70%}<br>
+![pair-wise enrichment analysis](manual_figure/pair-wise enrichment analysis.png){#id .class width=80%}<br>
 
 ---
 
@@ -310,7 +310,7 @@ TPMカウントなどのnormalized countデータを用いてbasemean cut-offや
 アップロードしたraw countデータを表示します。
 メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw countデータも表示します。
 <br><br>
-![cond 3 input](manual_figure/cond 3 input.png){#id .class width=60%}
+![cond 3 input](manual_figure/cond 3 input.png){#id .class width=80%}
 
 ---
 
@@ -320,9 +320,9 @@ Principal Component Analysis (PCA)、Multi-Dimensional Scaling (MDS), ward.D2に
 DEG解析の結果をscatter plotとheatmapで表示します。<br>
 3条件総当たりで遺伝子発現変動を可視化することで、各条件の遺伝子発現の特徴を抽出できます。<br>
 また、DEG解析の結果やDEGのカウントデータが出力されます。<br><br>
-![cond 3 overview](manual_figure/cond 3 overview1.png){#id .class width=70%}<br>
-![cond 3 overview](manual_figure/cond 3 overview2.png){#id .class width=70%}<br>
-![cond 3 overview](manual_figure/cond 3 overview3.png){#id .class width=70%}
+![cond 3 overview](manual_figure/cond 3 overview1.png){#id .class width=80%}<br>
+![cond 3 overview](manual_figure/cond 3 overview2.png){#id .class width=80%}<br>
+![cond 3 overview](manual_figure/cond 3 overview3.png){#id .class width=80%}
 <br>
 
 ---
@@ -330,8 +330,8 @@ DEG解析の結果をscatter plotとheatmapで表示します。<br>
 ### GOI (Genes of interest) profiling
 
 GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
-![cond 3 goi](manual_figure/cond 3 goi1.png){#id .class width=70%}<br>
-![cond 3 goi](manual_figure/cond 3 goi2.png){#id .class width=70%}<br>
+![cond 3 goi](manual_figure/cond 3 goi1.png){#id .class width=80%}<br>
+![cond 3 goi](manual_figure/cond 3 goi2.png){#id .class width=80%}<br>
 
 ---
 
@@ -356,8 +356,8 @@ Enrichment analysisによりDEGの機能を同定します。<br>
 解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。 <br>
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br><br>
 
-![cond 3 enrichment](manual_figure/cond 3 enrichment1.png){#id .class width=70%} <br>
-![cond 3 enrichment](manual_figure/cond 3 enrichment2.png){#id .class width=70%} <br>
+![cond 3 enrichment](manual_figure/cond 3 enrichment1.png){#id .class width=80%} <br>
+![cond 3 enrichment](manual_figure/cond 3 enrichment2.png){#id .class width=80%} <br>
 
 ---
 
@@ -434,8 +434,8 @@ TPMカウントなどのnormalized countデータを用いてbasemean cut-offや
 アップロードしたraw countデータを表示します。
 メタデータをアップロードした場合、メタデータとそのメタデータの情報を用いて抽出したraw countデータも表示します。
 <br>
-![multi input](manual_figure/multi input1.png){#id .class width=60%}
-![multi input](manual_figure/multi input2.png){#id .class width=60%}<br>
+![multi input](manual_figure/multi input1.png){#id .class width=80%}
+![multi input](manual_figure/multi input2.png){#id .class width=80%}<br>
 
 ---
 
@@ -448,8 +448,8 @@ DEG解析の結果をheatmapで表示します。<br>
 UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍点の数です。<br>
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
 サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br><br>
-![multi overview](manual_figure/multi overview1.png){#id .class width=70%}<br>
-![multi overview](manual_figure/multi overview2.png){#id .class width=70%}<br>
+![multi overview](manual_figure/multi overview1.png){#id .class width=80%}<br>
+![multi overview](manual_figure/multi overview2.png){#id .class width=80%}<br>
 
 
 ---
@@ -492,12 +492,12 @@ Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析�
 Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br>
 
 
-![multi deg](manual_figure/multi divisive.png){#id .class width=50%}<br>
-![multi deg](manual_figure/multi divisive1.png){#id .class width=50%}<br>
-![multi deg](manual_figure/multi divisive2.png){#id .class width=50%}<br>
-![multi deg](manual_figure/multi divisive3.png){#id .class width=50%}<br>
-![multi deg](manual_figure/multi divisive4.png){#id .class width=50%}<br>
-![multi deg](manual_figure/multi divisive5.png){#id .class width=50%}<br>
+![multi deg](manual_figure/multi divisive.png){#id .class width=80%}<br>
+![multi deg](manual_figure/multi divisive1.png){#id .class width=80%}<br>
+![multi deg](manual_figure/multi divisive2.png){#id .class width=80%}<br>
+![multi deg](manual_figure/multi divisive3.png){#id .class width=80%}<br>
+![multi deg](manual_figure/multi divisive4.png){#id .class width=80%}<br>
+![multi deg](manual_figure/multi divisive5.png){#id .class width=80%}<br>
 
 ---
 
@@ -519,12 +519,15 @@ Cut-off後のDEGの数が表示されます。<br>
 Cut-off後のDEGをFDRが低い順から抽出し、クラスタリング解析を実行します。<br>
 Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリーズする恐れがあるため、解析対象の遺伝子を絞り込みます。<br>
 
-![multi kmeans](manual_figure/multi kmeans1.png){#id .class width=60%}<br>
-![multi kmeans](manual_figure/multi kmeans2.png){#id .class width=60%}<br>
-![multi kmeans](manual_figure/multi kmeans3.png){#id .class width=60%}<br>
-![multi kmeans](manual_figure/multi kmeans4.png){#id .class width=60%}<br>
-![multi kmeans](manual_figure/multi kmeans5.png){#id .class width=60%}<br>
-![multi kmeans](manual_figure/multi kmeans6.png){#id .class width=60%}<br>
+**Boxplot**について<br>
+"DEG_pattern_normalized_count_data"テーブルから遺伝子を選択すると、"Boxplot"にプロット結果が表示されます。<br>
+
+![multi kmeans](manual_figure/multi kmeans1.png){#id .class width=80%}<br>
+![multi kmeans](manual_figure/multi kmeans2.png){#id .class width=80%}<br>
+![multi kmeans](manual_figure/multi kmeans3.png){#id .class width=80%}<br>
+![multi kmeans](manual_figure/multi kmeans4.png){#id .class width=80%}<br>
+![multi kmeans](manual_figure/multi kmeans5.png){#id .class width=80%}<br>
+![multi kmeans](manual_figure/multi kmeans6.png){#id .class width=80%}<br>
 
 ---
 
@@ -548,7 +551,7 @@ GSEA (gene set enrichment analysis)によりDEGの機能を同定します。<br
 
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。<br>
 
-![multi GSEA](manual_figure/multi GSEA.png){#id .class width=70%} <br>
+![multi GSEA](manual_figure/multi GSEA.png){#id .class width=80%} <br>
 
 ---
 
@@ -602,8 +605,8 @@ pre-zscoringは、複数のカウントデータを統合する前に、zscore�
 ベン図で表示されるグループは、アップロードした遺伝子リストのファイル名を元に作成されます（具体例の場合、example1.txtとexample2.txtをアップロードしています）。<br>
 共通部分はコロン「 : 」により表記されます（具体例の場合、**day0:day1:day5** = 「day0,day1,day5の共通部分」、**day0:day1** = 「day0とday1のみの共通部分」、**day0** = 「共通部分を除いたday0の遺伝子」となります）。
 <br><br>
-![venn venn diagram](manual_figure/venn venn diagram1.png){#id .class width=60%}<br>
-![venn venn diagram](manual_figure/venn venn diagram2.png){#id .class width=60%}<br>
+![venn venn diagram](manual_figure/venn venn diagram1.png){#id .class width=80%}<br>
+![venn venn diagram](manual_figure/venn venn diagram2.png){#id .class width=80%}<br>
 
 ---
 
@@ -615,10 +618,10 @@ pre-zscoringは、複数のカウントデータを統合する前に、zscore�
 integrated normalized countはzscore化をせずに複数のカウントデータを結合した結果です。<br>
 integrated zscored normalized countはzscore化したカウントデータです。pre-zscoringがTRUEの場合、複数のデータを結合する前にzscore化、pre-zscoringがFalseの場合、データを結合した後にzscore化されます。<br>
 「gene list」からnot selectedを選択することで、全遺伝子を結合したカウントデータを取得することも可能です。
-<br><br>
-![venn integrated heatmap](manual_figure/venn integrated heatmap.png){#id .class width=60%}<br>
-![venn integrated heatmap](manual_figure/venn integrated heatmap1.png){#id .class width=60%}<br>
-![venn integrated heatmap](manual_figure/venn integrated heatmap2.png){#id .class width=60%}<br>
+<br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap.png){#id .class width=80%}<br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap1.png){#id .class width=80%}<br>
+![venn integrated heatmap](manual_figure/venn integrated heatmap2.png){#id .class width=80%}<br>
 
 ---
 
@@ -644,8 +647,8 @@ integrated zscored normalized countはzscore化したカウントデータです
 cnet plotで表示するグループは、「Group」から選択することで切り替えることができます。
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
 <br><br>
-![venn enrichment](manual_figure/venn enrichment1.png){#id .class width=70%} <br>
-![venn enrichment](manual_figure/venn enrichment.png){#id .class width=70%} <br>
+![venn enrichment](manual_figure/venn enrichment1.png){#id .class width=80%} <br>
+![venn enrichment](manual_figure/venn enrichment.png){#id .class width=80%} <br>
 
 ---
 
@@ -714,9 +717,9 @@ basemeanの閾値が設定できます。
 
 アップロードしたNormalized countデータ、メタデータ、遺伝子リストを表示します。<br>
 メタデータや遺伝子リストをアップロードした場合、抽出結果のNormalized countデータも表示します。
-<br><br>
-![norm input](manual_figure/norm input.png){#id .class width=60%}
-<br><br>
+<br>
+![norm input](manual_figure/norm input.png){#id .class width=80%}
+<br>
 
 ---
 
@@ -726,8 +729,8 @@ UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍�
 小さくすると局所構造、大きくすると大域的な構造を保持します。<br>
 サンプル数が少ない場合は、n_neighborsを小さくする必要があります。<br>
 
-![norm overview](manual_figure/norm overview1.png){#id .class width=60%}<br>
-![norm overview](manual_figure/norm overview2.png){#id .class width=60%}<br>
+![norm overview](manual_figure/norm overview1.png){#id .class width=80%}<br>
+![norm overview](manual_figure/norm overview2.png){#id .class width=80%}<br>
 <br>
 
 ---
@@ -737,8 +740,8 @@ UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍�
 GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。
 <br>
 
-![norm goi](manual_figure/norm goi1.png){#id .class width=50%}<br>
-![norm goi](manual_figure/norm goi2.png){#id .class width=50%}<br>
+![norm goi](manual_figure/norm goi1.png){#id .class width=80%}<br>
+![norm goi](manual_figure/norm goi2.png){#id .class width=80%}<br>
 
 ---
 
@@ -747,9 +750,9 @@ k-means clusteringを実行します。<br>
 クラスターの数は、スライドバーを操作することで変更できます。<br>
 また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
 
-![norm kmeans](manual_figure/norm kmeans1.png){#id .class width=60%}<br>
-![norm kmeans](manual_figure/norm kmeans2.png){#id .class width=60%}<br>
-![norm kmeans](manual_figure/norm kmeans3.png){#id .class width=60%}<br>
+![norm kmeans](manual_figure/norm kmeans1.png){#id .class width=80%}<br>
+![norm kmeans](manual_figure/norm kmeans2.png){#id .class width=80%}<br>
+![norm kmeans](manual_figure/norm kmeans3.png){#id .class width=80%}<br>
 
 ---
 
@@ -798,8 +801,8 @@ Dotplotやcnet plotで表示されるpathwayの数を変更できます。
 ### Input gene list for enrichment analysis
 
 アップロードした遺伝子リストを表示します。
-<br><br>
-![enrich input](manual_figure/enrich input1.png){#id .class width=60%}
+<br>
+![enrich input](manual_figure/enrich input1.png){#id .class width=80%}
 <br>
 
 ---
@@ -825,9 +828,9 @@ Dotplotやcnet plotで表示されるpathwayの数を変更できます。
 解析は、over-representative analysis, gene-concept network (cnet) plotが実行されます。<br>
 cnet plotで表示するグループは、「Group」から選択することで切り替えることができます。
 解析は、[ClusterProfiler](https://yulab-smu.top/biomedical-knowledge-mining-book/enrichplot.html)に依存します。
-<br><br>
-![enrich enrichment](manual_figure/enrich enrichment1.png){#id .class width=70%}<br>
-![enrich enrichment](manual_figure/enrich enrichment2.png){#id .class width=70%}<br>
+<br>
+![enrich enrichment](manual_figure/enrich enrichment1.png){#id .class width=80%}<br>
+![enrich enrichment](manual_figure/enrich enrichment2.png){#id .class width=80%}<br>
 
 ---
 
@@ -841,10 +844,11 @@ padj: Dotplotに表示するmotifの閾値<br>
 Startボタンを押すと解析が始まります。<br><br>
 
 "Motif table"から興味あるモチーフを選択することで、"Motif region"にMotifの存在領域（エンリッチした遺伝子グループの指定したTSS領域限定）を表示することができます。<br>
+解析は、[monaLisa](https://fmicompbio.github.io/monaLisa/articles/monaLisa.html)に依存します。<br>
 
-![enrich promoter](manual_figure/enrich promoter1.png){#id .class width=70%}<br>
-![enrich promoter](manual_figure/enrich promoter2.png){#id .class width=70%}<br>
-![enrich promoter](manual_figure/enrich promoter3.png){#id .class width=70%}<br>
+![enrich promoter](manual_figure/enrich promoter1.png){#id .class width=80%}<br>
+![enrich promoter](manual_figure/enrich promoter2.png){#id .class width=80%}<br>
+![enrich promoter](manual_figure/enrich promoter3.png){#id .class width=80%}<br>
 
 ---
 
@@ -862,9 +866,9 @@ Input formatは、以下の通りです。
 log2FoldChangeとpadjさえあれば、volcano plotを描写することができるので、RNA-seq以外のデータも利用できます。<br>
 GOI listから遺伝子を選択することで、volcano plotで表示される点のうち、目的の遺伝子だけをラベルすることができます。<br>
 x軸、y軸のレンジはスライドバーを操作することで自由に変更できます。<br>
-また、normalized countデータをアップロードする場合は、GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
+また、normalized countデータをアップロードする場合は、GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br>
 
-![volcano navi](manual_figure/volcano navi.png){#id .class width=100%}<br><br>
+![volcano navi](manual_figure/volcano navi.png){#id .class width=100%}<br>
 
 ---
 
