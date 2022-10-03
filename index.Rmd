@@ -1,6 +1,6 @@
 ---
   title: "RNAseqChef manual"
-  author: Kan Etoh
+  author: Kan Etoh, Mitsuyoshi Nakao
   date: '`r format(Sys.time(), "%y/%m/%d %H:%M")`'
 ---
 ```{r setup, include=FALSE}
@@ -38,7 +38,9 @@ RNAseqChefは、以下の方法で使用可能です。<br>
 ウェブページ: https://imeg-ku.shinyapps.io/RNAseqChef/ <br>
 ソースコード: https://github.com/Kan-E/RNAseqChef <br>
 Manual (English): https://kan-e.github.io/RNAseqChef_manual <br>
-問い合わせ先: Kan Etoh, kaneto@kumamoto-u.ac.jp <br><br><br>
+問い合わせ先: <br>
+Kan Etoh, kaneto@kumamoto-u.ac.jp <br>
+Mitsuyoshi Nakao, mnakao@gpo.kumamoto-u.ac.jp <br><br><br>
 
 
 本アプリは以下のセクションにより構成されます。<br>
