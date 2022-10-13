@@ -1,6 +1,5 @@
 ---
   title: "RNAseqChef manual"
-  author: Kan Etoh
   date: '`r format(Sys.time(), "%y/%m/%d %H:%M")`'
 ---
 ```{r setup, include=FALSE}
@@ -21,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7095218.svg)](https://doi.org/10.5281/zenodo.7095218)<br>
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7095217.svg)](https://doi.org/10.5281/zenodo.7095217)<br>
 
 # 概要
 
@@ -32,14 +31,10 @@ RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析
 また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br>
 Publication-readyな高解像度Figure（イラストレーターで編集可能なPDFファイル）をダウンロードすることができます。<br><br>
 RNAseqChefは、以下の方法で使用可能です。<br>
-方法1. 下記ウェブページへアクセス <br>
-方法2. 下記ソースコードページの「Local installation」に記載されているコードをRで実行 <br><br>
+1. [ウェブページ](https://imeg-ku.shinyapps.io/RNAseqChef/)にアクセス <br> 
+2. [ソースコードページ](https://github.com/Kan-E/RNAseqChef)の[Local installation](https://github.com/Kan-E/RNAseqChef#local-installation) に記載されている方法を実行<br>
 
-ウェブページ: https://imeg-ku.shinyapps.io/RNAseqChef/ <br>
-ソースコード: https://github.com/Kan-E/RNAseqChef <br>
-Manual (English): https://kan-e.github.io/RNAseqChef_manual <br>
-問い合わせ先: <br>
-Kan Etoh, kaneto@kumamoto-u.ac.jp <br><br>
+If you need help, please create an issue on [Github](https://github.com/Kan-E/RNAseqChef/issues) or [contact us](mailto:kaneto@kumamoto-u.ac.jp){.email}. <br>
 
 
 本アプリは以下のセクションにより構成されます。<br>
