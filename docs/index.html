@@ -13,7 +13,7 @@
 
 <title>RNAseqChef manual</title>
 
-<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -107,8 +107,8 @@ pre code {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -116,16 +116,9 @@ pre code {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -244,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">22/10/13 09:31</h4>
+<h4 class="date">22/10/25 12:09</h4>
 
 </div>
 
@@ -1081,7 +1074,11 @@ style="width:50.0%" alt="enrich set" /><br><br></p>
 <hr />
 <div id="input-format-5" class="section level3">
 <h3>Input format</h3>
-<p>inputとなる遺伝子リストのフォーマットは以下の通りです。<br></p>
+</div>
+</div>
+<div id="single-file-upload" class="section level2">
+<h2>Single file upload</h2>
+<p>単一ファイルをアップロードする場合、inputとなる遺伝子リストのフォーマットは以下の通りです。<br></p>
 <pre><code>- １列目は、遺伝子名
 - ２列目は、遺伝子に対応するグループ名 
 - ３列目以降は解析に影響しません
@@ -1089,6 +1086,15 @@ style="width:50.0%" alt="enrich set" /><br><br></p>
 <p>３列目以降は解析に影響しないため、カウントデータが含まれていても問題ありません。<br>
 Venn diagramやk-means
 clusteringで得たテーブルデータを形式を変更せずに使用することができます。<br><br></p>
+</div>
+<div id="multiple-file-upload" class="section level2">
+<h2>Multiple file upload</h2>
+<p>複数ファイルをアップロードする場合、inputとなる遺伝子リストのフォーマットは以下の通りです。</p>
+<pre><code>- １列目は、遺伝子名
+- ２列目以降は、解析に影響しません
+- ファイル名が、Group名として使用されます
+- ファイル名は、拡張子以外でピリオド「 . 」を使用しない</code></pre>
+<p>Venn diagramセクションのinput formatと同じです。</p>
 <hr />
 <div id="species-4" class="section level4">
 <h4>Species</h4>
@@ -1102,7 +1108,6 @@ clusteringで得たテーブルデータを形式を変更せずに使用する�
 <h4>Most significant pathways</h4>
 <p>Dotplotやcnet plotで表示されるpathwayの数を変更できます。 <br></p>
 <hr />
-</div>
 </div>
 </div>
 <div id="output-5" class="section level2">
@@ -1470,7 +1475,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [9] XVector_0.36.0                           
 ## [10] TFBSTools_1.34.0                         
 ## [11] JASPAR2020_0.99.10                       
-## [12] BiocParallel_1.30.3                      
+## [12] BiocParallel_1.30.4                      
 ## [13] monaLisa_1.2.0                           
 ## [14] biomaRt_2.52.0                           
 ## [15] umap_0.2.9.0                             
@@ -1497,10 +1502,10 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [36] qvalue_2.28.0                            
 ## [37] IHW_1.24.0                               
 ## [38] edgeR_3.38.4                             
-## [39] limma_3.52.3                             
-## [40] ggnewscale_0.4.7                         
+## [39] limma_3.52.4                             
+## [40] ggnewscale_0.4.8                         
 ## [41] EBSeq_1.36.0                             
-## [42] testthat_3.1.4                           
+## [42] testthat_3.1.5                           
 ## [43] gplots_3.1.3                             
 ## [44] blockmodeling_1.1.3                      
 ## [45] DESeq2_1.36.0                            
@@ -1523,8 +1528,8 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [62] forcats_0.5.2                            
 ## [63] stringr_1.4.1                            
 ## [64] dplyr_1.0.10                             
-## [65] purrr_0.3.4                              
-## [66] readr_2.1.2                              
+## [65] purrr_0.3.5                              
+## [66] readr_2.1.3                              
 ## [67] tidyr_1.2.1                              
 ## [68] tibble_3.1.8                             
 ## [69] ggplot2_3.3.6                            
@@ -1536,40 +1541,40 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [75] mvtnorm_1.1-3                            
 ## [76] rstatix_0.7.0                            
 ## [77] gdata_2.18.0.1                           
-## [78] DT_0.25                                  
+## [78] DT_0.26                                  
 ## [79] shiny_1.7.2                              
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] Rsamtools_2.12.0            foreach_1.5.2              
-##   [3] glmnet_4.1-4                crayon_1.5.1               
-##   [5] nlme_3.1-159                backports_1.4.1            
+##   [3] glmnet_4.1-4                crayon_1.5.2               
+##   [5] nlme_3.1-160                backports_1.4.1            
 ##   [7] reprex_2.0.2                GOSemSim_2.22.0            
 ##   [9] rlang_1.0.6                 readxl_1.4.1               
 ##  [11] filelock_1.0.2              rjson_0.2.21               
 ##  [13] bcellViper_1.32.0           CNEr_1.32.0                
 ##  [15] bit64_4.0.5                 glue_1.6.2                 
 ##  [17] poweRlaw_0.70.6             parallel_4.2.1             
-##  [19] haven_2.5.1                 tidyselect_1.1.2           
-##  [21] XML_3.99-0.10               zoo_1.8-11                 
+##  [19] haven_2.5.1                 tidyselect_1.2.0           
+##  [21] XML_3.99-0.11               zoo_1.8-11                 
 ##  [23] GenomicAlignments_1.32.1    xtable_1.8-4               
-##  [25] magrittr_2.0.3              evaluate_0.16              
+##  [25] magrittr_2.0.3              evaluate_0.17              
 ##  [27] sm_2.2-5.7.1                cli_3.4.1                  
 ##  [29] zlibbioc_1.42.0             rstudioapi_0.14            
 ##  [31] bslib_0.4.0                 fastmatch_1.1-3            
-##  [33] treeio_1.20.2               xfun_0.33                  
-##  [35] askpass_1.1                 clue_0.3-61                
+##  [33] treeio_1.20.2               xfun_0.34                  
+##  [35] askpass_1.1                 clue_0.3-62                
 ##  [37] cluster_2.1.4               caTools_1.18.2             
 ##  [39] tidygraph_1.2.2             KEGGREST_1.36.3            
 ##  [41] logging_0.10-108            ape_5.6-2                  
-##  [43] TFMPvalue_0.0.8             png_0.1-7                  
+##  [43] TFMPvalue_0.0.9             png_0.1-7                  
 ##  [45] reshape_0.8.9               withr_2.5.0                
 ##  [47] bitops_1.0-7                slam_0.1-50                
-##  [49] ggforce_0.3.4               plyr_1.8.7                 
+##  [49] ggforce_0.4.1               plyr_1.8.7                 
 ##  [51] cellranger_1.1.0            pracma_2.4.2               
 ##  [53] pillar_1.8.1                GlobalOptions_0.1.2        
 ##  [55] stabs_0.6-4                 cachem_1.0.6               
 ##  [57] fs_1.5.2                    GetoptLong_1.0.5           
-##  [59] vctrs_0.4.1                 ellipsis_0.3.2             
+##  [59] vctrs_0.5.0                 ellipsis_0.3.2             
 ##  [61] generics_0.1.3              munsell_0.5.0              
 ##  [63] tweenr_2.0.2                fgsea_1.22.0               
 ##  [65] DelayedArray_0.22.0         fastmap_1.1.0              
@@ -1577,43 +1582,43 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [69] httpuv_1.6.6                GenomeInfoDbData_1.2.8     
 ##  [71] lattice_0.20-45             utf8_1.2.2                 
 ##  [73] later_1.3.0                 BiocFileCache_2.4.0        
-##  [75] jsonlite_1.8.0              scales_1.2.1               
+##  [75] jsonlite_1.8.3              scales_1.2.1               
 ##  [77] tidytree_0.4.1              carData_3.0-5              
 ##  [79] lazyeval_0.2.2              promises_1.2.0.1           
-##  [81] car_3.1-0                   doParallel_1.0.17          
+##  [81] car_3.1-1                   doParallel_1.0.17          
 ##  [83] R.utils_2.12.0              reticulate_1.26            
-##  [85] rmarkdown_2.16              sandwich_3.0-2             
+##  [85] rmarkdown_2.17              sandwich_3.0-2             
 ##  [87] vioplot_0.3.7               downloader_0.4             
-##  [89] igraph_1.3.5                yaml_2.3.5                 
+##  [89] igraph_1.3.5                yaml_2.3.6                 
 ##  [91] htmltools_0.5.3             memoise_2.0.1              
 ##  [93] BiocIO_1.6.0                locfit_1.5-9.6             
-##  [95] graphlayouts_0.8.1          viridisLite_0.4.1          
-##  [97] digest_0.6.29               assertthat_0.2.1           
+##  [95] graphlayouts_0.8.3          viridisLite_0.4.1          
+##  [97] digest_0.6.30               assertthat_0.2.1           
 ##  [99] mime_0.12                   rappdirs_0.3.3             
-## [101] RSQLite_2.2.17              yulab.utils_0.0.5          
-## [103] data.table_1.14.2           blob_1.2.3                 
+## [101] RSQLite_2.2.18              yulab.utils_0.0.5          
+## [103] data.table_1.14.4           blob_1.2.3                 
 ## [105] R.oo_1.25.0                 lpsymphony_1.24.0          
 ## [107] splines_4.2.1               googledrive_2.0.0          
-## [109] RCurl_1.98-1.8              broom_1.0.1                
+## [109] RCurl_1.98-1.9              broom_1.0.1                
 ## [111] hms_1.1.2                   modelr_0.1.9               
 ## [113] colorspace_2.0-3            ConsensusClusterPlus_1.60.0
-## [115] mnormt_2.1.0                shape_1.4.6                
-## [117] aplot_0.1.7                 sass_0.4.2                 
+## [115] mnormt_2.1.1                shape_1.4.6                
+## [117] aplot_0.1.8                 sass_0.4.2                 
 ## [119] Rcpp_1.0.9                  circlize_0.4.15            
 ## [121] fansi_1.0.3                 tzdb_0.3.0                 
 ## [123] brio_1.1.3                  Nozzle.R1_1.1-1.1          
-## [125] R6_2.5.1                    lifecycle_1.0.2            
-## [127] curl_4.3.2                  ggsignif_0.6.3             
+## [125] R6_2.5.1                    lifecycle_1.0.3            
+## [127] curl_4.3.3                  ggsignif_0.6.4             
 ## [129] googlesheets4_1.0.1         jquerylib_0.1.4            
 ## [131] DO.db_2.9                   Matrix_1.5-1               
 ## [133] RColorBrewer_1.1-3          iterators_1.0.14           
-## [135] htmlwidgets_1.5.4           polyclip_1.10-0            
+## [135] htmlwidgets_1.5.4           polyclip_1.10-4            
 ## [137] shadowtext_0.1.2            gridGraphics_0.5-1         
 ## [139] seqLogo_1.62.0              rvest_1.0.3                
-## [141] openssl_2.0.3               patchwork_1.1.2            
+## [141] openssl_2.0.4               patchwork_1.1.2            
 ## [143] codetools_0.2-18            lubridate_1.8.0            
 ## [145] GO.db_3.15.0                gtools_3.9.3               
-## [147] prettyunits_1.1.1           psych_2.2.5                
+## [147] prettyunits_1.1.1           psych_2.2.9                
 ## [149] dbplyr_2.2.1                RSpectra_0.16-1            
 ## [151] R.methodsS3_1.8.2           gtable_0.3.1               
 ## [153] DBI_1.1.3                   ggfun_0.0.7                
@@ -1621,12 +1626,12 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [157] stringi_1.7.8               progress_1.2.2             
 ## [159] reshape2_1.4.4              farver_2.1.1               
 ## [161] annotate_1.74.0             viridis_0.6.2              
-## [163] fdrtool_1.2.17              ggtree_3.4.2               
+## [163] fdrtool_1.2.17              ggtree_3.4.4               
 ## [165] xml2_1.3.3                  admisc_0.30                
 ## [167] restfulr_0.0.15             geneplotter_1.74.0         
 ## [169] bit_4.0.4                   scatterpie_0.1.8           
-## [171] ggraph_2.0.6                pkgconfig_2.0.3            
-## [173] babelgene_22.3              gargle_1.2.1               
+## [171] ggraph_2.1.0                pkgconfig_2.0.3            
+## [173] babelgene_22.9              gargle_1.2.1               
 ## [175] DirichletMultinomial_1.38.0 lasso2_1.2-22              
 ## [177] knitr_1.40</code></pre>
 </div>
