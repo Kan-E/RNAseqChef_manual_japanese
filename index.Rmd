@@ -1054,11 +1054,11 @@ sample data
 ---
 
 # 非モデル生物の解析に関して
-非モデル生物がデータセットの"Species"として選択された場合、"Ortholog"が選択できるようになります。この機能は近縁のモデル生物のアノテーション情報を最大限利用するために開発しました。<br>
+非モデル生物がデータセットの"Species"として選択された場合、"Ortholog"が選択できるようになります。この機能は近縁のモデル生物のアノテーション情報を最大限利用することを目的に開発しました。<br>
 
 非モデル生物のアノテーション情報にはいくつかの問題があります。<br>
 ・非モデル生物の遺伝子の中には、アノテーション情報がない(Gene SymbolやNCBI gene ID)が、オルソログとして紐付けられているモデル生物の遺伝子を確認するとアノテーション情報がある、という遺伝子が大量に存在する。<br>
-・オルソログとして紐付けられている遺伝子の数は生物種によって異なる（同じモデル生物でも近縁のモデル生物と紐付けた方がより多くのアノテーション情報を引き出せる）。<br>
+・オルソログとして紐付けられている遺伝子の数は生物種によって異なる（同じモデル生物でも近縁のモデル生物と紐付けた方がより多くのアノテーション情報を引き出せる）。<br><br>
 v1.0.8以降のRNAseqChefでは、以下の生物種をOrthologとして選択することが可能です。<br>
 Animalの場合："Homo sapiens", "Mus musculus", "Rattus norvegicus", "Bos taurus","Canis lupus familiaris","Danio rerio","Gallus gallus","Macaca mulatta", "Pan troglodytes"<br>
 Metazoaの場合："Drosophila melanogaster", "Caenorhabditis elegans" <br>
@@ -1087,10 +1087,10 @@ Plantsの場合: "Arabidopsis thaliana"<br>
 サーバーの影響を排除したい場合はDockerバージョンをご利用ください。
 
 ## PublicのRNA-seqデータを解析したいがどこから入手するべきか。
-ヒト、マウス、ラットに関してはGREIN (http://www.ilincs.org/apps/grein/)をお勧めします。<br>
+ヒト、マウス、ラットに関しては[GREIN](http://www.ilincs.org/apps/grein/)をお勧めします。<br>
 メタデータとカウントデータ(Raw countとTPM count)を入手できます。<br>
 GEOからダウンロードできるカウントデータを使用する際は、カウントデータの種類（Raw count、Normalized count）に気をつけてご利用ください。また、GEOからダウンロードできるカウントデータの中には、遺伝子名の誤変換が生じているデータが混ざっている時がありますので、ご注意ください。<br>
-カウントデータが入手できない場合は、Fastqファイルからの一次解析が必要です。Galaxy(https://usegalaxy.org)などの一次解析が可能なツールをご検討ください。
+カウントデータが入手できない場合は、Fastqファイルからの一次解析が必要です。[Galaxy](https://usegalaxy.org)などの一次解析が可能なツールをご検討ください。
 
 ## 3 condition DEGとMulti DEGはどのように使い分けるべきか。
 
@@ -1114,6 +1114,9 @@ n = 1 の場合は、Normalized count analysisをご利用ください。例え�
 順番としては、まずはHallmark gene setを使用し、次にアノテーションされている遺伝子数の多いKEGGやReactomeを試し、それでもエンリッチしない場合はGO解析を行います（GOはアノテーションされている遺伝子数は一番多いですが、アノテーションの正確性や意味の分かりやすさという点でKEGGやReactomeと比べて扱いにくい印象があります）。<br>
 転写因子の予測解析に関しては、DoRothEA regulonをお勧めします。<br>
 ヒトとマウスのRegulonのデータベースを利用することで非常に信頼性の高い予測が可能です。<br>
+
+## ダウンロードした図の文字サイズやフォントは変更可能か？
+IllustratorのようなPDFファイルを編集することができるアプリケーションを使用することで変更可能です。
 
 
 ---
