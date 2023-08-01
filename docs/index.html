@@ -7,13 +7,13 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-<meta name="google-site-verification" content="AKtpqQgvPScOVJFGeZDNIn71HNrOUUQSsv0XXnBUinI" />
+
 
 
 
 <title>RNAseqChef manual</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">22/10/25 12:09</h4>
+<h4 class="date">23/07/31 23:07</h4>
 
 </div>
 
@@ -452,8 +452,10 @@ listから選択された遺伝子のheatmapおよびboxplotが表示されま�
 <img src="manual_figure/pair-wise%20GOI%20profiling1.png" id="id"
 class="class" style="width:80.0%" alt="pair-wise GOI profiling" /><br>
 <img src="manual_figure/pair-wise%20GOI%20profiling2.png" id="id"
-class="class" style="width:80.0%" alt="pair-wise GOI profiling" />
-<br></p>
+class="class" style="width:80.0%" alt="pair-wise GOI profiling" /> <br>
+Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br>
+<img src="manual_figure/pair-wise%20GOI%20profiling3.png" id="id"
+class="class" style="width:80.0%" /></p>
 <hr />
 </div>
 <div id="enrichment-analysis" class="section level3">
@@ -530,6 +532,13 @@ n数表記がない場合には、自動的にナンバリングされます（�
 style="width:50.0%" alt="unchanged image" /> <br><br></p>
 <hr />
 </div>
+<div id="recode.rdata" class="section level4">
+<h4>3. <strong>Recode.Rdata</strong> <br></h4>
+<p>以前3conditions DEGで解析を行なっており、“Download
+summary”ボタンを押すことでRecode.Rdataファイルを取得していた場合に限り、使用可能なオプションです。
+Recode.Rdataファイルをアップロードすることで、時間のかかるEBSeqによるDEG解析をスキップすることができます。</p>
+<hr />
+</div>
 <div id="species-1" class="section level4">
 <h4>Species</h4>
 <p>データセットの種を選択することで以下の解析が実行されます。</p>
@@ -583,8 +592,10 @@ listから選択された遺伝子のheatmapおよびboxplotが表示されま�
 <img src="manual_figure/cond%203%20goi1.png" id="id" class="class"
 style="width:80.0%" alt="cond 3 goi" /><br> <img
 src="manual_figure/cond%203%20goi2.png" id="id" class="class"
-style="width:80.0%" alt="cond 3 goi" /><br></p>
-<hr />
+style="width:80.0%" alt="cond 3 goi" /><br><br> Volcano
+plot上で興味ある遺伝子をまとめて選択することも可能です。<br> <img
+src="manual_figure/cond%203%20goi3.png" id="id" class="class"
+style="width:80.0%" /> —</p>
 </div>
 <div id="enrichment-analysis-1" class="section level3">
 <h3>Enrichment analysis</h3>
@@ -855,7 +866,7 @@ style="width:50.0%" alt="venn setting" /><br></p>
 - ファイル名は、拡張子以外でピリオド「 . 」を使用しない</code></pre>
 <p>２列目以降は解析に影響しないため、カウントデータが含まれていても問題ありません。<br>
 <strong>最大７種類</strong>の遺伝子リストの共通部分、非共通部分を可視化、リストとして出力できます。<br><br>
-<img src="www/venn_input.png" id="id" class="class" style="width:15.0%"
+<img src="www/venn_input.png" id="id" class="class" style="width:70.0%"
 alt="venn input" /><br><br></p>
 </div>
 <div id="複数のカウントデータ統合ヒートマップの作成"
@@ -1006,7 +1017,7 @@ listをアップロードすることで、目的の遺伝子グループのみ�
 </div>
 <div id="filter-option-2" class="section level4">
 <h4>Filter option 2</h4>
-<p>basemeanの閾値が設定できます。 <br> <br></p>
+<p>Fold Changeとbasemeanの閾値が設定できます。 <br> <br></p>
 <hr />
 </div>
 </div>
@@ -1038,8 +1049,22 @@ style="width:80.0%" alt="norm overview" /><br> <br></p>
 </div>
 <div id="goi-genes-of-interest-profiling-2" class="section level3">
 <h3>GOI (Genes of interest) profiling</h3>
-<p>GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。
-<br></p>
+<p>GOI
+listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br>
+<strong>Select a pair for fold change cut-off</strong>: Fold
+ChangeによるCut-offを適用したい条件のペアを選択できます。<br>
+<strong>Genes</strong>: <br> <strong>Select all
+genes</strong>を選択した場合、Filter後の全遺伝子のヒートマップを描写します。ボックスプロットに関しては、Filter後の遺伝子の数が200遺伝子名未満の場合のみ描写されます。<strong>Genes
+of interest
+(GOI)</strong>から遺伝子を選択した場合、選択した遺伝子のヒートマップ上での位置が図示されます。<br>
+<strong>Custom</strong>を選択した場合、<strong>Genes of interest
+(GOI)</strong>から選択した遺伝子に関してのみ、ヒートマップとボックスプロットが描写されます。<br>
+<strong>statistics</strong>:条件が２群の場合は、<strong>Welch’s
+t-test</strong>と<strong>Wilcoxon test</strong>が選択可能です。
+条件が３群以上の場合は、<strong>TukeyHSD</strong>と<strong>Dunnett’s
+test</strong>、<strong>Wilcoxon test</strong>が選択可能です。
+200遺伝子まで一括で統計処理、有意差のマーク入りのグラフが描写できます。<br>
+<strong>PlotType</strong>:<strong>Boxplot</strong>、<strong>Barplot</strong>、<strong>Errorplot</strong>が選択可能です。<br></p>
 <p><img src="manual_figure/norm%20goi1.png" id="id" class="class"
 style="width:80.0%" alt="norm goi" /><br> <img
 src="manual_figure/norm%20goi2.png" id="id" class="class"
@@ -1050,7 +1075,9 @@ style="width:80.0%" alt="norm goi" /><br></p>
 <h3>k-means clustering</h3>
 <p>k-means clusteringを実行します。<br>
 クラスターの数は、スライドバーを操作することで変更できます。<br>
-また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br></p>
+また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
+<strong>Select a pair for fold change cut-off</strong>: Fold
+ChangeによるCut-offを適用したい条件のペアを選択できます。<br></p>
 <p><img src="manual_figure/norm%20kmeans1.png" id="id" class="class"
 style="width:80.0%" alt="norm kmeans" /><br> <img
 src="manual_figure/norm%20kmeans2.png" id="id" class="class"
@@ -1320,6 +1347,26 @@ R package version 3.15.0.</li>
 package version 3.15.0.</li>
 <li>Marc Carlson (2022). org.Ce.eg.db: Genome wide annotation for Worm.
 R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Bt.eg.db: Genome wide annotation for
+Bovine. R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Cf.eg.db: Genome wide annotation for
+Canine. R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Dr.eg.db: Genome wide annotation for
+Zebrafish. R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Gg.eg.db: Genome wide annotation for
+Chicken. R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Mmu.eg.db: Genome wide annotation for
+Rhesus. R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Pt.eg.db: Genome wide annotation for Chimp.
+R package version 3.15.0.</li>
+<li>Marc Carlson (2022). org.Sc.sgd.db: Genome wide annotation for
+Yeast. R package version 3.15.0.</li>
+</ul>
+<p>biomaRt (for ortholog)</p>
+<ul>
+<li>Mapping identifiers for the integration of genomic datasets with the
+R/Bioconductor package biomaRt. Steffen Durinck, Paul T. Spellman, Ewan
+Birney and Wolfgang Huber, Nature Protocols 4, 1184-1191 (2009).</li>
 </ul>
 <p>genefilter (for z-score normalization)</p>
 <ul>
@@ -1421,6 +1468,110 @@ from healthy donors. Nat Commun 2017 Nov 13;8(1):1450. PMID:
 <hr />
 </div>
 </div>
+<div id="非モデル生物の解析に関して" class="section level1">
+<h1>非モデル生物の解析に関して</h1>
+<p>非モデル生物がデータセットの”Species”として選択された場合、“Ortholog”が選択できるようになります。この機能は近縁のモデル生物のアノテーション情報を最大限利用するために開発しました。<br></p>
+<p>非モデル生物のアノテーション情報にはいくつかの問題があります。<br>
+・非モデル生物の遺伝子の中には、アノテーション情報がない(Gene
+SymbolやNCBI gene
+ID)が、オルソログとして紐付けられているモデル生物の遺伝子を確認するとアノテーション情報がある、という遺伝子が大量に存在する。<br>
+・オルソログとして紐付けられている遺伝子の数は生物種によって異なる（同じモデル生物でも近縁のモデル生物と紐付けた方がより多くのアノテーション情報を引き出せる）。<br>
+v1.0.8以降のRNAseqChefでは、以下の生物種をOrthologとして選択することが可能です。<br>
+Animalの場合：“Homo sapiens”, “Mus musculus”, “Rattus norvegicus”, “Bos
+taurus”,“Canis lupus familiaris”,“Danio rerio”,“Gallus gallus”,“Macaca
+mulatta”, “Pan troglodytes”<br> Metazoaの場合：“Drosophila
+melanogaster”, “Caenorhabditis elegans” <br> Fungiの場合: “Saccharomyces
+cerevisiae”<br> Plantsの場合: “Arabidopsis thaliana”<br></p>
+<hr />
+</div>
+<div id="よくある質問" class="section level1">
+<h1>よくある質問</h1>
+<div id="カウントデータが正常にアップロードされない"
+class="section level2">
+<h2>カウントデータが正常にアップロードされない。</h2>
+<ul>
+<li>拡張子を確認してください。タブ区切りファイル(.txt,
+.tsv)、カンマ区切りファイル(.csv)、エクセルファイル(.xlsx)以外は対応していません。</li>
+<li>遺伝子名に重複のないことを確認してください。エクセルを用いてファイルを開いたことがある場合、オートコレクション機能により遺伝子名が誤変換された可能性があります。</li>
+<li>遺伝子名に’NA’が含まれていないことを確認してください。</li>
+</ul>
+</div>
+<div id="disconnected-from-serverが発生する" class="section level2">
+<h2>“disconnected from server”が発生する</h2>
+<p>いくつかの可能性が考えられます。</p>
+<ul>
+<li>複数人が同時にk-means
+clusteringなどのメモリを必要とする解析を行なっている</li>
+<li>開発者が更新作業を行なっている</li>
+<li>予期せぬシステムエラーがある</li>
+</ul>
+<p>同じ操作をすると必ず”disconnected from
+server”が発生する場合は、予期せぬシステムエラーの可能性が高いです。ご連絡頂けると幸いです。<br>
+それ以外の場合は、時間を置いてからあらためて解析を実行してください。<br>
+サーバーの影響を排除したい場合はDockerバージョンをご利用ください。</p>
+</div>
+<div id="publicのrna-seqデータを解析したいがどこから入手するべきか"
+class="section level2">
+<h2>PublicのRNA-seqデータを解析したいがどこから入手するべきか。</h2>
+<p>ヒト、マウス、ラットに関してはGREIN (<a
+href="http://www.ilincs.org/apps/grein/)をお勧めします"
+class="uri">http://www.ilincs.org/apps/grein/)をお勧めします</a>。<br>
+メタデータとカウントデータ(Raw countとTPM count)を入手できます。<br>
+GEOからダウンロードできるカウントデータを使用する際は、カウントデータの種類（Raw
+count、Normalized
+count）に気をつけてご利用ください。また、GEOからダウンロードできるカウントデータの中には、遺伝子名の誤変換が生じているデータが混ざっている時がありますので、ご注意ください。<br>
+カウントデータが入手できない場合は、Fastqファイルからの一次解析が必要です。Galaxy(<a
+href="https://usegalaxy.org)などの一次解析が可能なツールをご検討ください"
+class="uri">https://usegalaxy.org)などの一次解析が可能なツールをご検討ください</a>。</p>
+</div>
+<div id="condition-degとmulti-degはどのように使い分けるべきか"
+class="section level2">
+<h2>3 condition DEGとMulti DEGはどのように使い分けるべきか。</h2>
+<p>単に３群の解析を行いたい場合であれば、3 conditions
+DEGをお勧めします。<br>
+（検定が厳しい（ばらつきが大きいデータの解析は難しい）という弱点があるので、状況によってはMulti
+DEGの方が良い場合もあります）<br> 3 conditions DEG
+(EBSeq)は全条件総当たりでp
+valueを計算するのでどの群間で有意差があるかがわかりますが、 Multi DEG
+(DESeq2 Likelihood ratio
+test)の場合は有意差のある群が含まれているかどうかしかわかりません。<br>
+（例えると、EBSeqがTukeyHSD、likelihood ratio testがANOVA）<br>
+したがって、3 condition
+DEGの方が3群間の関係性をより明確に評価できるというメリットがあります。<br></p>
+<p>その一方で、4群以上の解析に関してはEBSeqでは時間がかかりすぎる上に、発生するpatternも膨大となるので解釈が難しくなるという問題があります。<br>
+そこで、MultiDEGではEBSeqではなく、簡便に計算できるlikelihood ratio
+testとクラスタリング解析の合わせ技でパターン分析する方法を採用しております。</p>
+</div>
+<div id="n-1-のデータはどのように解析すべきか" class="section level2">
+<h2>n = 1 のデータはどのように解析すべきか</h2>
+<p>Pair-wise DEG, 3 conditions DEG, Multi
+DEGでは統計解析を行うため、各条件最低n = 2 サンプルが必要です。 n = 1
+の場合は、Normalized count
+analysisをご利用ください。例えば、指定した条件間で２倍以上変化した遺伝子の抽出やk-means
+clusteringによる興味ある発現パターンを示す遺伝子群の抽出などが可能です。</p>
+</div>
+<div id="enrichment解析をする際にどのgene-setを使用するのが効果的か"
+class="section level2">
+<h2>Enrichment解析をする際に、どのGene setを使用するのが効果的か。</h2>
+<p>（あくまで開発者の意見です。利用者の好みもあると思うので参考程度に考えてください）
+機能解析に関しては信頼度が高く、明快なtermが取り揃えられたHallmark gene
+setをお勧めします。<br> 順番としては、まずはHallmark gene
+setを使用し、次にアノテーションされている遺伝子数の多いKEGGやReactomeを試し、それでもエンリッチしない場合はGO解析を行います（GOはアノテーションされている遺伝子数は一番多いですが、アノテーションの正確性や意味の分かりやすさという点でKEGGやReactomeと比べて扱いにくい印象があります）。<br>
+転写因子の予測解析に関しては、DoRothEA regulonをお勧めします。<br>
+ヒトとマウスのRegulonのデータベースを利用することで非常に信頼性の高い予測が可能です。<br></p>
+<hr />
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>When the user publishes the results from RNAseqChef analysis, please
+cite our original paper. - Etoh K. &amp; Nakao M. A web-based
+integrative transcriptome analysis, RNAseqChef, uncovers cell/tissue
+type-dependent action of sulforaphane. <em>JBC</em>, 299(6), 104810
+(2023) <a href="https://doi.org/10.1016/j.jbc.2023.104810"
+class="uri">https://doi.org/10.1016/j.jbc.2023.104810</a></p>
+<hr />
+</div>
 <div id="license" class="section level1">
 <h1>License</h1>
 <p>This shiny code is licensed under the GPLv3. Please see the file
@@ -1448,7 +1599,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 <div id="session-info" class="section level1">
 <h1>Session info</h1>
 <pre class="r"><code> sessionInfo()</code></pre>
-<pre><code>## R version 4.2.1 (2022-06-23)
+<pre><code>## R version 4.2.3 (2023-03-15)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
 ## Running under: macOS Big Sur ... 10.16
 ## 
@@ -1457,7 +1608,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-## [1] ja_JP.UTF-8/ja_JP.UTF-8/ja_JP.UTF-8/C/ja_JP.UTF-8/ja_JP.UTF-8
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
 ##  [1] grid      stats4    tools     stats     graphics  grDevices utils    
@@ -1478,12 +1629,12 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [12] BiocParallel_1.30.4                      
 ## [13] monaLisa_1.2.0                           
 ## [14] biomaRt_2.52.0                           
-## [15] umap_0.2.9.0                             
+## [15] umap_0.2.10.0                            
 ## [16] dorothea_1.8.0                           
 ## [17] clusterProfiler.dplyr_0.0.2              
-## [18] BiocManager_1.30.18                      
+## [18] BiocManager_1.30.20                      
 ## [19] shinyjs_2.1.0                            
-## [20] plotly_4.10.0                            
+## [20] plotly_4.10.1                            
 ## [21] shinyBS_0.61.1                           
 ## [22] ComplexHeatmap_2.12.1                    
 ## [23] genefilter_1.78.0                        
@@ -1505,14 +1656,14 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [39] limma_3.52.4                             
 ## [40] ggnewscale_0.4.8                         
 ## [41] EBSeq_1.36.0                             
-## [42] testthat_3.1.5                           
+## [42] testthat_3.1.7                           
 ## [43] gplots_3.1.3                             
-## [44] blockmodeling_1.1.3                      
+## [44] blockmodeling_1.1.4                      
 ## [45] DESeq2_1.36.0                            
 ## [46] SummarizedExperiment_1.26.1              
 ## [47] Biobase_2.56.0                           
 ## [48] MatrixGenerics_1.8.1                     
-## [49] matrixStats_0.62.0                       
+## [49] matrixStats_0.63.0                       
 ## [50] GenomicRanges_1.48.0                     
 ## [51] GenomeInfoDb_1.32.4                      
 ## [52] IRanges_2.30.1                           
@@ -1522,118 +1673,113 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [56] gridExtra_2.3                            
 ## [57] ggplotify_0.1.0                          
 ## [58] ggdendro_0.1.23                          
-## [59] ggrepel_0.9.1                            
+## [59] ggrepel_0.9.3                            
 ## [60] venn_1.11                                
-## [61] ggpubr_0.4.0                             
-## [62] forcats_0.5.2                            
-## [63] stringr_1.4.1                            
-## [64] dplyr_1.0.10                             
-## [65] purrr_0.3.5                              
-## [66] readr_2.1.3                              
-## [67] tidyr_1.2.1                              
-## [68] tibble_3.1.8                             
-## [69] ggplot2_3.3.6                            
-## [70] tidyverse_1.3.2                          
-## [71] multcomp_1.4-20                          
-## [72] TH.data_1.1-1                            
-## [73] MASS_7.3-58.1                            
-## [74] survival_3.4-0                           
-## [75] mvtnorm_1.1-3                            
-## [76] rstatix_0.7.0                            
-## [77] gdata_2.18.0.1                           
-## [78] DT_0.26                                  
-## [79] shiny_1.7.2                              
+## [61] ggpubr_0.6.0                             
+## [62] lubridate_1.9.2                          
+## [63] forcats_1.0.0                            
+## [64] stringr_1.5.0                            
+## [65] dplyr_1.1.2                              
+## [66] purrr_1.0.1                              
+## [67] readr_2.1.4                              
+## [68] tidyr_1.3.0                              
+## [69] tibble_3.2.1                             
+## [70] ggplot2_3.4.2                            
+## [71] tidyverse_2.0.0                          
+## [72] multcomp_1.4-23                          
+## [73] TH.data_1.1-2                            
+## [74] MASS_7.3-58.2                            
+## [75] survival_3.5-3                           
+## [76] mvtnorm_1.1-3                            
+## [77] rstatix_0.7.2                            
+## [78] gdata_2.19.0                             
+## [79] DT_0.27                                  
+## [80] shiny_1.7.4                              
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] Rsamtools_2.12.0            foreach_1.5.2              
-##   [3] glmnet_4.1-4                crayon_1.5.2               
-##   [5] nlme_3.1-160                backports_1.4.1            
-##   [7] reprex_2.0.2                GOSemSim_2.22.0            
-##   [9] rlang_1.0.6                 readxl_1.4.1               
-##  [11] filelock_1.0.2              rjson_0.2.21               
-##  [13] bcellViper_1.32.0           CNEr_1.32.0                
-##  [15] bit64_4.0.5                 glue_1.6.2                 
-##  [17] poweRlaw_0.70.6             parallel_4.2.1             
-##  [19] haven_2.5.1                 tidyselect_1.2.0           
-##  [21] XML_3.99-0.11               zoo_1.8-11                 
-##  [23] GenomicAlignments_1.32.1    xtable_1.8-4               
-##  [25] magrittr_2.0.3              evaluate_0.17              
-##  [27] sm_2.2-5.7.1                cli_3.4.1                  
-##  [29] zlibbioc_1.42.0             rstudioapi_0.14            
-##  [31] bslib_0.4.0                 fastmatch_1.1-3            
-##  [33] treeio_1.20.2               xfun_0.34                  
-##  [35] askpass_1.1                 clue_0.3-62                
-##  [37] cluster_2.1.4               caTools_1.18.2             
-##  [39] tidygraph_1.2.2             KEGGREST_1.36.3            
-##  [41] logging_0.10-108            ape_5.6-2                  
-##  [43] TFMPvalue_0.0.9             png_0.1-7                  
-##  [45] reshape_0.8.9               withr_2.5.0                
-##  [47] bitops_1.0-7                slam_0.1-50                
-##  [49] ggforce_0.4.1               plyr_1.8.7                 
-##  [51] cellranger_1.1.0            pracma_2.4.2               
-##  [53] pillar_1.8.1                GlobalOptions_0.1.2        
-##  [55] stabs_0.6-4                 cachem_1.0.6               
-##  [57] fs_1.5.2                    GetoptLong_1.0.5           
-##  [59] vctrs_0.5.0                 ellipsis_0.3.2             
-##  [61] generics_0.1.3              munsell_0.5.0              
-##  [63] tweenr_2.0.2                fgsea_1.22.0               
-##  [65] DelayedArray_0.22.0         fastmap_1.1.0              
-##  [67] compiler_4.2.1              abind_1.4-5                
-##  [69] httpuv_1.6.6                GenomeInfoDbData_1.2.8     
-##  [71] lattice_0.20-45             utf8_1.2.2                 
-##  [73] later_1.3.0                 BiocFileCache_2.4.0        
-##  [75] jsonlite_1.8.3              scales_1.2.1               
-##  [77] tidytree_0.4.1              carData_3.0-5              
-##  [79] lazyeval_0.2.2              promises_1.2.0.1           
-##  [81] car_3.1-1                   doParallel_1.0.17          
-##  [83] R.utils_2.12.0              reticulate_1.26            
-##  [85] rmarkdown_2.17              sandwich_3.0-2             
-##  [87] vioplot_0.3.7               downloader_0.4             
-##  [89] igraph_1.3.5                yaml_2.3.6                 
-##  [91] htmltools_0.5.3             memoise_2.0.1              
-##  [93] BiocIO_1.6.0                locfit_1.5-9.6             
-##  [95] graphlayouts_0.8.3          viridisLite_0.4.1          
-##  [97] digest_0.6.30               assertthat_0.2.1           
-##  [99] mime_0.12                   rappdirs_0.3.3             
-## [101] RSQLite_2.2.18              yulab.utils_0.0.5          
-## [103] data.table_1.14.4           blob_1.2.3                 
-## [105] R.oo_1.25.0                 lpsymphony_1.24.0          
-## [107] splines_4.2.1               googledrive_2.0.0          
-## [109] RCurl_1.98-1.9              broom_1.0.1                
-## [111] hms_1.1.2                   modelr_0.1.9               
-## [113] colorspace_2.0-3            ConsensusClusterPlus_1.60.0
-## [115] mnormt_2.1.1                shape_1.4.6                
-## [117] aplot_0.1.8                 sass_0.4.2                 
-## [119] Rcpp_1.0.9                  circlize_0.4.15            
-## [121] fansi_1.0.3                 tzdb_0.3.0                 
-## [123] brio_1.1.3                  Nozzle.R1_1.1-1.1          
-## [125] R6_2.5.1                    lifecycle_1.0.3            
-## [127] curl_4.3.3                  ggsignif_0.6.4             
-## [129] googlesheets4_1.0.1         jquerylib_0.1.4            
-## [131] DO.db_2.9                   Matrix_1.5-1               
-## [133] RColorBrewer_1.1-3          iterators_1.0.14           
-## [135] htmlwidgets_1.5.4           polyclip_1.10-4            
-## [137] shadowtext_0.1.2            gridGraphics_0.5-1         
-## [139] seqLogo_1.62.0              rvest_1.0.3                
-## [141] openssl_2.0.4               patchwork_1.1.2            
-## [143] codetools_0.2-18            lubridate_1.8.0            
-## [145] GO.db_3.15.0                gtools_3.9.3               
-## [147] prettyunits_1.1.1           psych_2.2.9                
-## [149] dbplyr_2.2.1                RSpectra_0.16-1            
-## [151] R.methodsS3_1.8.2           gtable_0.3.1               
-## [153] DBI_1.1.3                   ggfun_0.0.7                
-## [155] httr_1.4.4                  KernSmooth_2.23-20         
-## [157] stringi_1.7.8               progress_1.2.2             
-## [159] reshape2_1.4.4              farver_2.1.1               
-## [161] annotate_1.74.0             viridis_0.6.2              
-## [163] fdrtool_1.2.17              ggtree_3.4.4               
-## [165] xml2_1.3.3                  admisc_0.30                
-## [167] restfulr_0.0.15             geneplotter_1.74.0         
-## [169] bit_4.0.4                   scatterpie_0.1.8           
-## [171] ggraph_2.1.0                pkgconfig_2.0.3            
-## [173] babelgene_22.9              gargle_1.2.1               
-## [175] DirichletMultinomial_1.38.0 lasso2_1.2-22              
-## [177] knitr_1.40</code></pre>
+##   [3] glmnet_4.1-7                crayon_1.5.2               
+##   [5] nlme_3.1-162                backports_1.4.1            
+##   [7] GOSemSim_2.22.0             rlang_1.1.0                
+##   [9] filelock_1.0.2              rjson_0.2.21               
+##  [11] bcellViper_1.32.0           CNEr_1.32.0                
+##  [13] bit64_4.0.5                 glue_1.6.2                 
+##  [15] poweRlaw_0.70.6             parallel_4.2.3             
+##  [17] tidyselect_1.2.0            XML_3.99-0.14              
+##  [19] zoo_1.8-12                  GenomicAlignments_1.32.1   
+##  [21] xtable_1.8-4                magrittr_2.0.3             
+##  [23] evaluate_0.20               sm_2.2-5.7.1               
+##  [25] cli_3.6.1                   zlibbioc_1.42.0            
+##  [27] rstudioapi_0.14             bslib_0.4.2                
+##  [29] fastmatch_1.1-3             treeio_1.20.2              
+##  [31] xfun_0.39                   askpass_1.1                
+##  [33] clue_0.3-64                 cluster_2.1.4              
+##  [35] caTools_1.18.2              tidygraph_1.2.3            
+##  [37] KEGGREST_1.36.3             logging_0.10-108           
+##  [39] ape_5.7-1                   TFMPvalue_0.0.9            
+##  [41] png_0.1-8                   reshape_0.8.9              
+##  [43] withr_2.5.0                 bitops_1.0-7               
+##  [45] slam_0.1-50                 ggforce_0.4.1              
+##  [47] plyr_1.8.8                  pracma_2.4.2               
+##  [49] pillar_1.9.0                GlobalOptions_0.1.2        
+##  [51] stabs_0.6-4                 cachem_1.0.7               
+##  [53] GetoptLong_1.0.5            vctrs_0.6.2                
+##  [55] ellipsis_0.3.2              generics_0.1.3             
+##  [57] munsell_0.5.0               tweenr_2.0.2               
+##  [59] fgsea_1.22.0                DelayedArray_0.22.0        
+##  [61] fastmap_1.1.1               compiler_4.2.3             
+##  [63] abind_1.4-5                 httpuv_1.6.9               
+##  [65] GenomeInfoDbData_1.2.8      lattice_0.20-45            
+##  [67] utf8_1.2.3                  later_1.3.0                
+##  [69] BiocFileCache_2.4.0         jsonlite_1.8.4             
+##  [71] scales_1.2.1                tidytree_0.4.2             
+##  [73] carData_3.0-5               lazyeval_0.2.2             
+##  [75] promises_1.2.0.1            car_3.1-2                  
+##  [77] doParallel_1.0.17           R.utils_2.12.2             
+##  [79] reticulate_1.28             rmarkdown_2.21             
+##  [81] sandwich_3.0-2              vioplot_0.4.0              
+##  [83] downloader_0.4              igraph_1.4.2               
+##  [85] yaml_2.3.7                  htmltools_0.5.5            
+##  [87] memoise_2.0.1               BiocIO_1.6.0               
+##  [89] locfit_1.5-9.7              graphlayouts_0.8.4         
+##  [91] viridisLite_0.4.1           digest_0.6.31              
+##  [93] mime_0.12                   rappdirs_0.3.3             
+##  [95] RSQLite_2.3.1               yulab.utils_0.0.6          
+##  [97] data.table_1.14.8           blob_1.2.4                 
+##  [99] R.oo_1.25.0                 lpsymphony_1.24.0          
+## [101] splines_4.2.3               RCurl_1.98-1.12            
+## [103] broom_1.0.4                 hms_1.1.3                  
+## [105] colorspace_2.1-0            ConsensusClusterPlus_1.60.0
+## [107] mnormt_2.1.1                shape_1.4.6                
+## [109] aplot_0.1.10                sass_0.4.5                 
+## [111] Rcpp_1.0.10                 circlize_0.4.15            
+## [113] fansi_1.0.4                 tzdb_0.3.0                 
+## [115] brio_1.1.3                  Nozzle.R1_1.1-1.1          
+## [117] R6_2.5.1                    lifecycle_1.0.3            
+## [119] curl_5.0.0                  ggsignif_0.6.4             
+## [121] jquerylib_0.1.4             DO.db_2.9                  
+## [123] Matrix_1.5-3                RColorBrewer_1.1-3         
+## [125] iterators_1.0.14            htmlwidgets_1.6.2          
+## [127] polyclip_1.10-4             shadowtext_0.1.2           
+## [129] timechange_0.2.0            gridGraphics_0.5-1         
+## [131] seqLogo_1.62.0              openssl_2.0.6              
+## [133] patchwork_1.1.2             codetools_0.2-19           
+## [135] GO.db_3.15.0                gtools_3.9.4               
+## [137] prettyunits_1.1.1           psych_2.3.3                
+## [139] dbplyr_2.3.2                RSpectra_0.16-1            
+## [141] R.methodsS3_1.8.2           gtable_0.3.3               
+## [143] DBI_1.1.3                   ggfun_0.0.9                
+## [145] httr_1.4.5                  KernSmooth_2.23-20         
+## [147] stringi_1.7.12              progress_1.2.2             
+## [149] reshape2_1.4.4              farver_2.1.1               
+## [151] annotate_1.74.0             viridis_0.6.2              
+## [153] fdrtool_1.2.17              ggtree_3.4.4               
+## [155] xml2_1.3.3                  admisc_0.31                
+## [157] restfulr_0.0.15             geneplotter_1.74.0         
+## [159] bit_4.0.5                   scatterpie_0.1.9           
+## [161] ggraph_2.1.0                pkgconfig_2.0.3            
+## [163] babelgene_22.9              DirichletMultinomial_1.38.0
+## [165] lasso2_1.2-22               knitr_1.43</code></pre>
 </div>
 
 

@@ -210,6 +210,8 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 ![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling1.png){#id .class width=80%}<br>
 ![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling2.png){#id .class width=80%}
 <br>
+Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br>
+![](manual_figure/pair-wise GOI profiling3.png){#id .class width=80%}
 
 ---
 
@@ -247,6 +249,7 @@ EBSeqによる多重比較解析を実行することで、３群間のDEGを同
 
 ![cond 3 set](manual_figure/cond 3 set.png){#id .class width=50%}<br>
 
+
 ---
 
 ### Input format
@@ -279,6 +282,12 @@ n数表記がない場合には、自動的にナンバリングされます（�
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
+---
+
+#### 3. **Recode.Rdata** <br>
+以前3conditions DEGで解析を行なっており、"Download summary"ボタンを押すことでRecode.Rdataファイルを取得していた場合に限り、使用可能なオプションです。
+Recode.Rdataファイルをアップロードすることで、時間のかかるEBSeqによるDEG解析をスキップすることができます。
+
 ---
    
 #### Species
@@ -327,8 +336,9 @@ DEG解析の結果をscatter plotとheatmapで表示します。<br>
 
 GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br><br>
 ![cond 3 goi](manual_figure/cond 3 goi1.png){#id .class width=80%}<br>
-![cond 3 goi](manual_figure/cond 3 goi2.png){#id .class width=80%}<br>
-
+![cond 3 goi](manual_figure/cond 3 goi2.png){#id .class width=80%}<br><br>
+Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br>
+![](manual_figure/cond 3 goi3.png){#id .class width=80%}
 ---
 
 ### Enrichment analysis
@@ -573,7 +583,7 @@ inputとなる遺伝子リストのフォーマットは以下の通りです。
 
 ２列目以降は解析に影響しないため、カウントデータが含まれていても問題ありません。<br>
 **最大７種類**の遺伝子リストの共通部分、非共通部分を可視化、リストとして出力できます。<br><br>
-![venn input](www/venn_input.png){#id .class width=15%}<br><br>
+![venn input](www/venn_input.png){#id .class width=70%}<br><br>
 
 #### 複数のカウントデータ（統合ヒートマップの作成）
 複数のカウントデータを統合して、ベン図により同定した遺伝子セットの発現を可視化します。<br>
@@ -701,7 +711,7 @@ gene listをアップロードすることで、目的の遺伝子グループ�
 <br>  <br> 
     
 #### Filter option 2
-basemeanの閾値が設定できます。
+Fold Changeとbasemeanの閾値が設定できます。
 <br>  <br> 
 
    
@@ -733,8 +743,15 @@ UMAPのn_neighborsは、多様体構造の局所近似で使用される近傍�
 
 ### GOI (Genes of interest) profiling
 
-GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。
-<br>
+GOI listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br>
+**Select a pair for fold change cut-off**: Fold ChangeによるCut-offを適用したい条件のペアを選択できます。<br>
+**Genes**: <br>
+**Select all genes**を選択した場合、Filter後の全遺伝子のヒートマップを描写します。ボックスプロットに関しては、Filter後の遺伝子の数が200遺伝子名未満の場合のみ描写されます。**Genes of interest (GOI)**から遺伝子を選択した場合、選択した遺伝子のヒートマップ上での位置が図示されます。<br>
+**Custom**を選択した場合、**Genes of interest (GOI)**から選択した遺伝子に関してのみ、ヒートマップとボックスプロットが描写されます。<br>
+**statistics**:条件が２群の場合は、**Welch's t-test**と**Wilcoxon test**が選択可能です。
+条件が３群以上の場合は、**TukeyHSD**と**Dunnett's test**、**Wilcoxon test**が選択可能です。
+200遺伝子まで一括で統計処理、有意差のマーク入りのグラフが描写できます。<br>
+**PlotType**:**Boxplot**、**Barplot**、**Errorplot**が選択可能です。<br>
 
 ![norm goi](manual_figure/norm goi1.png){#id .class width=80%}<br>
 ![norm goi](manual_figure/norm goi2.png){#id .class width=80%}<br>
@@ -745,6 +762,7 @@ GOI listから選択された遺伝子のheatmapおよびboxplotが表示され�
 k-means clusteringを実行します。<br>
 クラスターの数は、スライドバーを操作することで変更できます。<br>
 また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
+**Select a pair for fold change cut-off**: Fold ChangeによるCut-offを適用したい条件のペアを選択できます。<br>
 
 ![norm kmeans](manual_figure/norm kmeans1.png){#id .class width=80%}<br>
 ![norm kmeans](manual_figure/norm kmeans2.png){#id .class width=80%}<br>
@@ -964,6 +982,19 @@ AnnotationDbi, org.Hs.eg.db, org.Mm.eg.db, org.Rn.eg.db, org.Xl.eg.db, org.Dm.eg
 - Marc Carlson (2022). org.Xl.eg.db: Genome wide annotation for Worm. R package version 3.15.0.
 - Marc Carlson (2022). org.Dm.eg.db: Genome wide annotation for Rat. R package version 3.15.0.
 - Marc Carlson (2022). org.Ce.eg.db: Genome wide annotation for Worm. R package version 3.15.0.
+- Marc Carlson (2022). org.Bt.eg.db: Genome wide annotation for Bovine. R package version 3.15.0.
+- Marc Carlson (2022). org.Cf.eg.db: Genome wide annotation for Canine. R package version 3.15.0.
+- Marc Carlson (2022). org.Dr.eg.db: Genome wide annotation for Zebrafish. R package version 3.15.0.
+- Marc Carlson (2022). org.Gg.eg.db: Genome wide annotation for Chicken. R package version 3.15.0.
+- Marc Carlson (2022). org.Mmu.eg.db: Genome wide annotation for Rhesus. R package version 3.15.0.
+- Marc Carlson (2022). org.Pt.eg.db: Genome wide annotation for Chimp. R package version 3.15.0.
+- Marc Carlson (2022). org.Sc.sgd.db: Genome wide annotation for Yeast. R package version 3.15.0.
+
+biomaRt (for ortholog)
+
+- Mapping identifiers for the integration of genomic datasets with the R/Bioconductor package
+  biomaRt. Steffen Durinck, Paul T. Spellman, Ewan Birney and Wolfgang Huber, Nature Protocols 4,
+  1184-1191 (2009).
 
 genefilter (for z-score normalization)
 
@@ -1019,6 +1050,78 @@ sample data
 
 - R. Takase, S. Hino, K. Nagaoka, K. Anan, K. Kohrogi, H. Araki, Y. Hino, A. Sakamoto, T. B. Nicholson, T. Chen, M. Nakao, Lysine-specific demethylase-2 is distinctively involved in brown and beige adipogenic differentiation. FASEB J. 33, 5300–5311 (2019).
 - Saunderson EA, Stepper P, Gomm JJ, Hoa L et al. Hit-and-run epigenetic editing prevents senescence entry in primary breast cells from healthy donors. Nat Commun 2017 Nov 13;8(1):1450. PMID: 29133799
+
+---
+
+# 非モデル生物の解析に関して
+非モデル生物がデータセットの"Species"として選択された場合、"Ortholog"が選択できるようになります。この機能は近縁のモデル生物のアノテーション情報を最大限利用するために開発しました。<br>
+
+非モデル生物のアノテーション情報にはいくつかの問題があります。<br>
+・非モデル生物の遺伝子の中には、アノテーション情報がない(Gene SymbolやNCBI gene ID)が、オルソログとして紐付けられているモデル生物の遺伝子を確認するとアノテーション情報がある、という遺伝子が大量に存在する。<br>
+・オルソログとして紐付けられている遺伝子の数は生物種によって異なる（同じモデル生物でも近縁のモデル生物と紐付けた方がより多くのアノテーション情報を引き出せる）。<br>
+v1.0.8以降のRNAseqChefでは、以下の生物種をOrthologとして選択することが可能です。<br>
+Animalの場合："Homo sapiens", "Mus musculus", "Rattus norvegicus", "Bos taurus","Canis lupus familiaris","Danio rerio","Gallus gallus","Macaca mulatta", "Pan troglodytes"<br>
+Metazoaの場合："Drosophila melanogaster", "Caenorhabditis elegans" <br>
+Fungiの場合: "Saccharomyces cerevisiae"<br>
+Plantsの場合: "Arabidopsis thaliana"<br>
+
+---
+
+# よくある質問
+
+## カウントデータが正常にアップロードされない。
+
+- 拡張子を確認してください。タブ区切りファイル(.txt, .tsv)、カンマ区切りファイル(.csv)、エクセルファイル(.xlsx)以外は対応していません。
+- 遺伝子名に重複のないことを確認してください。エクセルを用いてファイルを開いたことがある場合、オートコレクション機能により遺伝子名が誤変換された可能性があります。
+- 遺伝子名に'NA'が含まれていないことを確認してください。
+
+## "disconnected from server"が発生する
+いくつかの可能性が考えられます。
+
+- 複数人が同時にk-means clusteringなどのメモリを必要とする解析を行なっている
+- 開発者が更新作業を行なっている
+- 予期せぬシステムエラーがある
+
+同じ操作をすると必ず"disconnected from server"が発生する場合は、予期せぬシステムエラーの可能性が高いです。ご連絡頂けると幸いです。<br>
+それ以外の場合は、時間を置いてからあらためて解析を実行してください。<br>
+サーバーの影響を排除したい場合はDockerバージョンをご利用ください。
+
+## PublicのRNA-seqデータを解析したいがどこから入手するべきか。
+ヒト、マウス、ラットに関してはGREIN (http://www.ilincs.org/apps/grein/)をお勧めします。<br>
+メタデータとカウントデータ(Raw countとTPM count)を入手できます。<br>
+GEOからダウンロードできるカウントデータを使用する際は、カウントデータの種類（Raw count、Normalized count）に気をつけてご利用ください。また、GEOからダウンロードできるカウントデータの中には、遺伝子名の誤変換が生じているデータが混ざっている時がありますので、ご注意ください。<br>
+カウントデータが入手できない場合は、Fastqファイルからの一次解析が必要です。Galaxy(https://usegalaxy.org)などの一次解析が可能なツールをご検討ください。
+
+## 3 condition DEGとMulti DEGはどのように使い分けるべきか。
+
+単に３群の解析を行いたい場合であれば、3 conditions DEGをお勧めします。<br>
+（検定が厳しい（ばらつきが大きいデータの解析は難しい）という弱点があるので、状況によってはMulti DEGの方が良い場合もあります）<br>
+3 conditions DEG (EBSeq)は全条件総当たりでp valueを計算するのでどの群間で有意差があるかがわかりますが、
+Multi DEG (DESeq2 Likelihood ratio test)の場合は有意差のある群が含まれているかどうかしかわかりません。<br>
+（例えると、EBSeqがTukeyHSD、likelihood ratio testがANOVA）<br>
+したがって、3 condition DEGの方が3群間の関係性をより明確に評価できるというメリットがあります。<br>
+
+その一方で、4群以上の解析に関してはEBSeqでは時間がかかりすぎる上に、発生するpatternも膨大となるので解釈が難しくなるという問題があります。<br>
+そこで、MultiDEGではEBSeqではなく、簡便に計算できるlikelihood ratio testとクラスタリング解析の合わせ技でパターン分析する方法を採用しております。
+
+## n = 1 のデータはどのように解析すべきか
+Pair-wise DEG, 3 conditions DEG, Multi DEGでは統計解析を行うため、各条件最低n = 2 サンプルが必要です。
+n = 1 の場合は、Normalized count analysisをご利用ください。例えば、指定した条件間で２倍以上変化した遺伝子の抽出やk-means clusteringによる興味ある発現パターンを示す遺伝子群の抽出などが可能です。 
+
+## Enrichment解析をする際に、どのGene setを使用するのが効果的か。
+（あくまで開発者の意見です。利用者の好みもあると思うので参考程度に考えてください）
+機能解析に関しては信頼度が高く、明快なtermが取り揃えられたHallmark gene setをお勧めします。<br>
+順番としては、まずはHallmark gene setを使用し、次にアノテーションされている遺伝子数の多いKEGGやReactomeを試し、それでもエンリッチしない場合はGO解析を行います（GOはアノテーションされている遺伝子数は一番多いですが、アノテーションの正確性や意味の分かりやすさという点でKEGGやReactomeと比べて扱いにくい印象があります）。<br>
+転写因子の予測解析に関しては、DoRothEA regulonをお勧めします。<br>
+ヒトとマウスのRegulonのデータベースを利用することで非常に信頼性の高い予測が可能です。<br>
+
+
+---
+
+# Citation
+When the user publishes the results from RNAseqChef analysis, please cite our original paper.
+- Etoh K. & Nakao M. A web-based integrative transcriptome analysis, RNAseqChef, uncovers cell/tissue type-dependent action of sulforaphane. _JBC_, 299(6), 104810 (2023)
+https://doi.org/10.1016/j.jbc.2023.104810
 
 ---
 
