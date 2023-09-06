@@ -128,7 +128,7 @@ inputとなるraw countデータの形式は3種類あります。<br>
     - ２列目は、対応するサンプル名 (例: Control_1)
     - ３列目以降は、解析に影響しません 
 メタデータ２列目のサンプル名は、n数表記（例："_1"）は必須ではありません。
-n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。
+n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。<br>
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
@@ -528,12 +528,8 @@ Cut-off後のDEGが多すぎる場合、サーバーメモリの都合上フリ�
 **Boxplot**について<br>
 "DEG_pattern_normalized_count_data"テーブルから遺伝子を選択すると、"Boxplot"にプロット結果が表示されます。<br>
 
-![multi kmeans](manual_figure/multi kmeans1.png){#id .class width=80%}<br>
+![multi kmeans](manual_figure/multi kmeans.png){#id .class width=80%}<br>
 ![multi kmeans](manual_figure/multi kmeans2.png){#id .class width=80%}<br>
-![multi kmeans](manual_figure/multi kmeans3.png){#id .class width=80%}<br>
-![multi kmeans](manual_figure/multi kmeans4.png){#id .class width=80%}<br>
-![multi kmeans](manual_figure/multi kmeans5.png){#id .class width=80%}<br>
-![multi kmeans](manual_figure/multi kmeans6.png){#id .class width=80%}<br>
 
 ---
 
@@ -694,7 +690,7 @@ Normalized countデータのクラスタリング解析を実行します。<br>
     - ２列目は、対応するサンプル名 (例: Control_1)
     - ３列目以降は、解析に影響しません 
 メタデータ２列目のサンプル名は、n数表記（例："_1"）は必須ではありません。
-n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。
+n数表記がない場合には、自動的にナンバリングされます（上から順に"_1","_2"...と割り振られます）。<br>
 ![unchanged image](www/input_format2.png){#id .class width=50%}
 <br><br>
    
@@ -758,14 +754,42 @@ GOI listから選択された遺伝子のheatmapおよびboxplotが表示され�
 
 ---
 
+### Correlation analysis
+相関解析を実行します。<br>
+二つのモードがあります。<br>
+
+#### Selected pair
+興味ある２つの遺伝子のcorrelation plotを描写します。<br>
+**Select GOI**と**Select GOI (y_axis)**からそれぞれ遺伝子を選択します。<br>
+ドットの色は**Color**から選択することができます。"Sample name"を選んだ場合は群ごとに配色されます。"遺伝子名"を選択した場合は、選んだ遺伝子の発現量に応じて配色されます。青が低発現、赤が高発現を意味します。<br>
+Correlation analysisのmethodは"Spearman's rank correlation analysis"と"Pearson's correlation analysis"が**Statistics**より選択可能です。<br><br>
+![norm goi](manual_figure/norm corr1.png){#id .class width=100%}<br><br>
+
+#### Screening
+興味ある遺伝子とカウントデータに含まれるすべてのパラメーターとの相関係数を計算します。<br>
+Baitとなる遺伝子は**Select　GOI**から選択します。**Start**を押すと実行されます。<br>
+結果として、縦軸が相関係数、横軸がrank（相関係数が高い順番）であるcorrelation rank plotが得られます。"padj (or pval) cut-off"の値に従い、positive correlationとnegative correlationを示す遺伝子が同定されます。<br>
+padjはBH法により計算されます。<br><br>
+
+表データの興味ある遺伝子をクリックすると、Baitとのcorrelation plotが描写されます。ブラウザ上では選択したすべての遺伝子とのcorrelation plotは表示できないですが、**Download correlation plot (all genes from 'select GOI')**をクリックするとすべてのグラフが取得可能です。<br><br>
+![norm goi](manual_figure/norm corr2.png){#id .class width=100%}<br>
+また、correlation rank plotで興味あるエリアを四角で囲うことで、一度にpreyの遺伝子を選択することができます。**Download correlation plot (all genes from 'select GOI')**をクリックするとすべてのグラフが取得可能です。<br><br>
+
+
+---
+
 ### k-means clustering
 k-means clusteringを実行します。<br>
-クラスターの数は、スライドバーを操作することで変更できます。<br>
-また、遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
 **Select a pair for fold change cut-off**: Fold ChangeによるCut-offを適用したい条件のペアを選択できます。<br>
+クラスターの数は、スライドバーを操作することで変更できます。<br>
+サーバーメモリの都合上、解析対象を**Most variable genes**で指定する遺伝子数に絞っています。<br>
+FoldChange cut-off後のすべての遺伝子を解析したい場合は、**The number of genes after the filteration**で表示される数以上の数値を**Most variable genes**から指定してください。<br>
+また、**k-means clustering result**パネルに遺伝子とクラスターの対応関係をテーブルデータとして出力します。<br>
+興味ある遺伝子をクリックすると、ヒートマップ上の選択した遺伝子の位置が表示されます。<br>
+また、選択した遺伝子のボックスプロットも表示されます。<br>
+さらに、ヒートマップ上のクラスターの順番を変更したいときは**Order of clusters on heatmap**を操作することで変更可能です。<br><br>
 
-![norm kmeans](manual_figure/norm kmeans1.png){#id .class width=80%}<br>
-![norm kmeans](manual_figure/norm kmeans2.png){#id .class width=80%}<br>
+![norm kmeans](manual_figure/norm k-means 2.png){#id .class width=80%}<br>
 ![norm kmeans](manual_figure/norm kmeans3.png){#id .class width=80%}<br>
 
 ---
@@ -827,8 +851,8 @@ Dotplotやcnet plotで表示されるpathwayの数を変更できます。
 
 ### Input gene list for enrichment analysis
 
-アップロードした遺伝子リストを表示します。
-<br>
+アップロードした遺伝子リストを表示します。<br>
+**Order of groups**を操作することで、解析するグループの取捨選択やDotplotのx軸の順番を変更することが可能です。<br>
 ![enrich input](manual_figure/enrich input1.png){#id .class width=80%}
 <br>
 
