@@ -26,13 +26,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
+#### New
+
+- **統合TVに[使用方法の説明動画](https://togotv.dbcls.jp/20231213.html)が掲載されました。**
+- **「よくある質問」を更新しました。**
+
+<br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
 単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
 また、RNA-seqのカウントデータからChIP-seqやATAC-seqの解析で得た遺伝子セットを抽出・解析するマルチオミクスな解析も可能です。<br>
 Publication-readyな高解像度Figure（イラストレーターで編集可能なPDFファイル）をダウンロードすることができます。<br><br>
 RNAseqChefは、以下の方法で使用可能です。<br>
 1. [ウェブページ](https://imeg-ku.shinyapps.io/RNAseqChef/)にアクセス <br> 
-2. [ソースコードページ](https://github.com/Kan-E/RNAseqChef)の[Local installation](https://github.com/Kan-E/RNAseqChef#local-installation) に記載されている方法を実行<br>
+2. [ソースコードページ](https://github.com/Kan-E/RNAseqChef)の[Local installation](https://github.com/Kan-E/RNAseqChef#local-installation) に記載されている方法を実行<br><br>
 
 If you need help, please create an issue on [Github](https://github.com/Kan-E/RNAseqChef/issues) or [contact us](mailto:kaneto@kumamoto-u.ac.jp){.email}. <br>
 
@@ -1099,7 +1105,7 @@ Plantsの場合: "Arabidopsis thaliana"<br>
 - 遺伝子名に重複のないことを確認してください。エクセルを用いてファイルを開いたことがある場合、オートコレクション機能により遺伝子名が誤変換された可能性があります。
 - 遺伝子名に'NA'が含まれていないことを確認してください。
 
-## "disconnected from server"が発生する
+## "disconnected from server"が発生する。
 いくつかの可能性が考えられます。
 
 - 複数人が同時にk-means clusteringなどのメモリを必要とする解析を行なっている
@@ -1128,7 +1134,7 @@ Multi DEG (DESeq2 Likelihood ratio test)の場合は有意差のある群が含�
 その一方で、4群以上の解析に関してはEBSeqでは時間がかかりすぎる上に、発生するpatternも膨大となるので解釈が難しくなるという問題があります。<br>
 そこで、MultiDEGではEBSeqではなく、簡便に計算できるlikelihood ratio testとクラスタリング解析の合わせ技でパターン分析する方法を採用しております。
 
-## n = 1 のデータはどのように解析すべきか
+## n = 1 のデータはどのように解析すべきか。
 Pair-wise DEG, 3 conditions DEG, Multi DEGでは統計解析を行うため、各条件最低n = 2 サンプルが必要です。
 n = 1 の場合は、Normalized count analysisをご利用ください。例えば、指定した条件間で２倍以上変化した遺伝子の抽出やk-means clusteringによる興味ある発現パターンを示す遺伝子群の抽出などが可能です。 
 
@@ -1139,9 +1145,19 @@ n = 1 の場合は、Normalized count analysisをご利用ください。例え�
 転写因子の予測解析に関しては、DoRothEA regulonをお勧めします。<br>
 ヒトとマウスのRegulonのデータベースを利用することで非常に信頼性の高い予測が可能です。<br>
 
-## ダウンロードした図の文字サイズやフォントは変更可能か？
+## ダウンロードした図の文字サイズやフォントは変更可能か。
 IllustratorのようなPDFファイルを編集することができるアプリケーションを使用することで変更可能です。
 
+## basemean cut-offの閾値はどの程度が適切か(低発現遺伝子除外の基準について)。
+Bulk RNA-seqではその解析感度の高さから極めて発現量が低い遺伝子も検出可能ですが、表現形に寄与するとは思えないほど低発現の遺伝子は解析から省きたいシチュエーションも想定されると思います。<br>
+RNAseqChefではbasemean cut-offを設定することで低発現の遺伝子を除外することが可能です。この機能を利用する場合は、TPMなどの遺伝子間の発現量の比較が可能なNormalized countをアップロードする必要があります([動画](https://togotv.dbcls.jp/20231213.html) 8:30から参照)。<br>
+
+(以下はあくまで開発者の意見です。参考程度に考えて下さい。)<br>
+Cell lineのRNA-seqの場合、TPM < 1は極めて発現量が低いのでcut-offしても問題ないと考えています。<br>
+状況によっては遺伝子数をより絞り込むためにTPM > 10に設定することも有効かもしれませんが、表現形の決定に寄与する重要な遺伝子が5 < TPM < 10の中に含まれていることもあります。<br>
+したがって、TPM > 10の遺伝子を優先的に着目するという考えはありかもしれませんが、1 < TPM < 10を完全に無視するのは危険と考えています。<br>
+
+**注意点**：Cell lineなどの「単一の細胞種から構成されるサンプル」と組織などの「複数の細胞種が構成されるサンプル」ではTPMの値の意味合いが変わってくるので注意が必要です。後者の場合、細胞種特異的な発現を示す遺伝子の数が増えるので、低発現の遺伝子は検出されにくくなります。basemean cut-offはCell lineなどの「単一の細胞種から構成されるサンプル」の解析にのみ使用することを推奨します。
 
 ---
 
