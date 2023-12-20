@@ -7,7 +7,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-<meta name="google-site-verification" content="AKtpqQgvPScOVJFGeZDNIn71HNrOUUQSsv0XXnBUinI" />
+
 
 
 
@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">23/12/19 15:54</h4>
+<h4 class="date">23/12/21 00:53</h4>
 
 </div>
 
@@ -1624,7 +1624,7 @@ countをアップロードする必要があります(<a
 href="https://togotv.dbcls.jp/20231213.html">動画</a>
 8:30から参照)。<br></p>
 <p>(以下はあくまで開発者の意見です。参考程度に考えて下さい。)<br> Cell
-lineのRNA-seqの場合、TPM &lt;
+lineのmRNA-seqの場合、TPM &lt;
 1は極めて発現量が低いのでcut-offしても問題ないと考えています。<br>
 状況によっては遺伝子数をより絞り込むためにTPM &gt;
 10に設定することも有効かもしれませんが、表現形の決定に寄与する重要な遺伝子が5
@@ -1634,7 +1634,10 @@ lineのRNA-seqの場合、TPM &lt;
 <p><strong>注意点</strong>：Cell
 lineなどの「単一の細胞種から構成されるサンプル」と組織などの「複数の細胞種が構成されるサンプル」ではTPMの値の意味合いが変わってくるので注意が必要です。後者の場合、細胞種特異的な発現を示す遺伝子の数が増えるので、低発現の遺伝子は検出されにくくなります。basemean
 cut-offはCell
-lineなどの「単一の細胞種から構成されるサンプル」の解析にのみ使用することを推奨します。</p>
+lineなどの「単一の細胞種から構成されるサンプル」の解析にのみ使用することを推奨します。<br>
+また、Total
+RNA-seqではmRNA-seqと比べて検出されるRNAの種類が増えるので、その分TPMの値が小さくなります。Total
+RNA-seqとmRNA-seqの間でTPMの比較はできないのでご注意ください。</p>
 <hr />
 </div>
 </div>
