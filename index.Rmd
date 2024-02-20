@@ -26,10 +26,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
-#### New
-
-- **統合TVに[使用方法の説明動画](https://togotv.dbcls.jp/20231213.html)が掲載されました。**
-- **「よくある質問」を更新しました。**
+#### News (2024/2/20)
+- **(2024/2/20) GREINに関する情報(よくある情報)を修正しました**
+- **(2024/1/18) アプリをアップデートしました(v1.1.0)。**
+- **(2024/1/18) ミラーサイトを用意しました([mirror 1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/), [mirror 2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/))。正規のURLにアクセスできない場合にご利用ください。**
+- **(2024/1/18)「よくある質問」を更新しました。**
+- **(2023/12/13) 統合TVに[使用方法の説明動画](https://togotv.dbcls.jp/20231213.html)が掲載されました。**
 
 <br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
@@ -1105,7 +1107,7 @@ Plantsの場合: "Arabidopsis thaliana"<br>
 - 遺伝子名に重複のないことを確認してください。エクセルを用いてファイルを開いたことがある場合、オートコレクション機能により遺伝子名が誤変換された可能性があります。
 - 遺伝子名に'NA'が含まれていないことを確認してください。
 
-## "disconnected from server"が発生する。
+## "disconnected from server"が発生する、またはウェブアプリが立ち上がらない。
 いくつかの可能性が考えられます。
 
 - 複数人が同時にk-means clusteringなどのメモリを必要とする解析を行なっている
@@ -1114,11 +1116,13 @@ Plantsの場合: "Arabidopsis thaliana"<br>
 
 同じ操作をすると必ず"disconnected from server"が発生する場合は、予期せぬシステムエラーの可能性が高いです。ご連絡頂けると幸いです。<br>
 それ以外の場合は、時間を置いてからあらためて解析を実行してください。<br>
+ウェブアプリが立ち上がらない場合、アクセスが集中している可能性があります。正規のURLにアクセスできない場合は、ミラーサイトをご利用ください([mirror 1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/), [mirror 2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/))。
 サーバーの影響を排除したい場合はDockerバージョンをご利用ください。
 
 ## PublicのRNA-seqデータを解析したいがどこから入手するべきか。
 ヒト、マウス、ラットに関しては[GREIN](http://www.ilincs.org/apps/grein/)をお勧めします。<br>
-メタデータとカウントデータ(Raw countとTPM count)を入手できます。<br>
+メタデータとカウントデータ(Raw countとNormalized count)を入手できます。<br>
+ (2024/2/20修正内容 Normalized count (TPM)と記載していましたが誤りでした。正確な情報は[GREINの原著](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6527554/)をご覧ください。)<br>
 GEOからダウンロードできるカウントデータを使用する際は、カウントデータの種類（Raw count、Normalized count）に気をつけてご利用ください。また、GEOからダウンロードできるカウントデータの中には、遺伝子名の誤変換が生じているデータが混ざっている時がありますので、ご注意ください。<br>
 カウントデータが入手できない場合は、Fastqファイルからの一次解析が必要です。[Galaxy](https://usegalaxy.org)などの一次解析が可能なツールをご検討ください。
 

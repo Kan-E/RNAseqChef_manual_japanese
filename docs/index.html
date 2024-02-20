@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">23/12/21 00:53</h4>
+<h4 class="date">24/02/20 15:00</h4>
 
 </div>
 
@@ -250,12 +250,20 @@ alt="DOI" /></a><br></p>
 <h1>概要</h1>
 <p><img src="manual_figure/graphical%20abstract_ver2.png" id="id"
 class="class" style="width:80.0%" /> <br><br></p>
-<div id="new" class="section level4">
-<h4>New</h4>
+<div id="news-2024220" class="section level4">
+<h4>News (2024/2/20)</h4>
 <ul>
-<li><strong>統合TVに<a
+<li><strong>(2024/2/20)
+GREINに関する情報(よくある情報)を修正しました</strong></li>
+<li><strong>(2024/1/18)
+アプリをアップデートしました(v1.1.0)。</strong></li>
+<li><strong>(2024/1/18) ミラーサイトを用意しました(<a
+href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/">mirror 1</a>, <a
+href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">mirror
+2</a>)。正規のURLにアクセスできない場合にご利用ください。</strong></li>
+<li><strong>(2024/1/18)「よくある質問」を更新しました。</strong></li>
+<li><strong>(2023/12/13) 統合TVに<a
 href="https://togotv.dbcls.jp/20231213.html">使用方法の説明動画</a>が掲載されました。</strong></li>
-<li><strong>「よくある質問」を更新しました。</strong></li>
 </ul>
 <p><br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
@@ -1544,8 +1552,11 @@ class="section level2">
 <li>遺伝子名に’NA’が含まれていないことを確認してください。</li>
 </ul>
 </div>
-<div id="disconnected-from-serverが発生する" class="section level2">
-<h2>“disconnected from server”が発生する。</h2>
+<div
+id="disconnected-from-serverが発生するまたはウェブアプリが立ち上がらない"
+class="section level2">
+<h2>“disconnected from
+server”が発生する、またはウェブアプリが立ち上がらない。</h2>
 <p>いくつかの可能性が考えられます。</p>
 <ul>
 <li>複数人が同時にk-means
@@ -1556,6 +1567,9 @@ clusteringなどのメモリを必要とする解析を行なっている</li>
 <p>同じ操作をすると必ず”disconnected from
 server”が発生する場合は、予期せぬシステムエラーの可能性が高いです。ご連絡頂けると幸いです。<br>
 それ以外の場合は、時間を置いてからあらためて解析を実行してください。<br>
+ウェブアプリが立ち上がらない場合、アクセスが集中している可能性があります。正規のURLにアクセスできない場合は、ミラーサイトをご利用ください(<a
+href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/">mirror 1</a>, <a
+href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">mirror 2</a>)。
 サーバーの影響を排除したい場合はDockerバージョンをご利用ください。</p>
 </div>
 <div id="publicのrna-seqデータを解析したいがどこから入手するべきか"
@@ -1563,7 +1577,10 @@ class="section level2">
 <h2>PublicのRNA-seqデータを解析したいがどこから入手するべきか。</h2>
 <p>ヒト、マウス、ラットに関しては<a
 href="http://www.ilincs.org/apps/grein/">GREIN</a>をお勧めします。<br>
-メタデータとカウントデータ(Raw countとTPM count)を入手できます。<br>
+メタデータとカウントデータ(Raw countとNormalized
+count)を入手できます。<br> (2024/2/20修正内容 Normalized count
+(TPM)と記載していましたが誤りでした。正確な情報は<a
+href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6527554/">GREINの原著</a>をご覧ください。)<br>
 GEOからダウンロードできるカウントデータを使用する際は、カウントデータの種類（Raw
 count、Normalized
 count）に気をつけてご利用ください。また、GEOからダウンロードできるカウントデータの中には、遺伝子名の誤変換が生じているデータが混ざっている時がありますので、ご注意ください。<br>
