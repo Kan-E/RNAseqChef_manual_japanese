@@ -26,9 +26,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
-#### News (2024/2/20)
+#### News (2024/3/13)
+- **(2024/3/13) アプリをアップデートしました(v1.1.1)。**<br>
+  これまで時間のかかった"3 conditions DEG"が高速で実行できるようになりました。
 - **(2024/2/20) GREINに関する情報(よくある情報)を修正しました**
-- **(2024/1/18) アプリをアップデートしました(v1.1.0)。**
 - **(2024/1/18) ミラーサイトを用意しました([mirror 1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/), [mirror 2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/))。正規のURLにアクセスできない場合にご利用ください。**
 - **(2024/1/18)「よくある質問」を更新しました。**
 - **(2023/12/13) 統合TVに[使用方法の説明動画](https://togotv.dbcls.jp/20231213.html)が掲載されました。**
@@ -251,6 +252,7 @@ Volcano plot上で興味ある遺伝子をまとめて選択することも可�
 
 EBSeqによる多重比較解析を実行することで、３群間のDEGを同時に検出・可視化・機能解析結果を出力します。<br>
 注： 多重比較解析は時間がかかります（５〜１０分）。
+(2024/3/13追記) EBSeq.v2が使えるようになりました。今までの数十倍の速度でDEG解析が実行できます。EBSeq.v1も今まで通り利用できます。
 
 ## Setting
 
@@ -297,6 +299,10 @@ n数表記がない場合には、自動的にナンバリングされます（�
 Recode.Rdataファイルをアップロードすることで、時間のかかるEBSeqによるDEG解析をスキップすることができます。
 
 ---
+
+#### EBSeq
+EBSeq.v2とEBSeq.v1を切り替えることができます。
+EBSeq.v2に関する詳細は[こちら](https://www.biorxiv.org/content/10.1101/2020.06.19.162180v2.full)をご覧ください。
    
 #### Species
 データセットの種を選択することで以下の解析が実行されます。
@@ -968,6 +974,7 @@ EBSeq (for ebseq)
 
 - Ning Leng and Christina Kendziorski (2020). EBSeq: An R package for gene and isoform
   differential expression analysis of RNA-seq data. R package version 1.30.0.
+- Ma X, Leng N (2019). EBSeq: An R package for gene and isoform differential expression analysis of RNA-seq data. R package version 1.99.0.
   
 DESeq2 (for deseq2)
 
