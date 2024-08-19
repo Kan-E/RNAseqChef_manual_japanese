@@ -26,13 +26,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
-#### News (2024/3/13)
-- **(2024/3/13) アプリをアップデートしました(v1.1.1)。**<br>
-  これまで時間のかかった"3 conditions DEG"が高速で実行できるようになりました。
+#### News (2024/8/19)
+- **(2024/8/19) アプリをアップデートしました(v1.1.2)。**<br>
+    - Normalized count analysis:セッティングパネルのFilter optionからGene setを選択できるようになりました。
+  例えば「"Hallmark gene set"の"Adipogenesis"に含まれる遺伝子」など興味あるパスウェイに含まれる遺伝子のみを簡単に抽出することができます。
+    - Boxplotのグラフデザインを改良しました。Normalized count analysisのGOI profilingに関しては、デザインや色を自由に選択できるようになりました。
+    - ENSEMBL ID(小数点を含む)を使用した場合に発生するバグを修正しました。
 - **(2024/2/20) GREINに関する情報(よくある情報)を修正しました**
 - **(2024/1/18) ミラーサイトを用意しました([mirror 1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/), [mirror 2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/))。正規のURLにアクセスできない場合にご利用ください。**
 - **(2024/1/18)「よくある質問」を更新しました。**
-- **(2023/12/13) 統合TVに[使用方法の説明動画](https://togotv.dbcls.jp/20231213.html)が掲載されました。**
+
+#### 解説動画 (統合TV)
+- **[RNAseqChefをDocker環境で使って公開RNA-seqデータの3群間多重比較解析を行う](https://togotv.dbcls.jp/20240411.html)**
+- **[RNAseqChef を使って公共データベース上のRNA-seqデータに対して2群間の比較解析を行う](https://togotv.dbcls.jp/20240226.html)**
+- **[RNAseqChef: 遺伝子発現変動を自動的に可視化するRNA-seq統合解析ツール @ 日本エピジェネティクス研究会リソースセミナー](https://togotv.dbcls.jp/20231213.html)**
 
 <br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
@@ -717,8 +724,12 @@ n数表記がない場合には、自動的にナンバリングされます（�
 <br>  <br> 
 
 #### Filter option 1
-gene listをアップロードすることで、目的の遺伝子グループのみを抽出後、クラスタリング解析を実行します。
-<br>  <br> 
+**Gene set filterから"Gene set"を選択** <br> 
+エンリッチメント解析で使用できるGene setを選択できます。選択したパスウェイに含まれる遺伝子のみを抽出して解析を実行します。<br> 
+**Gene set filterから"custom"を選択** <br> 
+gene listをアップロードすることで、目的の遺伝子のみを抽出することができます。
+<br>  <br>
+![norm set](manual_figure/norm set geneset.png){#id .class width=50%}<br><br>
     
 #### Filter option 2
 Fold Changeとbasemeanの閾値が設定できます。
@@ -759,9 +770,13 @@ GOI listから選択された遺伝子のheatmapおよびboxplotが表示され�
 **Select all genes**を選択した場合、Filter後の全遺伝子のヒートマップを描写します。ボックスプロットに関しては、Filter後の遺伝子の数が200遺伝子名未満の場合のみ描写されます。**Genes of interest (GOI)**から遺伝子を選択した場合、選択した遺伝子のヒートマップ上での位置が図示されます。<br>
 **Custom**を選択した場合、**Genes of interest (GOI)**から選択した遺伝子に関してのみ、ヒートマップとボックスプロットが描写されます。<br>
 **statistics**:条件が２群の場合は、**Welch's t-test**と**Wilcoxon test**が選択可能です。
-条件が３群以上の場合は、**TukeyHSD**と**Dunnett's test**、**Wilcoxon test**が選択可能です。
+条件が３群以上の場合は、**TukeyHSD**と**Dunnett's test**、**Dunn's test**が選択可能です。
 200遺伝子まで一括で統計処理、有意差のマーク入りのグラフが描写できます。<br>
-**PlotType**:**Boxplot**、**Barplot**、**Errorplot**が選択可能です。<br>
+**PlotType**:**Boxplot**、**Barplot**、**violinplot**、**Errorplot**が選択可能です。<br>
+**graph design**: 新しいグラフデザインと今までのグラフデザインを切り替えることができます。<br>
+**Color palette**: グラフの色を選択できます。<br>
+**Color reverse**: グラフの色の順番を逆転できます。<br>
+**min value of y-axis**: y軸の最低値を変更できます (default: 0)。値を未入力とすると最低値のサンプルを参考に算出されます。<br>
 
 ![norm goi](manual_figure/norm goi1.png){#id .class width=80%}<br>
 ![norm goi](manual_figure/norm goi2.png){#id .class width=80%}<br>

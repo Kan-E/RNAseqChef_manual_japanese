@@ -7,7 +7,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-<meta name="google-site-verification" content="AKtpqQgvPScOVJFGeZDNIn71HNrOUUQSsv0XXnBUinI" />
+
 
 
 
@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">24/02/20 15:00</h4>
+<h4 class="date">24/08/19 21:19</h4>
 
 </div>
 
@@ -250,20 +250,40 @@ alt="DOI" /></a><br></p>
 <h1>概要</h1>
 <p><img src="manual_figure/graphical%20abstract_ver2.png" id="id"
 class="class" style="width:80.0%" /> <br><br></p>
-<div id="news-2024220" class="section level4">
-<h4>News (2024/2/20)</h4>
+<div id="news-2024819" class="section level4">
+<h4>News (2024/8/19)</h4>
 <ul>
+<li><strong>(2024/8/19)
+アプリをアップデートしました(v1.1.2)。</strong><br>
+<ul>
+<li>Normalized count analysis:セッティングパネルのFilter optionからGene
+setを選択できるようになりました。 例えば「“Hallmark gene
+set”の”Adipogenesis”に含まれる遺伝子」など興味あるパスウェイに含まれる遺伝子のみを簡単に抽出することができます。</li>
+<li>Boxplotのグラフデザインを改良しました。Normalized count
+analysisのGOI
+profilingに関しては、デザインや色を自由に選択できるようになりました。</li>
+<li>ENSEMBL
+ID(小数点を含む)を使用した場合に発生するバグを修正しました。</li>
+</ul></li>
 <li><strong>(2024/2/20)
 GREINに関する情報(よくある情報)を修正しました</strong></li>
-<li><strong>(2024/1/18)
-アプリをアップデートしました(v1.1.0)。</strong></li>
 <li><strong>(2024/1/18) ミラーサイトを用意しました(<a
 href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/">mirror 1</a>, <a
 href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">mirror
 2</a>)。正規のURLにアクセスできない場合にご利用ください。</strong></li>
 <li><strong>(2024/1/18)「よくある質問」を更新しました。</strong></li>
-<li><strong>(2023/12/13) 統合TVに<a
-href="https://togotv.dbcls.jp/20231213.html">使用方法の説明動画</a>が掲載されました。</strong></li>
+</ul>
+</div>
+<div id="解説動画-統合tv" class="section level4">
+<h4>解説動画 (統合TV)</h4>
+<ul>
+<li><strong><a
+href="https://togotv.dbcls.jp/20240411.html">RNAseqChefをDocker環境で使って公開RNA-seqデータの3群間多重比較解析を行う</a></strong></li>
+<li><strong><a href="https://togotv.dbcls.jp/20240226.html">RNAseqChef
+を使って公共データベース上のRNA-seqデータに対して2群間の比較解析を行う</a></strong></li>
+<li><strong><a href="https://togotv.dbcls.jp/20231213.html">RNAseqChef:
+遺伝子発現変動を自動的に可視化するRNA-seq統合解析ツール @
+日本エピジェネティクス研究会リソースセミナー</a></strong></li>
 </ul>
 <p><br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
@@ -513,7 +533,8 @@ alt="pair-wise enrichment analysis" /><br></p>
 <div id="conditions-deg" class="section level1">
 <h1>3 conditions DEG</h1>
 <p>EBSeqによる多重比較解析を実行することで、３群間のDEGを同時に検出・可視化・機能解析結果を出力します。<br>
-注： 多重比較解析は時間がかかります（５〜１０分）。</p>
+注： 多重比較解析は時間がかかります（５〜１０分）。 (2024/3/13追記)
+EBSeq.v2が使えるようになりました。今までの数十倍の速度でDEG解析が実行できます。EBSeq.v1も今まで通り利用できます。</p>
 <div id="setting-1" class="section level2">
 <h2>Setting</h2>
 <p><img src="manual_figure/cond%203%20set.png" id="id" class="class"
@@ -555,6 +576,12 @@ style="width:50.0%" alt="unchanged image" /> <br><br></p>
 summary”ボタンを押すことでRecode.Rdataファイルを取得していた場合に限り、使用可能なオプションです。
 Recode.Rdataファイルをアップロードすることで、時間のかかるEBSeqによるDEG解析をスキップすることができます。</p>
 <hr />
+</div>
+<div id="ebseq" class="section level4">
+<h4>EBSeq</h4>
+<p>EBSeq.v2とEBSeq.v1を切り替えることができます。
+EBSeq.v2に関する詳細は<a
+href="https://www.biorxiv.org/content/10.1101/2020.06.19.162180v2.full">こちら</a>をご覧ください。</p>
 </div>
 <div id="species-1" class="section level4">
 <h4>Species</h4>
@@ -1020,9 +1047,13 @@ style="width:50.0%" alt="unchanged image" /> <br><br></p>
 </div>
 <div id="filter-option-1" class="section level4">
 <h4>Filter option 1</h4>
-<p>gene
-listをアップロードすることで、目的の遺伝子グループのみを抽出後、クラスタリング解析を実行します。
-<br> <br></p>
+<p><strong>Gene set filterから”Gene set”を選択</strong> <br>
+エンリッチメント解析で使用できるGene
+setを選択できます。選択したパスウェイに含まれる遺伝子のみを抽出して解析を実行します。<br>
+<strong>Gene set filterから”custom”を選択</strong> <br> gene
+listをアップロードすることで、目的の遺伝子のみを抽出することができます。
+<br> <br> <img src="manual_figure/norm%20set%20geneset.png" id="id"
+class="class" style="width:50.0%" alt="norm set" /><br><br></p>
 </div>
 <div id="filter-option-2" class="section level4">
 <h4>Filter option 2</h4>
@@ -1071,9 +1102,16 @@ of interest
 <strong>statistics</strong>:条件が２群の場合は、<strong>Welch’s
 t-test</strong>と<strong>Wilcoxon test</strong>が選択可能です。
 条件が３群以上の場合は、<strong>TukeyHSD</strong>と<strong>Dunnett’s
-test</strong>、<strong>Wilcoxon test</strong>が選択可能です。
+test</strong>、<strong>Dunn’s test</strong>が選択可能です。
 200遺伝子まで一括で統計処理、有意差のマーク入りのグラフが描写できます。<br>
-<strong>PlotType</strong>:<strong>Boxplot</strong>、<strong>Barplot</strong>、<strong>Errorplot</strong>が選択可能です。<br></p>
+<strong>PlotType</strong>:<strong>Boxplot</strong>、<strong>Barplot</strong>、<strong>violinplot</strong>、<strong>Errorplot</strong>が選択可能です。<br>
+<strong>graph design</strong>:
+新しいグラフデザインと今までのグラフデザインを切り替えることができます。<br>
+<strong>Color palette</strong>: グラフの色を選択できます。<br>
+<strong>Color reverse</strong>: グラフの色の順番を逆転できます。<br>
+<strong>min value of y-axis</strong>: y軸の最低値を変更できます
+(default:
+0)。値を未入力とすると最低値のサンプルを参考に算出されます。<br></p>
 <p><img src="manual_figure/norm%20goi1.png" id="id" class="class"
 style="width:80.0%" alt="norm goi" /><br> <img
 src="manual_figure/norm%20goi2.png" id="id" class="class"
@@ -1324,6 +1362,9 @@ class="uri">https://CRAN.R-project.org/package=DT</a></li>
 <li>Ning Leng and Christina Kendziorski (2020). EBSeq: An R package for
 gene and isoform differential expression analysis of RNA-seq data. R
 package version 1.30.0.</li>
+<li>Ma X, Leng N (2019). EBSeq: An R package for gene and isoform
+differential expression analysis of RNA-seq data. R package version
+1.99.0.</li>
 </ul>
 <p>DESeq2 (for deseq2)</p>
 <ul>
@@ -1854,7 +1895,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [117] R6_2.5.1                    lifecycle_1.0.3            
 ## [119] curl_5.0.0                  ggsignif_0.6.4             
 ## [121] jquerylib_0.1.4             DO.db_2.9                  
-## [123] Matrix_1.5-3                RColorBrewer_1.1-3         
+## [123] Matrix_1.6-4                RColorBrewer_1.1-3         
 ## [125] iterators_1.0.14            htmlwidgets_1.6.2          
 ## [127] polyclip_1.10-4             shadowtext_0.1.2           
 ## [129] timechange_0.2.0            gridGraphics_0.5-1         
