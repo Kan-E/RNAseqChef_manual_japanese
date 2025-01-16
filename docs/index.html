@@ -7,7 +7,7 @@
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-<meta name="google-site-verification" content="AKtpqQgvPScOVJFGeZDNIn71HNrOUUQSsv0XXnBUinI" />
+
 
 
 
@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">24/08/19 21:24</h4>
+<h4 class="date">25/01/16 15:12</h4>
 
 </div>
 
@@ -250,27 +250,44 @@ alt="DOI" /></a><br></p>
 <h1>概要</h1>
 <p><img src="manual_figure/graphical%20abstract_ver2.png" id="id"
 class="class" style="width:80.0%" /> <br><br></p>
-<div id="news-2024819" class="section level4">
-<h4>News (2024/8/19)</h4>
+<div id="news-2025116" class="section level4">
+<h4>News (2025/1/16)</h4>
 <ul>
-<li><strong>(2024/8/19)
-アプリをアップデートしました(v1.1.2)。</strong><br>
+<li><strong>RNAseqChefにアクセスができない場合の対応について</strong>
 <ul>
-<li>Normalized count analysis:セッティングパネルのFilter optionからGene
-setを選択できるようになりました。 例えば「“Hallmark gene
-set”の”Adipogenesis”に含まれる遺伝子」など興味あるパスウェイに含まれる遺伝子のみを簡単に抽出することができます。</li>
-<li>Boxplotのグラフデザインを改良しました。Normalized count
-analysisのGOI
-profilingに関しては、デザインや色を自由に選択できるようになりました。</li>
-<li>ENSEMBL
-ID(小数点を含む)を使用した場合に発生するバグを修正しました。</li>
+<li>アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
+現状、以下の方法でご解決ください。</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>時間をおいてから再度アクセスする。</li>
+<li><a
+href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/">ミラーサイト1</a>または<a
+href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">ミラーサイト2</a>を利用する。</li>
+<li>Docker版のRNAseqChefを利用する(統合TVに使用方法の<a
+href="https://togotv.dbcls.jp/20240411.html">解説動画</a>があります)。</li>
+</ol></li>
+<li><strong>(2024/12/25)
+アプリをアップデートしました(v1.1.4)。</strong><br>
+<ul>
+<li><strong><a href="#pathway%20of%20interest%20(%3E=v1.1.4)">GOI
+profilingに”Pathway of interest”機能を加えました。</a></strong></li>
+<li><strong><a
+href="#short%20unique%20ID%20(%3E=v1.1.4)%20(Ensembl%20IDの場合のみ有効)">GOI
+profilingに”short unique ID”機能を加えました(ensembl
+idの場合のみ有効)。</a></strong></li>
+<li><strong><a
+href="#ENSEMBL%20ID%20to%20SYMBOL">遺伝子IDの変換機能”ENSEMBL ID to
+SYMBOL”を加えました(More -&gt; “ENSEMBL ID to
+SYMBOL”)。</a></strong></li>
 </ul></li>
+<li><strong>(2024/11/5) Normalized count
+analysisにおいて、特定の生物種を選択した際に発生するエラーを解消しました。</strong></li>
+<li><strong>(2024/11/5) Normalized count analysisのGOI
+profilingを微修正しました。BoxplotのY軸のラベル名やスケールが変更可能となりました。</strong></li>
+<li><strong>(2024/11/5) <a
+href="#eulerrパッケージ">ベン図にeulerrパッケージの機能を加えました。オーバーラップする遺伝子の数に応じて面積が変化するベン図を作図できます。</a></strong></li>
 <li><strong>(2024/2/20)
 GREINに関する情報(よくある情報)を修正しました</strong></li>
-<li><strong>(2024/1/18) ミラーサイトを用意しました(<a
-href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/">mirror 1</a>, <a
-href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">mirror
-2</a>)。正規のURLにアクセスできない場合にご利用ください。</strong></li>
 <li><strong>(2024/1/18)「よくある質問」を更新しました。</strong></li>
 </ul>
 </div>
@@ -285,6 +302,15 @@ href="https://togotv.dbcls.jp/20240411.html">RNAseqChefをDocker環境で使っ�
 遺伝子発現変動を自動的に可視化するRNA-seq統合解析ツール @
 日本エピジェネティクス研究会リソースセミナー</a></strong></li>
 </ul>
+</div>
+<div id="引用について" class="section level4">
+<h4>引用について</h4>
+RNAseqChefを用いた解析結果を発表される場合、原著論文の引用をお願いいたします。<br>
+<strong>Etoh K. &amp; Nakao M. J Biol Chem, 299(6), 104810 (2023)
+<a href='https://doi.org/10.1016/j.jbc.2023.104810'>https://doi.org/10.1016/j.jbc.2023.104810
+</a></strong> <span class="__dimensions_badge_embed__"
+data-doi="10.1016/j.jbc.2023.104810" data-style="small_circle"></span>
+<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 <p><br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
 単一のデータセットの解析だけでなく、複数のデータセットの結果を統合解析することも可能です。
@@ -490,10 +516,30 @@ listから選択された遺伝子のheatmapおよびboxplotが表示されま�
 class="class" style="width:80.0%" alt="pair-wise GOI profiling" /><br>
 <img src="manual_figure/pair-wise%20GOI%20profiling2.png" id="id"
 class="class" style="width:80.0%" alt="pair-wise GOI profiling" /> <br>
-Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br>
+Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br><br>
 <img src="manual_figure/pair-wise%20GOI%20profiling3.png" id="id"
 class="class" style="width:80.0%" /></p>
+<p><a id="pathway of interest (>=v1.1.4)"></a></p>
+<div id="pathway-of-interest-v1.1.4" class="section level4">
+<h4>pathway of interest (&gt;=v1.1.4)</h4>
+<p>pathway of
+interestから興味のあるパスウェイを選択することで、そのパスウェイに含まれる遺伝子のみを可視化することができます。<br>grayの遺伝子が選択したパスウェイに含まれない遺伝子を図示しています。<br>このモードを利用しているときは、volcano
+plot上のエリア指定で、grayの遺伝子(選択したパスウェイに含まれない遺伝子)は選択されません。<br>したがって、興味あるパスウェイの遺伝子の発現量のみを簡便に確認することができます。<br></p>
+<p><img src="manual_figure/pair%20goi%20pathway.png" id="id"
+class="class" style="width:80.0%" /><br><br></p>
+<p><a id="short unique ID (>=v1.1.4) (Ensembl IDの場合のみ有効)"></a></p>
+</div>
+<div id="short-unique-id-v1.1.4-ensembl-idの場合のみ有効"
+class="section level4">
+<h4>short unique ID (&gt;=v1.1.4) (ensembl IDの場合のみ有効)</h4>
+<p>Unique ID (symbol - ensembl
+id)を短い文字数で表示することができます。<br> short unique
+IDを”ON”にすると、遺伝子名は以下のように表示されます。<br></p>
+<pre><code>- 複数のensembl idが同一のsymbolに対応する場合：symbol - ensembl id
+- ensembl idとsymbolが1:1対応の場合: symbol
+- 対応するsymbolがない(NA)場合: ensembl id</code></pre>
 <hr />
+</div>
 </div>
 <div id="enrichment-analysis" class="section level3">
 <h3>Enrichment analysis</h3>
@@ -941,7 +987,14 @@ src="manual_figure/venn%20venn%20diagram1.png" id="id" class="class"
 style="width:80.0%" alt="venn venn diagram" /><br> <img
 src="manual_figure/venn%20venn%20diagram2.png" id="id" class="class"
 style="width:80.0%" alt="venn venn diagram" /><br></p>
+<p><a id="eulerrパッケージ"></a></p>
+<div id="eulerrパッケージ-v1.1.5" class="section level4">
+<h4>eulerrパッケージ (&gt;= v1.1.5)</h4>
+<p>オーバーラップする遺伝子の数に応じて面積が変化するベン図を作図できます。<br></p>
+<p><img src="manual_figure/venn%20type.png" id="id" class="class"
+style="width:80.0%" alt="venn venn diagram" /><br></p>
 <hr />
+</div>
 </div>
 <div id="integrated-heatmap" class="section level3">
 <h3>Integrated heatmap</h3>
@@ -1302,7 +1355,7 @@ style="width:80.0%" alt="enrich promoter" /><br></p>
 <div id="volcano-navi" class="section level2">
 <h2>Volcano navi</h2>
 <p>Volcano plotを描写します。<br> Input formatは、以下の通りです。</p>
-<pre><code>- １行目は、遺伝子名 
+<pre><code>- １列目は、遺伝子名 
 - 「log2FoldChange」と「padj」という名前の行を含む
 - その他の列は、解析に影響しません</code></pre>
 <p>log2FoldChangeとpadjさえあれば、volcano
@@ -1314,6 +1367,26 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 listから選択された遺伝子のheatmapおよびboxplotが表示されます。<br></p>
 <p><img src="manual_figure/volcano%20navi.png" id="id" class="class"
 style="width:100.0%" alt="volcano navi" /><br></p>
+<hr />
+<p><a id="ENSEMBL ID to SYMBOL"></a></p>
+</div>
+<div id="ensembl-id-to-symbol" class="section level2">
+<h2>ENSEMBL ID to SYMBOL</h2>
+<p>ENSEMBL IDをSYMBOLやUnique IDに変換します。<br> Input
+formatは、以下の通りです。<br></p>
+<pre><code>- １列目は、遺伝子名(ENSEMBL ID)
+- その他の列は、解析に影響しません</code></pre>
+<p><strong>注意点</strong>：Ensembl
+IDとSymbolは1対1対応ではありません。複数のensembl
+idが同一のsymbolと対応している場合があります。そのため、symbolの重複を回避するためにUnique_IDを用意しています。Unique_IDは状況に応じて以下のように表示されます。<br></p>
+<pre><code>- 複数のensembl idが同一のsymbolに対応する場合：symbol - ensembl id
+- ensembl idとsymbolが1:1対応の場合: symbol
+- 対応するsymbolがない(NA)場合: ensembl id</code></pre>
+<p>したがって、enrichment analysisやvenn
+analysisを行う場合、Unique_IDには”symbol - ensembl
+id”が混ざっている点に注意する必要があります。<br></p>
+<p><img src="manual_figure/ensembl%20id%20to%20symbol.png" id="id"
+class="class" style="width:100.0%" alt="ens id conv" /><br></p>
 <hr />
 </div>
 <div id="msigdb-gene-set" class="section level2">
@@ -1765,7 +1838,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [11] JASPAR2020_0.99.10                       
 ## [12] BiocParallel_1.30.4                      
 ## [13] monaLisa_1.2.0                           
-## [14] biomaRt_2.52.0                           
+## [14] biomaRt_2.50.3                           
 ## [15] umap_0.2.10.0                            
 ## [16] dorothea_1.8.0                           
 ## [17] clusterProfiler.dplyr_0.0.2              
@@ -1821,7 +1894,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [67] readr_2.1.4                              
 ## [68] tidyr_1.3.0                              
 ## [69] tibble_3.2.1                             
-## [70] ggplot2_3.4.2                            
+## [70] ggplot2_3.5.1                            
 ## [71] tidyverse_2.0.0                          
 ## [72] multcomp_1.4-23                          
 ## [73] TH.data_1.1-2                            
@@ -1869,7 +1942,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [65] GenomeInfoDbData_1.2.8      lattice_0.20-45            
 ##  [67] utf8_1.2.3                  later_1.3.0                
 ##  [69] BiocFileCache_2.4.0         jsonlite_1.8.4             
-##  [71] scales_1.2.1                tidytree_0.4.2             
+##  [71] scales_1.3.0                tidytree_0.4.2             
 ##  [73] carData_3.0-5               lazyeval_0.2.2             
 ##  [75] promises_1.2.0.1            car_3.1-2                  
 ##  [77] doParallel_1.0.17           R.utils_2.12.2             
@@ -1895,7 +1968,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [117] R6_2.5.1                    lifecycle_1.0.3            
 ## [119] curl_5.0.0                  ggsignif_0.6.4             
 ## [121] jquerylib_0.1.4             DO.db_2.9                  
-## [123] Matrix_1.6-4                RColorBrewer_1.1-3         
+## [123] Matrix_1.6-5                RColorBrewer_1.1-3         
 ## [125] iterators_1.0.14            htmlwidgets_1.6.2          
 ## [127] polyclip_1.10-4             shadowtext_0.1.2           
 ## [129] timechange_0.2.0            gridGraphics_0.5-1         

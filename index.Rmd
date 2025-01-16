@@ -26,20 +26,32 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
-#### News (2024/8/19)
-- **(2024/8/19) アプリをアップデートしました(v1.1.2)。**<br>
-    - Normalized count analysis:セッティングパネルのFilter optionからGene setを選択できるようになりました。
-  例えば「"Hallmark gene set"の"Adipogenesis"に含まれる遺伝子」など興味あるパスウェイに含まれる遺伝子のみを簡単に抽出することができます。
-    - Boxplotのグラフデザインを改良しました。Normalized count analysisのGOI profilingに関しては、デザインや色を自由に選択できるようになりました。
-    - ENSEMBL ID(小数点を含む)を使用した場合に発生するバグを修正しました。
+#### News (2025/1/16)
+- **RNAseqChefにアクセスができない場合の対応について**
+    - アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
+    現状、以下の方法でご解決ください。
+    1. 時間をおいてから再度アクセスする。
+    2. [ミラーサイト1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/)または[ミラーサイト2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/)を利用する。
+    3. Docker版のRNAseqChefを利用する(統合TVに使用方法の[解説動画](https://togotv.dbcls.jp/20240411.html)があります)。
+- **(2024/12/25) アプリをアップデートしました(v1.1.4)。**<br>
+    - **[GOI profilingに"Pathway of interest"機能を加えました。](#pathway of interest (>=v1.1.4))**
+    - **[GOI profilingに"short unique ID"機能を加えました(ensembl idの場合のみ有効)。](#short unique ID (>=v1.1.4) (Ensembl IDの場合のみ有効))**
+    - **[遺伝子IDの変換機能"ENSEMBL ID to SYMBOL"を加えました(More -> "ENSEMBL ID to SYMBOL")。](#ENSEMBL ID to SYMBOL)**
+- **(2024/11/5) Normalized count analysisにおいて、特定の生物種を選択した際に発生するエラーを解消しました。**
+- **(2024/11/5) Normalized count analysisのGOI profilingを微修正しました。BoxplotのY軸のラベル名やスケールが変更可能となりました。**
+- **(2024/11/5) [ベン図にeulerrパッケージの機能を加えました。オーバーラップする遺伝子の数に応じて面積が変化するベン図を作図できます。](#eulerrパッケージ)**
 - **(2024/2/20) GREINに関する情報(よくある情報)を修正しました**
-- **(2024/1/18) ミラーサイトを用意しました([mirror 1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/), [mirror 2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/))。正規のURLにアクセスできない場合にご利用ください。**
 - **(2024/1/18)「よくある質問」を更新しました。**
 
 #### 解説動画 (統合TV)
 - **[RNAseqChefをDocker環境で使って公開RNA-seqデータの3群間多重比較解析を行う](https://togotv.dbcls.jp/20240411.html)**
 - **[RNAseqChef を使って公共データベース上のRNA-seqデータに対して2群間の比較解析を行う](https://togotv.dbcls.jp/20240226.html)**
 - **[RNAseqChef: 遺伝子発現変動を自動的に可視化するRNA-seq統合解析ツール @ 日本エピジェネティクス研究会リソースセミナー](https://togotv.dbcls.jp/20231213.html)**
+
+#### 引用について
+RNAseqChefを用いた解析結果を発表される場合、原著論文の引用をお願いいたします。<br>
+**Etoh K. & Nakao M. J Biol Chem, 299(6), 104810 (2023) <a href='https://doi.org/10.1016/j.jbc.2023.104810'>https://doi.org/10.1016/j.jbc.2023.104810 </a>**
+<span class="__dimensions_badge_embed__" data-doi="10.1016/j.jbc.2023.104810" data-style="small_circle"></span><script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 
 <br>
 RNAseqChefは、RNA-seqにより得たカウントデータを自動的に解析・可視化するウェブアプリです。
@@ -226,8 +238,26 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 ![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling1.png){#id .class width=80%}<br>
 ![pair-wise GOI profiling](manual_figure/pair-wise GOI profiling2.png){#id .class width=80%}
 <br>
-Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br>
+Volcano plot上で興味ある遺伝子をまとめて選択することも可能です。<br><br>
 ![](manual_figure/pair-wise GOI profiling3.png){#id .class width=80%}
+
+
+<a id="pathway of interest (>=v1.1.4)"></a>
+
+#### pathway of interest (>=v1.1.4)
+pathway of interestから興味のあるパスウェイを選択することで、そのパスウェイに含まれる遺伝子のみを可視化することができます。<br>grayの遺伝子が選択したパスウェイに含まれない遺伝子を図示しています。<br>このモードを利用しているときは、volcano plot上のエリア指定で、grayの遺伝子(選択したパスウェイに含まれない遺伝子)は選択されません。<br>したがって、興味あるパスウェイの遺伝子の発現量のみを簡便に確認することができます。<br>
+
+![](manual_figure/pair goi pathway.png){#id .class width=80%}<br><br>
+
+<a id="short unique ID (>=v1.1.4) (Ensembl IDの場合のみ有効)"></a>
+
+#### short unique ID (>=v1.1.4) (ensembl IDの場合のみ有効)
+Unique ID (symbol - ensembl id)を短い文字数で表示することができます。<br>
+short unique IDを"ON"にすると、遺伝子名は以下のように表示されます。<br>
+
+    - 複数のensembl idが同一のsymbolに対応する場合：symbol - ensembl id
+    - ensembl idとsymbolが1:1対応の場合: symbol
+    - 対応するsymbolがない(NA)場合: ensembl id
 
 ---
 
@@ -631,6 +661,13 @@ pre-zscoringは、複数のカウントデータを統合する前に、zscore�
 ![venn venn diagram](manual_figure/venn venn diagram1.png){#id .class width=80%}<br>
 ![venn venn diagram](manual_figure/venn venn diagram2.png){#id .class width=80%}<br>
 
+<a id="eulerrパッケージ"></a>
+
+#### eulerrパッケージ (>= v1.1.5)
+オーバーラップする遺伝子の数に応じて面積が変化するベン図を作図できます。<br>
+
+![venn venn diagram](manual_figure/venn type.png){#id .class width=80%}<br>
+
 ---
 
 ### Integrated heatmap
@@ -939,7 +976,7 @@ Startボタンを押すと解析が始まります。<br><br>
 Volcano plotを描写します。<br>
 Input formatは、以下の通りです。
 
-    - １行目は、遺伝子名 
+    - １列目は、遺伝子名 
     - 「log2FoldChange」と「padj」という名前の行を含む
     - その他の列は、解析に影響しません
 
@@ -951,6 +988,28 @@ x軸、y軸のレンジはスライドバーを操作することで自由に変
 ![volcano navi](manual_figure/volcano navi.png){#id .class width=100%}<br>
 
 ---
+
+<a id="ENSEMBL ID to SYMBOL"></a>
+
+## ENSEMBL ID to SYMBOL
+ENSEMBL IDをSYMBOLやUnique IDに変換します。<br>
+Input formatは、以下の通りです。<br>
+
+    - １列目は、遺伝子名(ENSEMBL ID)
+    - その他の列は、解析に影響しません
+
+**注意点**：Ensembl IDとSymbolは1対1対応ではありません。複数のensembl idが同一のsymbolと対応している場合があります。そのため、symbolの重複を回避するためにUnique_IDを用意しています。Unique_IDは状況に応じて以下のように表示されます。<br>
+
+    - 複数のensembl idが同一のsymbolに対応する場合：symbol - ensembl id
+    - ensembl idとsymbolが1:1対応の場合: symbol
+    - 対応するsymbolがない(NA)場合: ensembl id
+    
+したがって、enrichment analysisやvenn analysisを行う場合、Unique_IDには"symbol - ensembl id"が混ざっている点に注意する必要があります。<br>
+
+![ens id conv](manual_figure/ensembl id to symbol.png){#id .class width=100%}<br>
+
+---
+
 
 ## MSigDB gene set
 
