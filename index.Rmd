@@ -26,22 +26,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
-#### News (2025/1/16)
-- **RNAseqChefにアクセスができない場合の対応について**
-    - アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
-    現状、以下の方法でご解決ください。
+#### RNAseqChefにアクセスができない場合の対応について
+- アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
+  現状、以下の方法でご解決ください。
     1. 時間をおいてから再度アクセスする。
     2. [ミラーサイト1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/)または[ミラーサイト2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/)を利用する。
     3. Docker版のRNAseqChefを利用する(統合TVに使用方法の[解説動画](https://togotv.dbcls.jp/20240411.html)があります)。
+
+#### News (2025/3/29)
+- **(2025/3/29)「よくある質問」を更新しました。**
 - **(2024/12/25) アプリをアップデートしました(v1.1.4)。**<br>
     - **[GOI profilingに"Pathway of interest"機能を加えました。](#pathway of interest (>=v1.1.4))**
     - **[GOI profilingに"short unique ID"機能を加えました(ensembl idの場合のみ有効)。](#short unique ID (>=v1.1.4) (Ensembl IDの場合のみ有効))**
     - **[遺伝子IDの変換機能"ENSEMBL ID to SYMBOL"を加えました(More -> "ENSEMBL ID to SYMBOL")。](#ENSEMBL ID to SYMBOL)**
-- **(2024/11/5) Normalized count analysisにおいて、特定の生物種を選択した際に発生するエラーを解消しました。**
-- **(2024/11/5) Normalized count analysisのGOI profilingを微修正しました。BoxplotのY軸のラベル名やスケールが変更可能となりました。**
-- **(2024/11/5) [ベン図にeulerrパッケージの機能を加えました。オーバーラップする遺伝子の数に応じて面積が変化するベン図を作図できます。](#eulerrパッケージ)**
-- **(2024/2/20) GREINに関する情報(よくある情報)を修正しました**
-- **(2024/1/18)「よくある質問」を更新しました。**
 
 #### 解説動画 (統合TV)
 - **[RNAseqChefをDocker環境で使って公開RNA-seqデータの3群間多重比較解析を行う](https://togotv.dbcls.jp/20240411.html)**
@@ -246,6 +243,7 @@ Volcano plot上で興味ある遺伝子をまとめて選択することも可�
 
 #### pathway of interest (>=v1.1.4)
 pathway of interestから興味のあるパスウェイを選択することで、そのパスウェイに含まれる遺伝子のみを可視化することができます。<br>grayの遺伝子が選択したパスウェイに含まれない遺伝子を図示しています。<br>このモードを利用しているときは、volcano plot上のエリア指定で、grayの遺伝子(選択したパスウェイに含まれない遺伝子)は選択されません。<br>したがって、興味あるパスウェイの遺伝子の発現量のみを簡便に確認することができます。<br>
+注意点：パスウェイ名は、「選択ウィンドウをクリック」→「文字を消す要領でdeleteボタンを押す」→「興味あるパスウェイを入力」で選択できます。
 
 ![](manual_figure/pair goi pathway.png){#id .class width=80%}<br><br>
 
@@ -731,7 +729,7 @@ Normalized countデータのクラスタリング解析を実行します。<br>
    pair-wise DEGや3 conditions DEGのフォーマットと同様です。
    
 #### 1. **normalized count データのみ** <br>
-以下の条件を満たす場合、raw countデータのみで解析を実行できます。
+以下の条件を満たす場合、標準化されたデータ(TPMやCPM)のみで解析を実行できます。
    
     - サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
     - アンダーバー「 _ 」は、n数の表記以外では使用しない
@@ -741,7 +739,7 @@ Normalized countデータのクラスタリング解析を実行します。<br>
 ---
    
 #### 2. **normalized count データ + メタデータ** <br>
-サンプル名がaccession numberである場合や余分な情報が含まれるraw countデータである場合に使用します。<br>
+サンプル名がaccession numberである場合や余分な情報が含まれるnormalized countデータである場合に使用します。<br>
 メタデータは以下の情報を含む必要があります。
    
     - １列目は、normalized countデータで使用されているサンプル名（例: accession number）
@@ -1167,6 +1165,8 @@ sample data
 ---
 
 # 非モデル生物の解析に関して
+#### 注意点: ortholog変換に利用している"Biomart"が不調のため、生物種によっては解析できない状況が続いております。DEG解析においてSpeciesを選択してエラーが発生する場合にはSpeciesは"not selected"を選択して解析してください。パスウェイ解析は別ツールをご利用ください。
+
 非モデル生物がデータセットの"Species"として選択された場合、"Ortholog"が選択できるようになります。この機能は近縁のモデル生物のアノテーション情報を最大限利用することを目的に開発しました。<br>
 
 非モデル生物のアノテーション情報にはいくつかの問題があります。<br>
@@ -1187,6 +1187,16 @@ Plantsの場合: "Arabidopsis thaliana"<br>
 - 拡張子を確認してください。タブ区切りファイル(.txt, .tsv)、カンマ区切りファイル(.csv)、エクセルファイル(.xlsx)以外は対応していません。
 - 遺伝子名に重複のないことを確認してください。エクセルを用いてファイルを開いたことがある場合、オートコレクション機能により遺伝子名が誤変換された可能性があります。
 - 遺伝子名に'NA'が含まれていないことを確認してください。
+
+## カウントデータはアップロードされるが解析できない。
+
+- サンプル名は極力シンプルな名前にしてください。ハイフン"-"やスペース" "など記号(アルファベットや数字ではない文字)は極力避けてください。
+- サンプル名の頭文字は数字でない文字を使用してください。
+- Raw countが求められる箇所でnormalized countを使用するとエラーが発生する場合があります。
+
+## フリーズ（画面が固まる）する。
+GOI profilingやcorrelation analysis (Normalized count analysis)など数秒間フリーズする場合があります。<br>
+10~20秒で解消されるのでお待ちください。
 
 ## "disconnected from server"が発生する、またはウェブアプリが立ち上がらない。
 いくつかの可能性が考えられます。

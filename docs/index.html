@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">25/01/16 15:12</h4>
+<h4 class="date">25/03/29 10:59</h4>
 
 </div>
 
@@ -250,14 +250,12 @@ alt="DOI" /></a><br></p>
 <h1>概要</h1>
 <p><img src="manual_figure/graphical%20abstract_ver2.png" id="id"
 class="class" style="width:80.0%" /> <br><br></p>
-<div id="news-2025116" class="section level4">
-<h4>News (2025/1/16)</h4>
-<ul>
-<li><strong>RNAseqChefにアクセスができない場合の対応について</strong>
+<div id="rnaseqchefにアクセスができない場合の対応について"
+class="section level4">
+<h4>RNAseqChefにアクセスができない場合の対応について</h4>
 <ul>
 <li>アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
-現状、以下の方法でご解決ください。</li>
-</ul>
+現状、以下の方法でご解決ください。
 <ol style="list-style-type: decimal">
 <li>時間をおいてから再度アクセスする。</li>
 <li><a
@@ -266,6 +264,12 @@ href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">ミラーサイト2</a>�
 <li>Docker版のRNAseqChefを利用する(統合TVに使用方法の<a
 href="https://togotv.dbcls.jp/20240411.html">解説動画</a>があります)。</li>
 </ol></li>
+</ul>
+</div>
+<div id="news-2025329" class="section level4">
+<h4>News (2025/3/29)</h4>
+<ul>
+<li><strong>(2025/3/29)「よくある質問」を更新しました。</strong></li>
 <li><strong>(2024/12/25)
 アプリをアップデートしました(v1.1.4)。</strong><br>
 <ul>
@@ -280,15 +284,6 @@ href="#ENSEMBL%20ID%20to%20SYMBOL">遺伝子IDの変換機能”ENSEMBL ID to
 SYMBOL”を加えました(More -&gt; “ENSEMBL ID to
 SYMBOL”)。</a></strong></li>
 </ul></li>
-<li><strong>(2024/11/5) Normalized count
-analysisにおいて、特定の生物種を選択した際に発生するエラーを解消しました。</strong></li>
-<li><strong>(2024/11/5) Normalized count analysisのGOI
-profilingを微修正しました。BoxplotのY軸のラベル名やスケールが変更可能となりました。</strong></li>
-<li><strong>(2024/11/5) <a
-href="#eulerrパッケージ">ベン図にeulerrパッケージの機能を加えました。オーバーラップする遺伝子の数に応じて面積が変化するベン図を作図できます。</a></strong></li>
-<li><strong>(2024/2/20)
-GREINに関する情報(よくある情報)を修正しました</strong></li>
-<li><strong>(2024/1/18)「よくある質問」を更新しました。</strong></li>
 </ul>
 </div>
 <div id="解説動画-統合tv" class="section level4">
@@ -524,7 +519,8 @@ class="class" style="width:80.0%" /></p>
 <h4>pathway of interest (&gt;=v1.1.4)</h4>
 <p>pathway of
 interestから興味のあるパスウェイを選択することで、そのパスウェイに含まれる遺伝子のみを可視化することができます。<br>grayの遺伝子が選択したパスウェイに含まれない遺伝子を図示しています。<br>このモードを利用しているときは、volcano
-plot上のエリア指定で、grayの遺伝子(選択したパスウェイに含まれない遺伝子)は選択されません。<br>したがって、興味あるパスウェイの遺伝子の発現量のみを簡便に確認することができます。<br></p>
+plot上のエリア指定で、grayの遺伝子(選択したパスウェイに含まれない遺伝子)は選択されません。<br>したがって、興味あるパスウェイの遺伝子の発現量のみを簡便に確認することができます。<br>
+注意点：パスウェイ名は、「選択ウィンドウをクリック」→「文字を消す要領でdeleteボタンを押す」→「興味あるパスウェイを入力」で選択できます。</p>
 <p><img src="manual_figure/pair%20goi%20pathway.png" id="id"
 class="class" style="width:80.0%" /><br><br></p>
 <p><a id="short unique ID (>=v1.1.4) (Ensembl IDの場合のみ有効)"></a></p>
@@ -1071,7 +1067,7 @@ style="width:50.0%" alt="norm set" /><br></p>
 <p>pair-wise DEGや3 conditions DEGのフォーマットと同様です。</p>
 <div id="normalized-count-データのみ" class="section level4">
 <h4>1. <strong>normalized count データのみ</strong> <br></h4>
-<p>以下の条件を満たす場合、raw countデータのみで解析を実行できます。</p>
+<p>以下の条件を満たす場合、標準化されたデータ(TPMやCPM)のみで解析を実行できます。</p>
 <pre><code>- サンプル名のn数は、アンダーバー「 _ 」を用いて表記する
 - アンダーバー「 _ 」は、n数の表記以外では使用しない</code></pre>
 <p><img src="www/input_format1.png" id="id" class="class"
@@ -1080,7 +1076,8 @@ style="width:0.0%" alt="unchanged image" /> <br>　</p>
 </div>
 <div id="normalized-count-データ-メタデータ" class="section level4">
 <h4>2. <strong>normalized count データ + メタデータ</strong> <br></h4>
-<p>サンプル名がaccession numberである場合や余分な情報が含まれるraw
+<p>サンプル名がaccession
+numberである場合や余分な情報が含まれるnormalized
 countデータである場合に使用します。<br>
 メタデータは以下の情報を含む必要があります。</p>
 <pre><code>- １列目は、normalized countデータで使用されているサンプル名（例: accession number）
@@ -1640,6 +1637,12 @@ from healthy donors. Nat Commun 2017 Nov 13;8(1):1450. PMID:
 </div>
 <div id="非モデル生物の解析に関して" class="section level1">
 <h1>非モデル生物の解析に関して</h1>
+<div
+id="注意点-ortholog変換に利用しているbiomartが不調のため生物種によっては解析できない状況が続いておりますdeg解析においてspeciesを選択してエラーが発生する場合にはspeciesはnot-selectedを選択して解析してくださいパスウェイ解析は別ツールをご利用ください"
+class="section level4">
+<h4>注意点:
+ortholog変換に利用している”Biomart”が不調のため、生物種によっては解析できない状況が続いております。DEG解析においてSpeciesを選択してエラーが発生する場合にはSpeciesは”not
+selected”を選択して解析してください。パスウェイ解析は別ツールをご利用ください。</h4>
 <p>非モデル生物がデータセットの”Species”として選択された場合、“Ortholog”が選択できるようになります。この機能は近縁のモデル生物のアノテーション情報を最大限利用することを目的に開発しました。<br></p>
 <p>非モデル生物のアノテーション情報にはいくつかの問題があります。<br>
 ・非モデル生物の遺伝子の中には、アノテーション情報がない(Gene
@@ -1654,6 +1657,7 @@ melanogaster”, “Caenorhabditis elegans” <br> Fungiの場合: “Saccharomy
 cerevisiae”<br> Plantsの場合: “Arabidopsis thaliana”<br></p>
 <hr />
 </div>
+</div>
 <div id="よくある質問" class="section level1">
 <h1>よくある質問</h1>
 <div id="カウントデータが正常にアップロードされない"
@@ -1665,6 +1669,23 @@ class="section level2">
 <li>遺伝子名に重複のないことを確認してください。エクセルを用いてファイルを開いたことがある場合、オートコレクション機能により遺伝子名が誤変換された可能性があります。</li>
 <li>遺伝子名に’NA’が含まれていないことを確認してください。</li>
 </ul>
+</div>
+<div id="カウントデータはアップロードされるが解析できない"
+class="section level2">
+<h2>カウントデータはアップロードされるが解析できない。</h2>
+<ul>
+<li>サンプル名は極力シンプルな名前にしてください。ハイフン”-“やスペース”
+“など記号(アルファベットや数字ではない文字)は極力避けてください。</li>
+<li>サンプル名の頭文字は数字でない文字を使用してください。</li>
+<li>Raw countが求められる箇所でnormalized
+countを使用するとエラーが発生する場合があります。</li>
+</ul>
+</div>
+<div id="フリーズ画面が固まるする" class="section level2">
+<h2>フリーズ（画面が固まる）する。</h2>
+<p>GOI profilingやcorrelation analysis (Normalized count
+analysis)など数秒間フリーズする場合があります。<br>
+10~20秒で解消されるのでお待ちください。</p>
 </div>
 <div
 id="disconnected-from-serverが発生するまたはウェブアプリが立ち上がらない"
