@@ -33,7 +33,8 @@ knitr::opts_chunk$set(echo = TRUE)
     2. [ミラーサイト1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/)または[ミラーサイト2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/)を利用する。
     3. Docker版のRNAseqChefを利用する(統合TVに使用方法の[解説動画](https://togotv.dbcls.jp/20240411.html)があります)。
 
-#### News (2025/3/29)
+#### News (2025/10/16)
+- **(2025/10/16)ボックスプロットを描写した際に外れ値がある場合、外れ値を色付きの点で重ねてしまう問題(見かけ上データポイントが増えてしまう問題)を修正しました。**
 - **(2025/3/29)「よくある質問」を更新しました。**
 - **(2024/12/25) アプリをアップデートしました(v1.1.4)。**<br>
     - **[GOI profilingに"Pathway of interest"機能を加えました。](#pathway of interest (>=v1.1.4))**
