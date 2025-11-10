@@ -33,13 +33,10 @@ knitr::opts_chunk$set(echo = TRUE)
     2. [ミラーサイト1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/)または[ミラーサイト2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/)を利用する。
     3. Docker版のRNAseqChefを利用する(統合TVに使用方法の[解説動画](https://togotv.dbcls.jp/20240411.html)があります)。
 
-#### News (2025/10/16)
+#### News (2025/11/9)
+- **[重要] (2025/11/9) PCA修正: PCAを描写する際に本来使用すべきスコア成分(x:座標)ではなく、荷重(rotation:各変数の重み)を利用しておりました。主成分や寄与率（% variance）が変更される可能性があるため、PCA の再実行を推奨します。混乱を招いたことをお詫びいたします。**
 - **(2025/10/16)ボックスプロットを描写した際に外れ値がある場合、外れ値を色付きの点で重ねてしまう問題(見かけ上データポイントが増えてしまう問題)を修正しました。**
 - **(2025/3/29)「よくある質問」を更新しました。**
-- **(2024/12/25) アプリをアップデートしました(v1.1.4)。**<br>
-    - **[GOI profilingに"Pathway of interest"機能を加えました。](#pathway of interest (>=v1.1.4))**
-    - **[GOI profilingに"short unique ID"機能を加えました(ensembl idの場合のみ有効)。](#short unique ID (>=v1.1.4) (Ensembl IDの場合のみ有効))**
-    - **[遺伝子IDの変換機能"ENSEMBL ID to SYMBOL"を加えました(More -> "ENSEMBL ID to SYMBOL")。](#ENSEMBL ID to SYMBOL)**
 
 #### 解説動画 (統合TV)
 - **[RNAseqChefをDocker環境で使って公開RNA-seqデータの3群間多重比較解析を行う](https://togotv.dbcls.jp/20240411.html)**
