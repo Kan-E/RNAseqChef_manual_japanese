@@ -26,12 +26,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
-#### RNAseqChefにアクセスができない場合の対応について
-- アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
-  現状、以下の方法でご解決ください。
-    1. 時間をおいてから再度アクセスする。
-    2. [ミラーサイト1](https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/)または[ミラーサイト2](https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/)を利用する。
-    3. Docker版のRNAseqChefを利用する(統合TVに使用方法の[解説動画](https://togotv.dbcls.jp/20240411.html)があります)。
+
+#### <span style="color: red;">**重要なお知らせ(2026/1/22):** </span>  
+サーバ費の都合上、ウェブバージョンはしばらくの間利用停止させて頂きます。ご迷惑をおかけして申し訳ございませんが、Docker版をご利用ください。
+Docker版RNAseqChefの利用方法は[解説動画](https://togotv.dbcls.jp/20240411.html)をご参照ください。
 
 #### News (2025/11/9)
 - **[重要] (2025/11/9) PCA修正: PCAを描写する際に本来使用すべきスコア成分(x:座標)ではなく、荷重(rotation:各変数の重み)を利用しておりました。主成分や寄与率（% variance）が変更される可能性があるため、PCA の再実行を推奨します。混乱を招いたことをお詫びいたします。**

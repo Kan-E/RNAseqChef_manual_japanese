@@ -237,7 +237,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RNAseqChef manual</h1>
-<h4 class="date">25/11/11 00:10</h4>
+<h4 class="date">26/01/22 21:45</h4>
 
 </div>
 
@@ -250,21 +250,13 @@ alt="DOI" /></a><br></p>
 <h1>概要</h1>
 <p><img src="manual_figure/graphical%20abstract_ver2.png" id="id"
 class="class" style="width:80.0%" /> <br><br></p>
-<div id="rnaseqchefにアクセスができない場合の対応について"
-class="section level4">
-<h4>RNAseqChefにアクセスができない場合の対応について</h4>
-<ul>
-<li>アクセス集中により一時的にRNAseqChefにアクセスできない場合があります。<br>
-現状、以下の方法でご解決ください。
-<ol style="list-style-type: decimal">
-<li>時間をおいてから再度アクセスする。</li>
-<li><a
-href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror1/">ミラーサイト1</a>または<a
-href="https://imeg-ku.shinyapps.io/RNAseqChef_mirror2/">ミラーサイト2</a>を利用する。</li>
-<li>Docker版のRNAseqChefを利用する(統合TVに使用方法の<a
-href="https://togotv.dbcls.jp/20240411.html">解説動画</a>があります)。</li>
-</ol></li>
-</ul>
+<div id="重要なお知らせ2026122" class="section level4">
+<h4><span
+style="color: red;"><strong>重要なお知らせ(2026/1/22):</strong>
+</span></h4>
+<p>サーバ費の都合上、ウェブバージョンはしばらくの間利用停止させて頂きます。ご迷惑をおかけして申し訳ございませんが、Docker版をご利用ください。
+Docker版RNAseqChefの利用方法は<a
+href="https://togotv.dbcls.jp/20240411.html">解説動画</a>をご参照ください。</p>
 </div>
 <div id="news-2025119" class="section level4">
 <h4>News (2025/11/9)</h4>
@@ -1901,8 +1893,8 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [62] lubridate_1.9.2                          
 ## [63] forcats_1.0.0                            
 ## [64] stringr_1.5.0                            
-## [65] dplyr_1.1.2                              
-## [66] purrr_1.0.1                              
+## [65] dplyr_1.1.4                              
+## [66] purrr_1.0.2                              
 ## [67] readr_2.1.4                              
 ## [68] tidyr_1.3.0                              
 ## [69] tibble_3.2.1                             
@@ -1922,7 +1914,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##   [1] Rsamtools_2.12.0            foreach_1.5.2              
 ##   [3] glmnet_4.1-7                crayon_1.5.2               
 ##   [5] nlme_3.1-162                backports_1.4.1            
-##   [7] GOSemSim_2.22.0             rlang_1.1.0                
+##   [7] GOSemSim_2.22.0             rlang_1.1.2                
 ##   [9] filelock_1.0.2              rjson_0.2.21               
 ##  [11] bcellViper_1.32.0           CNEr_1.32.0                
 ##  [13] bit64_4.0.5                 glue_1.6.2                 
@@ -1931,8 +1923,8 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [19] zoo_1.8-12                  GenomicAlignments_1.32.1   
 ##  [21] xtable_1.8-4                magrittr_2.0.3             
 ##  [23] evaluate_0.20               sm_2.2-5.7.1               
-##  [25] cli_3.6.1                   zlibbioc_1.42.0            
-##  [27] rstudioapi_0.14             bslib_0.4.2                
+##  [25] cli_3.6.2                   zlibbioc_1.42.0            
+##  [27] rstudioapi_0.17.1           bslib_0.4.2                
 ##  [29] fastmatch_1.1-3             treeio_1.20.2              
 ##  [31] xfun_0.39                   askpass_1.1                
 ##  [33] clue_0.3-64                 cluster_2.1.4              
@@ -1945,21 +1937,21 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [47] plyr_1.8.8                  pracma_2.4.2               
 ##  [49] pillar_1.9.0                GlobalOptions_0.1.2        
 ##  [51] stabs_0.6-4                 cachem_1.0.7               
-##  [53] GetoptLong_1.0.5            vctrs_0.6.2                
+##  [53] GetoptLong_1.0.5            vctrs_0.6.5                
 ##  [55] ellipsis_0.3.2              generics_0.1.3             
-##  [57] munsell_0.5.0               tweenr_2.0.2               
-##  [59] fgsea_1.22.0                DelayedArray_0.22.0        
-##  [61] fastmap_1.1.1               compiler_4.2.3             
-##  [63] abind_1.4-5                 httpuv_1.6.9               
-##  [65] GenomeInfoDbData_1.2.8      lattice_0.20-45            
-##  [67] utf8_1.2.3                  later_1.3.0                
-##  [69] BiocFileCache_2.4.0         jsonlite_1.8.4             
-##  [71] scales_1.3.0                tidytree_0.4.2             
-##  [73] carData_3.0-5               lazyeval_0.2.2             
-##  [75] promises_1.2.0.1            car_3.1-2                  
-##  [77] doParallel_1.0.17           R.utils_2.12.2             
-##  [79] reticulate_1.28             rmarkdown_2.21             
-##  [81] sandwich_3.0-2              vioplot_0.4.0              
+##  [57] tweenr_2.0.2                fgsea_1.22.0               
+##  [59] DelayedArray_0.22.0         fastmap_1.1.1              
+##  [61] compiler_4.2.3              abind_1.4-5                
+##  [63] httpuv_1.6.9                GenomeInfoDbData_1.2.8     
+##  [65] lattice_0.20-45             utf8_1.2.3                 
+##  [67] later_1.3.0                 BiocFileCache_2.4.0        
+##  [69] jsonlite_1.8.4              scales_1.4.0               
+##  [71] tidytree_0.4.2              carData_3.0-5              
+##  [73] lazyeval_0.2.2              promises_1.2.0.1           
+##  [75] car_3.1-2                   doParallel_1.0.17          
+##  [77] R.utils_2.12.2              reticulate_1.28            
+##  [79] rmarkdown_2.21              sandwich_3.0-2             
+##  [81] vioplot_0.4.0               dichromat_2.0-0.1          
 ##  [83] downloader_0.4              igraph_1.4.2               
 ##  [85] yaml_2.3.7                  htmltools_0.5.5            
 ##  [87] memoise_2.0.1               BiocIO_1.6.0               
@@ -1970,14 +1962,14 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ##  [97] data.table_1.14.8           blob_1.2.4                 
 ##  [99] R.oo_1.25.0                 lpsymphony_1.24.0          
 ## [101] splines_4.2.3               RCurl_1.98-1.12            
-## [103] broom_1.0.4                 hms_1.1.3                  
+## [103] broom_1.0.11                hms_1.1.3                  
 ## [105] colorspace_2.1-0            ConsensusClusterPlus_1.60.0
 ## [107] mnormt_2.1.1                shape_1.4.6                
 ## [109] aplot_0.1.10                sass_0.4.5                 
 ## [111] Rcpp_1.0.10                 circlize_0.4.16            
-## [113] fansi_1.0.4                 tzdb_0.3.0                 
+## [113] fansi_1.0.4                 tzdb_0.4.0                 
 ## [115] brio_1.1.3                  Nozzle.R1_1.1-1.1          
-## [117] R6_2.5.1                    lifecycle_1.0.3            
+## [117] R6_2.5.1                    lifecycle_1.0.4            
 ## [119] curl_5.0.0                  ggsignif_0.6.4             
 ## [121] jquerylib_0.1.4             DO.db_2.9                  
 ## [123] Matrix_1.6-5                RColorBrewer_1.1-3         
@@ -1989,7 +1981,7 @@ You may contact the author of this code, Kan Etoh, at &lt;kaneto@kumamoto-u.ac.j
 ## [135] GO.db_3.15.0                gtools_3.9.4               
 ## [137] prettyunits_1.1.1           psych_2.3.3                
 ## [139] dbplyr_2.3.2                RSpectra_0.16-1            
-## [141] R.methodsS3_1.8.2           gtable_0.3.3               
+## [141] R.methodsS3_1.8.2           gtable_0.3.6               
 ## [143] DBI_1.1.3                   ggfun_0.0.9                
 ## [145] httr_1.4.5                  KernSmooth_2.23-20         
 ## [147] stringi_1.7.12              progress_1.2.2             
