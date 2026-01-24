@@ -31,7 +31,8 @@ knitr::opts_chunk$set(echo = TRUE)
 サーバ費の都合上、ウェブバージョンはしばらくの間利用停止させて頂きます。ご迷惑をおかけして申し訳ございませんが、Docker版をご利用ください。
 Docker版RNAseqChefの利用方法は[解説動画](https://togotv.dbcls.jp/20240411.html)をご参照ください。
 
-#### News (2025/11/9)
+#### News (2026/1/24)
+- **Docker版RNAseqChefの簡単な立ち上げ方法を記載しました。**
 - **[重要] (2025/11/9) PCA修正: PCAを描写する際に本来使用すべきスコア成分(x:座標)ではなく、荷重(rotation:各変数の重み)を利用しておりました。主成分や寄与率（% variance）が変更される可能性があるため、PCA の再実行を推奨します。混乱を招いたことをお詫びいたします。**
 - **(2025/10/16)ボックスプロットを描写した際に外れ値がある場合、外れ値を色付きの点で重ねてしまう問題(見かけ上データポイントが増えてしまう問題)を修正しました。**
 - **(2025/3/29)「よくある質問」を更新しました。**
@@ -54,6 +55,10 @@ Publication-readyな高解像度Figure（イラストレーターで編集可能
 RNAseqChefは、以下の方法で使用可能です。<br>
 1. [ウェブページ](https://imeg-ku.shinyapps.io/RNAseqChef/)にアクセス <br> 
 2. [ソースコードページ](https://github.com/Kan-E/RNAseqChef)の[Local installation](https://github.com/Kan-E/RNAseqChef#local-installation) に記載されている方法を実行<br><br>
+
+## Docker imageの簡単な立ち上げ方法
+Docker DesktopへのRNAseqChefのダウンロード(docker pull)が完了すれば、以下の方法を用いることでコード不要でRNAseqChefを立ち上げることが可能です。<br>
+![docker](manual_figure/docker.png){#id .class width=100%} <br>
 
 If you need help, please create an issue on [Github](https://github.com/Kan-E/RNAseqChef/issues) or [contact us](mailto:kaneto@kumamoto-u.ac.jp){.email}. <br>
 
