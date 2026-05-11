@@ -3,18 +3,7 @@
   date: '`r format(Sys.time(), "%y/%m/%d %H:%M")`'
 ---
 ```{r setup, include=FALSE}
-source("global.R")
-library(biomaRt)
-library(monaLisa)
-library(GenomicRanges)
-library(BiocParallel)
-library(SummarizedExperiment)
-library(JASPAR2020)
-library(TFBSTools)
-library(BSgenome.Mmusculus.UCSC.mm10)
-library(BSgenome.Hsapiens.UCSC.hg19)
-library(TxDb.Mmusculus.UCSC.mm10.knownGene)
-library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+
 knitr::opts_chunk$set(echo = TRUE)
 ``` 
 
@@ -27,12 +16,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ![](manual_figure/graphical abstract_ver2.png){#id .class width=80%} <br><br>
 
 
-#### <span style="color: red;">**重要なお知らせ(2026/1/22):** </span>  
-サーバ費の都合上、ウェブバージョンはしばらくの間利用停止させて頂きます。ご迷惑をおかけして申し訳ございませんが、Docker版をご利用ください。
-Docker版RNAseqChefの利用方法は[解説動画](https://togotv.dbcls.jp/20240411.html)をご参照ください。
 
-#### News (2026/1/24)
-- **Docker版RNAseqChefの簡単な立ち上げ方法を記載しました。**
+#### News (2026/5/11)
+- **2026.5.1にv1.1.7を公開しました。ウェブ版も再開しました。**
+- **v1.1.7よりPDF preview機能を実装しました。ダウンロードするファイルのサイズをpreviewで確認しながら調整できます。**
 - **[重要] (2025/11/9) PCA修正: PCAを描写する際に本来使用すべきスコア成分(x:座標)ではなく、荷重(rotation:各変数の重み)を利用しておりました。主成分や寄与率（% variance）が変更される可能性があるため、PCA の再実行を推奨します。混乱を招いたことをお詫びいたします。**
 - **(2025/10/16)ボックスプロットを描写した際に外れ値がある場合、外れ値を色付きの点で重ねてしまう問題(見かけ上データポイントが増えてしまう問題)を修正しました。**
 - **(2025/3/29)「よくある質問」を更新しました。**
@@ -1290,8 +1277,3 @@ You may contact the author of this code, Kan Etoh, at <kaneto@kumamoto-u.ac.jp>
 
 ---
 
-# Session info
-
-```{r, echo = TRUE}
- sessionInfo()
-```
